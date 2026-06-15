@@ -4,7 +4,7 @@ Diana é uma VTuber IA local em PT-BR criada para funcionar como personagem viva
 
 ## Estado atual
 
-Versão atual: **0.5.9_OPERATIONAL_SKILL_EXECUTION_FIX**.
+Versão atual: **0.5.10_OPERATIONAL_SKILL_EXECUTION_FIX**.
 
 Esta versão corrige a execução real de skills operacionais. Na 0.5.6 a skill `ReadFileSkill` era chamada, mas pedidos de leitura direta ainda podiam cair no LLM, que anunciava que iria ler em vez de entregar o conteúdo.
 
@@ -88,23 +88,31 @@ O Knowledge local foi removido do runtime principal na 0.5.5 porque estava compe
 
 ## Roadmap curto
 
-- **0.5.9**: CommandRegistry/runtime cleanup para tirar comandos locais do `Diana.py`.
-- **0.5.9**: contrato de verdade mais forte para pós-geração.
+- **0.5.10**: CommandRegistry/runtime cleanup para tirar comandos locais do `Diana.py`.
+- **0.5.10**: contrato de verdade mais forte para pós-geração.
 - **0.5.10**: fila/interrupção de TTS e fluxo mais não-bloqueante.
 - **0.5.11**: memória hierárquica: working memory, session summary, episodic summary e semantic facts.
 - **Depois**: Knowledge novo, modular, isolado e orientado a estado real.
 
 
-## 0.5.9 — READFILE_FOLLOWUP_FUZZY_FIX
+## 0.5.10 — READFILE_FOLLOWUP_FUZZY_FIX
 
 - Corrige typos de alta confiança em pedidos de arquivo, como `oa rquivo` e `rquivo`.
 - Faz `Resume ele agora` usar o último arquivo lido como contexto.
 - Evita truncamento pelo ResponseCleaner em leitura direta de arquivo.
 
 
-## 0.5.9 — LLM_RENDER_ONLY_RESPONSE_PIPELINE
+## 0.5.10 — LLM_RENDER_ONLY_RESPONSE_PIPELINE
 
 - Integra o fix de micro_ping com LLM render-only: sem retrieval, sem Mem0, sem resposta pronta de banco.
 - CommentSkill continua permitido; não há guarda extra bloqueando personalidade.
 - DialogueActGate deixa micro_ping e diana_self_query seguirem para LLM com task curta/target correto.
 - Mantém o ReadFile follow-up/fuzzy fix da 0.5.8.
+
+
+## 0.5.10 — REPO_HYGIENE_CI_TEST_FIX
+
+- Workflow do GitHub Actions atualizado para rodar o teste atual em `tools/tests/`.
+- Teste atual ficou CI-safe: não importa SkillManager/ReadScreenSkill/PIL.
+- Changelogs e relatórios ficam em `Logs/`, não na raiz.
+- Mantém o pipeline 0.5.9: LLM render-only com CommentSkill preservado.
