@@ -1,0 +1,20 @@
+# Diana 0.5.6 — SKILL_CONFIDENCE_BRIDGE_FIX
+
+## Objetivo
+Corrigir a ponte entre `detect_capability()` e `SkillManager`: a capacidade era detectada como `read_file`, mas chegava ao manager com confidence 0.0, então a skill operacional não entrava e o LLM improvisava.
+
+## Mudanças
+- `criar_turn_context()` agora define `confidence=1.0` quando `capability != none`.
+- Runtime imprime `🧭 Capability: ... | confidence=...` por turno.
+- `ReadFileSkill.get_direct_response()` agora aceita `force=False` para não quebrar quando o SkillManager chama com `force=True`.
+- `ReadFileSkill` passa a funcionar no fluxo real para:
+  - `le o arquivo aqui! pra mim`
+  - `leia o arquivo aqui!.txt`
+  - `lê o primeiro arquivo pra mim`
+  - `me diz quais arquivos disponíveis pra leitura`
+- `OutputFirewall` remove a muleta inicial `vem cá` e substitui a frase arriscada `garota de programa`.
+
+## Validação
+- `test_continuidade_0_5_6_v20_skill_confidence_bridge_fix.py`
+- Resultado local: 21/21.
+- Compileall: OK.

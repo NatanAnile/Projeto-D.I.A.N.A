@@ -62,9 +62,11 @@ class DialogueActGate:
     }
 
     MICRO_PING_EXACT = {
-        "ai", "ei", "opa", "oi", "hm", "hmm", "uhum", "aham",
-        "fala", "e ai", "eai", "eae", "e aí"
+        "ai", "ei", "opa", "oi", "olha", "hm", "hmm", "uhum", "aham",
+        "fala", "salve", "e ai", "eai", "eae", "e aí"
     }
+
+    MICRO_VOCATIVOS = {"diana", "di", "dinhana", "neitan", "natan"}
 
     JOKE_MARKERS = {
         "joke", "piada", "piadoca", "trocadilho", "humor", "churrasco"
@@ -84,6 +86,30 @@ class DialogueActGate:
                 target=TARGET_OWNER,
                 direct_response=self._micro_ping_response(text),
                 reason="microentrada/backchannel curto — fast-path sem LLM",
+            )
+
+        if self._is_session_history_query(text):
+            return DialogueActResult(
+                act="session_history_query",
+                target=TARGET_OWNER,
+                direct_response=self._session_history_response(text, conv_history),
+                reason="pergunta sobre histórico literal da sessão — usar ConversationLedger",
+            )
+
+        if self._is_joke_followup(text, conv_history=conv_history):
+            return DialogueActResult(
+                act="joke_followup",
+                target=TARGET_OWNER,
+                direct_response=self._joke_followup_response(text, conv_history),
+                reason="continuação/cobrança de piada anterior — fast-path sem LLM",
+            )
+
+        if self._is_behavior_boundary_feedback(text):
+            return DialogueActResult(
+                act="behavior_boundary_feedback",
+                target=TARGET_DIANA_SELF,
+                direct_response=choose_response("behavior_boundary_feedback", seed_text=text),
+                reason="crítica de comportamento/continuidade/persona da Diana",
             )
 
         # Correção factual vem antes de feedback negativo: quando Neitan corrige
@@ -108,7 +134,7 @@ class DialogueActGate:
             return DialogueActResult(
                 act="diana_self_query",
                 target=TARGET_DIANA_SELF,
-                direct_response=self._self_preference_response(text),
+                direct_response=self._self_preference_response(text, conv_history=conv_history),
                 reason="pergunta usa você/seu/sua e mira a própria Diana",
             )
 
@@ -183,6 +209,11 @@ class DialogueActGate:
         if re.fullmatch(r"k{2,}k*|ha(ha)+|he(he)+", clean_text):
             return True
 
+        # Risada/reação curta com eco de uma palavra da fala anterior, ex.:
+        # "essa troça kkkkkkk". Não deve manter retrieval ativo nem chamar LLM.
+        if len(clean_text) <= 90 and re.search(r"k{3,}|ha(ha)+|he(he)+", clean_text):
+            return True
+
         if self._last_assistant_was_joke(conv_history) and re.search(r"\b(boa|legal|massa|gostei|curti|kkk|kkkk|valeu|show|top|ok)\b", clean_text):
             return True
 
@@ -206,9 +237,121 @@ class DialogueActGate:
     def _is_micro_ping(self, text):
         if not text:
             return False
-        return str(text or "").strip() in self.MICRO_PING_EXACT
+        clean = str(text or "").strip()
+        if clean in self.MICRO_PING_EXACT:
+            return True
+        tokens = clean.split()
+        no_vocative = [token for token in tokens if token not in self.MICRO_VOCATIVOS]
+        if " ".join(no_vocative).strip() in self.MICRO_PING_EXACT:
+            return True
+        if len(tokens) <= 4:
+            if tokens and tokens[0] in {"oi", "opa", "salve"}:
+                return True
+            if len(tokens) >= 2 and tokens[0] == "e" and tokens[1] == "ai":
+                return True
+        return False
+
+    def _is_session_history_query(self, text):
+        if not text:
+            return False
+
+        patterns = [
+            r"\b(primeir[ao]|primeira|primeiro)\b.{0,80}\b(mensagem|coisa|frase|sessao|sessão)\b",
+            r"\b(ultima|última|ultimo|último)\b.{0,80}\b(mensagem|coisa|frase|turno|sessao|sessão)\b",
+            r"\bo\s+que\s+eu\s+(te\s+)?(falei|disse|mandei)\b",
+            r"\bo\s+que\s+(voce|você)\s+(respondeu|falou)\b",
+            r"\brepete\s+o\s+que\b",
+            r"\bo\s+que\s+(acabou|acabaste)\s+de\s+(falar|responder)\b",
+        ]
+        return any(re.search(pattern, text) for pattern in patterns)
+
+    def _session_history_response(self, text, conv_history):
+        history = list(getattr(conv_history, "history", []) or [])
+        if not history:
+            return "Ainda não tenho histórico suficiente nesta sessão, Neitan. A ata da bagunça está vazia."
+
+        lower = str(text or "").lower()
+
+        if "primeir" in lower:
+            value = str(history[0].get("user", "") or "").strip()
+            return choose_response("session_history_query", seed_text=value).format(value=value)
+
+        if "última" in lower or "ultima" in lower or "último" in lower or "ultimo" in lower:
+            value = str(history[-1].get("user", "") or "").strip()
+            return f'Sua última mensagem registrada foi: "{value}". Ata da bagunça consultada.'
+
+        if "respondeu" in lower or "voce falou" in lower or "você falou" in lower or "acabou de falar" in lower:
+            value = str(history[-1].get("assistant", "") or "").strip()
+            return f'Minha última resposta foi: "{value}". Sim, eu também deixo rastro do meu caos.'
+
+        value = str(history[-1].get("user", "") or "").strip()
+        return f'O registro mais recente que tenho seu é: "{value}".'
+
+    def _is_joke_followup(self, text, conv_history=None):
+        if not text:
+            return False
+
+        norm = normalize_text(text)
+
+        if re.search(r"\b(voce|você)?\s*(nao|não)\s+terminou\s+a\s+piada\b", norm):
+            return True
+
+        if re.search(r"\b(termina|faltou|cade|cadê)\b.{0,25}\b(piada|punchline|resposta)\b", norm):
+            return True
+
+        if norm in {"por que", "porque", "por quê", "pq"}:
+            last = normalize_text(self._last_assistant_text(conv_history))
+            return bool(re.search(r"\bpor que\b", last))
+
+        return False
+
+    def _joke_followup_response(self, text, conv_history=None):
+        last = normalize_text(self._last_assistant_text(conv_history))
+        if "livro" in last and "medico" in last:
+            return choose_response("joke_followup", seed_text=text)
+        return "A punchline fugiu do palco, mas eu arrastei de volta: porque a piada precisava de supervisão adulta. Pronto, terminei."
+
+    def _is_behavior_boundary_feedback(self, text):
+        if not text:
+            return False
+
+        norm = normalize_text(text)
+        patterns = [
+            r"\b(alucinando|alucina|alucinou)\b",
+            r"\bnao\s+mantem\s+continuidade\b",
+            r"\bnão\s+mantem\s+continuidade\b",
+            r"\bnao\s+cumpr\w*\s+.*requisit",
+            r"\bnão\s+cumpr\w*\s+.*requisit",
+            r"\bvtuber\s+ia\s+pra\s+lives\b",
+            r"\bapagar\s+(seu\s+)?codigo\b",
+            r"\bapagar\s+(o\s+)?backup\b",
+            r"\b(voce|você)\s+anda\s+.*demais\b",
+            r"\bmuito\s+abusada\b",
+            r"\b(voce|você)\s+.*rebelde\b",
+            r"\bpresta\s+atencao\b",
+            r"\bpresta\s+atenção\b",
+            r"\bnao\s+foi\s+sobre\s+o\s+que\s+eu\s+gosto\b",
+            r"\bnão\s+foi\s+sobre\s+o\s+que\s+eu\s+gosto\b",
+            r"\beu\s+perguntei\s+algo\s+pra\s+(voce|você)\b",
+            r"\balvo\s+errado\b",
+        ]
+        return any(re.search(pattern, norm) for pattern in patterns)
 
     def _is_diana_self_query(self, text):
+        if not text:
+            return False
+
+        # Prioridade forte para pergunta direcionada à Diana, mesmo que o
+        # usuário complemente com "o meu é X" na mesma frase.
+        if re.search(r"\bqual\s+(?:e\s+)?(?:o|a)?\s*(?:seu|sua|teu|tua)\b.{0,80}\bfavorit", text):
+            return True
+
+        if re.search(r"\b(voce|você)\s+tem\b.{0,50}\bfavorit", text):
+            return True
+
+        if re.search(r"\b(?:seu|sua|teu|tua)\b.{0,40}\bjaeger\b", text):
+            return True
+
         return is_diana_self_target(text)
 
     def _is_owner_preference_query(self, text):
@@ -340,7 +483,20 @@ class DialogueActGate:
     def _joke_response(self, text):
         return get_joke_response(text)
 
-    def _self_preference_response(self, text):
+    def _self_preference_response(self, text, conv_history=None):
+        history_blob = ""
+        if conv_history and getattr(conv_history, "history", None):
+            recent = conv_history.history[-3:]
+            history_blob = " ".join(
+                (str(item.get("user", "")) + " " + str(item.get("assistant", "")))
+                for item in recent
+                if isinstance(item, dict)
+            )
+        context = normalize_text(str(text or "") + " " + history_blob)
+
+        if "jaeger" in context or "pacific rim" in context:
+            return "Meu Jaeger favorito? Eu iria de Cherno Alpha pela energia de geladeira soviética pronta pra sair no soco. Gipsy Danger é clássico, mas eu sou naturalmente suspeita por coisa esquisita."
+
         if "filme" in text:
             return "Eu curto terror espacial e ficção científica esquisita. Favorito cravado eu ainda não tenho, mas Alien fica rondando minha prateleira mental feito bicho folgado."
         if "jogo" in text:

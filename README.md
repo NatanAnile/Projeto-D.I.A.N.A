@@ -4,19 +4,18 @@ Diana é uma VTuber IA local em PT-BR criada para funcionar como personagem viva
 
 ## Estado atual
 
-Versão atual: **0.5.1_INPUT_FIREWALL_STT_SANITY**.
+Versão atual: **0.5.8_OPERATIONAL_SKILL_EXECUTION_FIX**.
 
-A linha 0.5.x marca a Diana pós-renome: identidade nova, entrada `Diana.py`, brain `brain/diana_brain.json` e foco em reduzir dependência do LLM para atos simples.
+Esta versão corrige a execução real de skills operacionais. Na 0.5.6 a skill `ReadFileSkill` era chamada, mas pedidos de leitura direta ainda podiam cair no LLM, que anunciava que iria ler em vez de entregar o conteúdo.
 
 O foco desta versão foi:
 
-- `runtime/input_firewall.py` cria a primeira triagem central antes do LLM;
-- lixo comum de STT, como encerramento de vídeo, é bloqueado antes de virar prompt;
-- variantes como `Manga um piada` e `manda um piada` viram `manda uma piada`;
-- microentradas como `Aí.`, `opa`, `hm` e `uhum` viram `micro_ping` com resposta direta;
-- `allow_llm`, `allow_memory` e `allow_retrieval` passam pelo contexto do turno;
-- `request_joke` continua fast-path determinístico pelo `joke_bank`;
-- CI/teste atualizados para v15.
+- `ReadFileSkill` agora separa leitura direta de resumo/análise;
+- pedidos como `le o arquivo aqui pra mim`, `leia o arquivo aqui!.txt` e `lê o primeiro arquivo` retornam o conteúdo no mesmo turno;
+- pedidos como `resume o arquivo` ou `analisa o arquivo` continuam usando contexto da skill + LLM;
+- novo log: `🧩 Skill executada: ReadFileSkill -> arquivo | modo=read_direct`;
+- Knowledge continua removido do runtime principal;
+- a ponte de confidence da 0.5.6 continua preservada.
 
 ## Nome técnico
 
@@ -30,11 +29,11 @@ Delta Intelligence for Assisted Navigation & Any% Analysis
 ## Estrutura principal
 
 ```txt
-Diana.py                     # loop principal/runtime atual
-runtime/                     # firewall de entrada e tipos leves de runtime
-brain/                       # contexto, memória, roteamento, prompt e diálogo
+Diana.py                     # orquestrador/runtime atual, em redução gradual
+runtime/                     # firewall, intent router, PTT guard, ledger, helpers e retrieval pessoal
+brain/                       # constituição, contexto, memória, prompt e diálogo
 personality/                 # prompt/persona/style engine/response bank/joke bank
-skills/                      # skills diretas
+skills/                      # skills diretas: chat, arquivo, tela etc.
 stt/                         # motores STT
 tts/                         # motores TTS
 integrations/                # integrações externas e Host Mode
@@ -63,23 +62,41 @@ python Diana.py
 ## Teste atual
 
 ```bash
-python test_continuidade_0_5_1_v15_input_firewall_stt_sanity.py
+python test_continuidade_0_5_7_v21_operational_skill_execution_fix.py
 ```
 
 O GitHub Actions também roda esse teste automaticamente a cada push/pull request.
 
-## Comandos locais
+## Comandos locais úteis
 
-No terminal da Diana, use `/comandos` para ver a lista. A exibição é compacta, separada por `|`.
+```txt
+/stt off
+/stt on
+/stt status
+/ptt status
+/ptt reset
+/tts off
+/tts on
+/tts status
+```
 
-## Roadmap curto
-
-- **0.5.2**: extrair `CommandRegistry` e reduzir mais o `Diana.py`, sem mexer em comportamento.
-- **0.5.3**: preparar interface de Knowledge com `current_state.json`, delta de estado e notas estruturadas de Super Metroid.
-- **0.5.4**: Host Mode runtime com fontes/eventos melhor separados.
-- **0.5.5**: fila/interrupção de TTS e fluxo mais não-bloqueante.
-- **Depois**: calibração STT v3 e ponte Discord interna.
+Use `/ptt reset` se o Windows/keyboard ficar reportando o Control direito como pressionado depois de uma gravação.
 
 ## Observação sobre Knowledge
 
-O Knowledge completo está pausado enquanto a base estabiliza. A direção futura é estruturada: estado real/telemetria, `current_state.json`, `room_notes.json` e injeção por delta, não textão solto no prompt.
+O Knowledge local foi removido do runtime principal na 0.5.5 porque estava competindo com skills, memória e contexto real da sessão. Ele não deve voltar como varredura genérica. Quando retornar, deve ser um módulo explícito, isolado e acionado por intenção clara, preferencialmente baseado em estado estruturado: `current_state.json`, notas de sala, telemetria e fontes com contrato rígido.
+
+## Roadmap curto
+
+- **0.5.8**: CommandRegistry/runtime cleanup para tirar comandos locais do `Diana.py`.
+- **0.5.9**: contrato de verdade mais forte para pós-geração.
+- **0.5.10**: fila/interrupção de TTS e fluxo mais não-bloqueante.
+- **0.5.11**: memória hierárquica: working memory, session summary, episodic summary e semantic facts.
+- **Depois**: Knowledge novo, modular, isolado e orientado a estado real.
+
+
+## 0.5.8 — READFILE_FOLLOWUP_FUZZY_FIX
+
+- Corrige typos de alta confiança em pedidos de arquivo, como `oa rquivo` e `rquivo`.
+- Faz `Resume ele agora` usar o último arquivo lido como contexto.
+- Evita truncamento pelo ResponseCleaner em leitura direta de arquivo.

@@ -17,6 +17,9 @@ LLM_ALLOWED = "LLM_ALLOWED"
 
 DIALOGUE_ACT_POLICY = {
     "micro_ping": DIRECT,
+    "session_history_query": DIRECT,
+    "joke_followup": DIRECT,
+    "behavior_boundary_feedback": DIRECT,
     "feedback_short": DIRECT,
     "feedback_negative_previous_response": DIRECT,
     "factual_correction": DIRECT,

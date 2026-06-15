@@ -36,12 +36,43 @@ class ReadFileSkill(BaseSkill):
         self.folder_path.mkdir(parents=True, exist_ok=True)
 
     # =========================
+    # 🧽 NORMALIZAR PEDIDOS
+    # =========================
+
+    def normalizar_texto(self, user_text):
+
+        texto = str(user_text or "").lower().strip()
+
+        replacements = [
+            (r"\boa\s+rquivos\b", "os arquivos"),
+            (r"\boa\s+rquivo\b", "o arquivo"),
+            (r"\bor\s+quivos\b", "os arquivos"),
+            (r"\bor\s+quivo\b", "o arquivo"),
+            (r"\bar\s+quivos\b", "arquivos"),
+            (r"\bar\s+quivo\b", "arquivo"),
+            (r"\brquivos\b", "arquivos"),
+            (r"\brquivo\b", "arquivo"),
+            (r"\barquvios\b", "arquivos"),
+            (r"\barquvio\b", "arquivo"),
+            (r"\barqivos\b", "arquivos"),
+            (r"\barqivo\b", "arquivo"),
+            (r"\baarquivos\b", "arquivos"),
+            (r"\baarquivo\b", "arquivo"),
+        ]
+
+        for pattern, replacement in replacements:
+            texto = re.sub(pattern, replacement, texto)
+
+        texto = re.sub(r"\s+", " ", texto).strip()
+        return texto
+
+    # =========================
     # 🔎 DETECTAR PEDIDO
     # =========================
 
     def detectar_pedido(self, user_text):
 
-        texto = user_text.lower().strip()
+        texto = self.normalizar_texto(user_text)
 
         gatilhos = [
             "lê esse arquivo",
@@ -72,6 +103,18 @@ class ReadFileSkill(BaseSkill):
             "resuma o arquivo",
             "resume ele",
             "resuma ele",
+            "resume isso",
+            "resuma isso",
+            "resume esse",
+            "resuma esse",
+            "analisa ele",
+            "analise ele",
+            "analisa isso",
+            "analise isso",
+            "explica ele",
+            "explique ele",
+            "explica isso",
+            "explique isso",
             "resume pra mim",
             "resuma pra mim",
             "resume essa transcrição",
@@ -88,7 +131,25 @@ class ReadFileSkill(BaseSkill):
             "analise o arquivo",
             "me explica esse arquivo",
             "me explique esse arquivo",
-            "me fala o contexto"
+            "me fala o contexto",
+            "arquivos disponiveis",
+            "arquivos disponíveis",
+            "arquivos pra leitura",
+            "arquivos para leitura",
+            "quais arquivos",
+            "lista os arquivos",
+            "liste os arquivos",
+            "lista eles",
+            "listar arquivos",
+            "primeiro arquivo",
+            "primeira arquivo",
+            "lê o primeiro",
+            "le o primeiro",
+            "leia o primeiro",
+            "vê o arquivo",
+            "ve o arquivo",
+            "ve o arquivo aqui",
+            "vê o arquivo aqui"
         ]
 
         for gatilho in gatilhos:
@@ -104,7 +165,10 @@ class ReadFileSkill(BaseSkill):
 
     def detectar_referencia_anterior(self, user_text):
 
-        texto = user_text.lower().strip()
+        texto = self.normalizar_texto(user_text)
+
+        if re.search(r"\b(resume|resumir|resuma|analisa|analise|explica|explique|interpreta|interprete|contexto|l[eê]|leia|ler|ve|v[eê]|ver|olha)\b.*\b(ele|isso|esse|essa|agora)\b", texto):
+            return True
 
         gatilhos = [
             "arquivo anterior",
@@ -121,7 +185,17 @@ class ReadFileSkill(BaseSkill):
             "nele",
             "dele",
             "dessa transcrição",
-            "dessa transcricao"
+            "dessa transcricao",
+            "resume ele",
+            "resuma ele",
+            "resume isso",
+            "resuma isso",
+            "analisa ele",
+            "analise ele",
+            "analisa isso",
+            "explica ele",
+            "explique ele",
+            "explica isso"
         ]
 
         for gatilho in gatilhos:
@@ -160,7 +234,7 @@ class ReadFileSkill(BaseSkill):
 
     def encontrar_por_primeira_letra(self, user_text, arquivos):
 
-        texto = user_text.lower()
+        texto = self.normalizar_texto(user_text)
 
         padroes = [
             r"começa com ([a-z0-9])",
@@ -208,7 +282,13 @@ class ReadFileSkill(BaseSkill):
         if not arquivos:
             return None
 
-        texto = user_text.lower()
+        texto = self.normalizar_texto(user_text)
+
+        if re.search(r"\b(primeiro|primeira)\b", texto):
+            return arquivos[0]
+
+        if re.search(r"\b(ultimo|último|ultima|última)\b", texto):
+            return arquivos[-1]
 
         # 1. Nome exato com extensão ou sem extensão
         for arquivo in arquivos:
@@ -291,10 +371,44 @@ class ReadFileSkill(BaseSkill):
         return texto, foi_cortado, None
 
     # =========================
+    # 🎯 MODO DO PEDIDO
+    # =========================
+
+    def pedido_de_leitura_direta(self, user_text):
+
+        texto = self.normalizar_texto(user_text)
+
+        if self.pedido_de_transformacao(user_text):
+            return False
+
+        return bool(re.search(
+            r"\b(l[eê]|leia|ler|lê|ve|v[eê]|ver|olha)\b.*\b(arquivo|texto|\.txt|\.md|\.json|\.csv|primeiro|primeira|ultimo|último|ultima|última)\b",
+            texto
+        ))
+
+    def pedido_de_transformacao(self, user_text):
+
+        texto = self.normalizar_texto(user_text)
+
+        return bool(re.search(
+            r"\b(resume|resumir|resuma|analisa|analise|explica|explique|contexto|interpreta|interprete|opini[aã]o|o que tem)\b",
+            texto
+        ))
+
+    def montar_resposta_leitura_direta(self, arquivo_nome, conteudo, foi_cortado=False):
+
+        cabecalho = f"Li o arquivo {arquivo_nome}:"
+        aviso = ""
+        if foi_cortado:
+            aviso = "\n\nCortei no limite seguro de leitura, porque esse arquivo é maior que a minha paciência renderizada."
+
+        return cabecalho + "\n\n" + conteudo.strip() + aviso
+
+    # =========================
     # ⚡ RESPOSTA DIRETA
     # =========================
 
-    def get_direct_response(self, user_text="", conversation=None):
+    def get_direct_response(self, user_text="", conversation=None, force=False):
 
         if not self.detectar_pedido(user_text):
             return None
@@ -313,9 +427,21 @@ class ReadFileSkill(BaseSkill):
         arquivo = self.encontrar_arquivo(user_text)
 
         if arquivo:
+            if self.pedido_de_leitura_direta(user_text):
+                conteudo, foi_cortado, erro = self.ler_arquivo(arquivo)
+                print("🧩 Skill executada: ReadFileSkill -> " + arquivo.name + " | modo=read_direct")
+                if erro:
+                    return "Tentei ler " + arquivo.name + ", mas deu erro: " + erro
+                self.last_file_name = arquivo.name
+                self.last_file_content = conteudo
+                self.last_file_was_cut = foi_cortado
+                return self.montar_resposta_leitura_direta(arquivo.name, conteudo, foi_cortado)
             return None
 
         if self.last_file_content and self.detectar_referencia_anterior(user_text):
+            if self.pedido_de_leitura_direta(user_text):
+                print("🧩 Skill executada: ReadFileSkill -> " + self.last_file_name + " | modo=read_direct_contexto_anterior")
+                return self.montar_resposta_leitura_direta(self.last_file_name, self.last_file_content, self.last_file_was_cut)
             return None
 
         nomes = [arquivo.name for arquivo in arquivos[:10]]
@@ -323,9 +449,9 @@ class ReadFileSkill(BaseSkill):
         print("🧩 Skill direta ativada: ReadFileSkill")
 
         return (
-            "Encontrei mais de um arquivo em data/read_files. "
-            "Me diz qual deles você quer que eu leia: "
+            "Arquivos disponíveis pra leitura: "
             + ", ".join(nomes)
+            + ". Escolhe um sem fazer o knowledge se meter, por favor."
         )
 
     # =========================

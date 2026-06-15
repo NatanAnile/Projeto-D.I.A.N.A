@@ -10,26 +10,7 @@
 - Nenhum assunto registrado ainda.
 
 ### Preferências citadas nesta sessão
-- mascote_favorito: robozinho
-- bebida_favorito: cha mate
-- editor_favorito: olive
-- codec_favorito: av1
-- camera_favorito: fuji x-s10
-- jogo_favorito: chrono trigger
-- serie_favorita: reacher
-- tema_favorito: bastidor tecnico
-- boss_favorito: ridley
-- categoria_favorito: gt code
-- formato_favorito: mkv
-- navegador_favorito: firefox
-- microfone_favorito: shure mv7
-- engine_favorito: gamemaker
-- app_favorito: obsidian
-- fonte_favorito: jetbrains mono
-- filtro_favorito: noise gate
-- rota_favorito: any% seguro
-- movimento_favorito: wall jump
-- tecnica_favorito: mockball
+- Nenhuma preferência nova registrada.
 
 ### Feedback de estilo
 - Nenhum feedback de estilo registrado.

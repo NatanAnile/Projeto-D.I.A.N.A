@@ -21,6 +21,7 @@ class OllamaLLM:
 
         self.url = "http://localhost:11434/api/generate"
         self.model = LLM_MODEL
+        self.last_error = ""
 
         print(f"🧠 LLM carregado: {self.model}")
 
@@ -81,6 +82,8 @@ class OllamaLLM:
             json_mode=json_mode
         )
 
+        self.last_error = ""
+
         try:
 
             response = requests.post(
@@ -135,6 +138,7 @@ class OllamaLLM:
 
         except Exception as e:
 
+            self.last_error = str(e)
             print("Erro no Ollama:", e)
             return ""
 

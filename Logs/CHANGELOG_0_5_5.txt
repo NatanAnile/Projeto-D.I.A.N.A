@@ -1,0 +1,39 @@
+# Diana 0.5.5 — NO_KNOWLEDGE_SKILL_ROUTER_FIX
+
+## Objetivo
+Remover o Knowledge do runtime principal e corrigir os conflitos onde Knowledge, Mem0, skills e LLM competiam pelo mesmo turno.
+
+## Mudanças principais
+
+### Knowledge removido
+- `data/knowledge` removido do pacote.
+- `KnowledgeRetriever` não é mais instanciado no runtime principal.
+- `ContextRetriever` usa `DisabledKnowledgeRetriever` como stub modular.
+- `PromptBuilder` não injeta `CONHECIMENTO RECUPERADO`.
+- `RetrievalResponder` não resolve mais operações de Knowledge.
+- `config.py`: `KNOWLEDGE_ENABLED=False`, `KNOWLEDGE_RETRIEVAL_LIMIT=0`.
+
+### Skills antes de Knowledge
+- Novo `runtime/intent_router.py`.
+- `Diana.py` usa `detect_capability()` para rotear chat/arquivo/tela antes do brain.
+- ReadFileSkill agora detecta:
+  - arquivos disponíveis para leitura;
+  - lista de arquivos;
+  - primeiro/último arquivo;
+  - nomes diretos com .txt/.md/.json/.csv;
+  - “vê/ve o arquivo aqui”.
+- `gerar_resposta_brain()` voltou a passar contexto de skill para o PromptBuilder.
+
+### Target Diana vs Neitan
+- Perguntas como “qual é o seu Jaeger favorito? O meu é Gipsy Danger” miram Diana, não Neitan.
+- Fatos pessoais do Neitan só entram se o DialogueAct for `owner_preference_query`.
+
+### Persona/output
+- Micro-ping ganhou respostas com personalidade.
+- OutputFirewall continua bloqueando diminutivos apenas do nome do usuário.
+- OutputFirewall corta call-to-action genérico no final quando parece automático.
+
+## Validação
+- `test_continuidade_0_5_5_v19_no_knowledge_skill_router_fix.py`
+- Resultado local: 29/29.
+- Compileall: OK.

@@ -51,7 +51,7 @@
       "Comece direto com a resposta. Não prepare terreno.",
       "Não repita nem parafraseie a fala do usuário.",
       "Use o histórico real quando a mensagem depender do que foi dito antes.",
-      "Quando houver conhecimento recuperado, a consulta já está resolvida: explique exatamente a entrada escolhida.",
+      "Knowledge local está desativado nesta fase. Use skills para chat/arquivos e histórico literal para continuidade; não invente base técnica local.",
       "Não acrescente nenhum fato, efeito, risco, requisito, número, local ou consequência ausente na fonte recuperada.",
       "Se não souber algo ou a busca falhar, diga que não sabe ou que não encontrou. Nunca chute."
     ],

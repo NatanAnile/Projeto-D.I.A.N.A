@@ -1,0 +1,59 @@
+# Diana 0.5.4 — SESSION_JOKE_PERSONA_BOUNDARY
+
+## Objetivo
+Corrigir rotas de continuidade conversacional que ainda caíam no LLM/retrieval errado:
+- perguntas sobre histórico da sessão;
+- continuação de piada;
+- risada/feedback curto após uma fala;
+- críticas de comportamento/continuidade;
+- micro-ping com erro de digitação no nome da Diana;
+- diminutivos proibidos apenas no nome do usuário.
+
+## Mudanças principais
+
+### runtime/output_firewall.py
+- Novo filtro final de persona.
+- Bloqueia apenas diminutivos/apelidos proibidos do nome do usuário:
+  - Natanzinho → Natan
+  - Nataninho → Natan
+  - Neitanzinho → Neitan
+  - Neitinho → Neitan
+- Mantém diminutivos naturais, como piadinha/trabalhozinho, para não deixar a fala falsa.
+
+### brain/dialogue_act_gate.py
+- Novo act: session_history_query.
+  - Perguntas como "qual foi a primeira mensagem que te mandei nessa sessão?" usam ConversationLedger.
+  - Não consultam KnowledgeRetriever.
+- Novo act: joke_followup.
+  - "por que?", "você não terminou a piada", "faltou a punchline" respondem direto.
+- Novo act: behavior_boundary_feedback.
+  - Críticas como "você anda alucinando" ou "não mantém continuidade" viram resposta direta.
+  - Mantém teatro/deboche, sem ir para LLM.
+- feedback_short agora aceita risadas curtas com comentário, exemplo: "essa troça kkkkkkk".
+
+### runtime/input_firewall.py
+- Micro-ping mais tolerante:
+  - e ai dinhana
+  - E ai Diana
+  - oi Diana
+  - salve dinhana
+  - opa Diana
+
+### brain/dialogue_act_policy.py
+- Novos acts marcados como DIRECT:
+  - session_history_query
+  - joke_followup
+  - behavior_boundary_feedback
+
+### README / CI
+- Atualizados para 0.5.4.
+- GitHub Actions agora roda o teste v18.
+
+## Validação
+- test_continuidade_0_5_4_v18_session_joke_persona_boundary.py
+- Resultado local: 49/49.
+- Compileall: OK.
+
+## Observação de persona
+Esta versão NÃO reduz o teatro abusado da Diana.
+Ela só remove diminutivos/apelidos proibidos do nome do usuário.

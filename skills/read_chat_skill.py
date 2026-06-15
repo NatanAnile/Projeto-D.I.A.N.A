@@ -294,6 +294,21 @@ class ReadChatSkill(BaseSkill):
         )
 
     # =========================
+    # 🎭 RESPOSTAS CURTAS DE CHAT
+    # =========================
+
+    def resposta_chat_vazio_ou_so_diana(self, user_text):
+
+        opcoes = [
+            "Li o chat e tá um deserto, Neitan. Só tem eco meu lá. Ou o chat fugiu, ou você espantou todo mundo com talento.",
+            "O chat recente só tem rastro meu. A goblin conversou com o espelho e ainda perdeu a discussão.",
+            "Chat útil agora? Nada. Só sobrou poeira, eco e minha paciência fazendo cosplay de recurso escasso.",
+            "Olhei o chat e encontrei basicamente eu mesma. Live solo com plateia imaginária, que luxo triste.",
+        ]
+        idx = sum(ord(ch) for ch in str(user_text or "")) % len(opcoes)
+        return opcoes[idx]
+
+    # =========================
     # ⚡ RESPOSTA DIRETA
     # =========================
 
@@ -329,7 +344,7 @@ class ReadChatSkill(BaseSkill):
             itens.append(item)
 
         if not itens:
-            return "Só encontrei mensagens da própria Diana no chat recente. A goblin conversou com o espelho, basicamente."
+            return self.resposta_chat_vazio_ou_so_diana(user_text)
 
         if modo == "ultima":
 

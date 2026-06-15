@@ -8,6 +8,7 @@ from brain.brain_loader import DianaBrain
 from brain.context_retriever import ContextRetriever
 from brain.query_planner import QueryPlanner
 from brain.query_gate import QueryGate
+from brain.constitution import build_constitution_context
 
 
 class PromptBuilder:
@@ -50,11 +51,18 @@ class PromptBuilder:
                 last_entry_name=str(last_entry.get("name", ""))
             )
             if not query_plan:
-                query_plan = {"source": "knowledge", "collection": "", "operation": "search", "filters": {"contains": [], "category": ""}, "limit": None, "requires_local_source": False}
+                query_plan = {"source": "none", "collection": "", "operation": "none", "filters": {"contains": [], "category": ""}, "limit": None, "requires_local_source": False}
         else:
             query_plan = {"source": "none", "collection": "", "operation": "none", "filters": {"contains": [], "category": ""}, "limit": None, "requires_local_source": False}
+        # Knowledge local foi removido na 0.5.5. O QueryGate agora só ajuda
+        # a decidir se memória pessoal/continuidade devem ser consultadas.
+        if query_plan.get("source") == "knowledge":
+            query_plan["source"] = "none"
+            query_plan["operation"] = "none"
         query_plan["should_query"] = gate["should_query"]
         query_plan["gate_reason"] = gate["reason"]
+        query_plan["dialogue_act"] = str(turn_context.get("dialogue_act", "") or "")
+        query_plan["dialogue_target"] = str(turn_context.get("dialogue_target", "") or "")
         self.last_query_plan = query_plan
         retrieved = self.context_retriever.retrieve(user_text, history_text=history_context, query_plan=query_plan)
         self.last_retrieval = retrieved
@@ -62,14 +70,15 @@ class PromptBuilder:
 
         parts = []
 
+        parts.append(build_constitution_context())
+
         parts.append(
-            "# POLÍTICA DE VERDADE — PRIORIDADE MÁXIMA\n"
+            "# CONTRATO DE FONTE DE VERDADE — PRIORIDADE MÁXIMA\n"
             "Criatividade pode mudar a forma da fala, nunca os fatos.\n"
-            "Não invente fatos pessoais, lembranças, nomes, termos técnicos, siglas, regras ou definições.\n"
-            "Para fatos pessoais sobre Neitan, use somente FATOS PESSOAIS RECUPERADOS, MEMÓRIAS MEM0 RECUPERADAS e HISTÓRICO REAL DA SESSÃO.\n"
-            "Para conhecimento técnico local, use o CONHECIMENTO RECUPERADO como fonte factual principal.\n"
+            "A fonte de continuidade da conversa é o HISTÓRICO LITERAL RECENTE vindo do ConversationLedger.\n"
+            "Resumo auxiliar de sessão serve só como orientação de baixa autoridade; nunca substitui o histórico literal.\n"
+            "Retrieval só vale quando o STATUS DAS FONTES indicar fato recuperado ou fonte obrigatória.\n"
             "Se uma informação pessoal não foi encontrada, diga claramente que não sabe e não dê palpite.\n"
-            "Se uma informação técnica não foi encontrada e você não tiver certeza, admita a incerteza.\n"
             "Se Neitan disser que você inventou ou errou, reconheça e pare de chutar."
         )
 
@@ -78,7 +87,7 @@ class PromptBuilder:
         if query_plan and query_plan.get("should_query") and self.query_planner.enabled:
             parts.append(
                 "# PLANO DE CONSULTA AUXILIAR — NÃO É RESPOSTA\n"
-                "O plano abaixo apenas escolheu a fonte e a operação. Os fatos continuam vindo dos arquivos locais.\n"
+                "Knowledge está desativado. Este plano só pode orientar memória pessoal/continuidade.\n"
                 + str(query_plan)
             )
 
@@ -87,14 +96,6 @@ class PromptBuilder:
 
         if retrieved.get("mem0_context"):
             parts.append("# MEMÓRIAS MEM0 RECUPERADAS\n" + retrieved["mem0_context"])
-
-        if retrieved["knowledge_context"]:
-            parts.append("# CONHECIMENTO RECUPERADO\n" + retrieved["knowledge_context"])
-
-        if self.session_summarizer:
-            episodic_context = self.session_summarizer.get_prompt_context()
-            if episodic_context:
-                parts.append(episodic_context)
 
         if active_activity_context:
             parts.append(
@@ -110,9 +111,19 @@ class PromptBuilder:
                 "As mensagens abaixo aconteceram de verdade nesta sessão.\n"
                 "Use este bloco para continuações, correções e perguntas sobre o que foi dito antes.\n"
                 "Não invente detalhes ausentes.\n"
-                "Este histórico tem prioridade sobre exemplos de estilo.\n\n"
+                "Este histórico tem prioridade sobre resumo auxiliar, exemplos de estilo e contexto tangencial.\n\n"
                 + history_context
             )
+
+        if self.session_summarizer:
+            episodic_context = self.session_summarizer.get_prompt_context()
+            if episodic_context:
+                parts.append(
+                    "# RESUMO AUXILIAR DA SESSÃO — BAIXA AUTORIDADE\n"
+                    "Use apenas para orientação geral quando o histórico literal não bastar. "
+                    "Se este resumo contradizer o histórico literal recente, ignore o resumo.\n"
+                    + episodic_context
+                )
 
         if active_activity_task:
             task = active_activity_task + "\n" + task
@@ -193,37 +204,24 @@ class PromptBuilder:
             if retrieved["personal_status"] == "FOUND":
                 values = "; ".join(f"{fact['path']}={fact['value']}" for fact in retrieved.get("owner_facts", []))
                 lines.append(
-                    "Pergunta pessoal detectada: fatos locais encontrados. "
+                    "Pergunta pessoal sobre Neitan detectada: fatos locais encontrados. "
                     "Use estes valores exatamente; não substitua e não dê outro palpite. " + values
                 )
             elif retrieved.get("mem0_memories"):
                 lines.append(
-                    "Pergunta pessoal detectada: fatos locais não encontrados, mas o Mem0 trouxe memória(s). "
+                    "Pergunta pessoal sobre Neitan detectada: fatos locais não encontrados, mas o Mem0 trouxe memória(s). "
                     "Use o Mem0 somente se responder diretamente à pergunta. Se não responder, admita que não sabe."
                 )
             else:
                 lines.append(
-                    "Pergunta pessoal detectada: INFORMAÇÃO NÃO ENCONTRADA. "
+                    "Pergunta pessoal sobre Neitan detectada: INFORMAÇÃO NÃO ENCONTRADA. "
                     "A resposta obrigatória é admitir que não sabe. Não adivinhe, não improvise e não invente."
                 )
 
-        if retrieved["technical_query"] or retrieved.get("knowledge_source_required"):
-            if retrieved["knowledge_status"] == "FOUND":
-                collection = retrieved.get("knowledge_collection") or "geral"
-                lines.append(f"Pergunta técnica detectada: consulta já resolvida na coleção {collection}. A entrada recuperada é obrigatória. Explique exatamente essa entrada; não peça nome, não troque de entrada e não acrescente fatos ausentes.")
-            elif retrieved.get("knowledge_source_required"):
-                lines.append(
-                    "FONTE LOCAL OBRIGATÓRIA NÃO ENCONTRADA. "
-                    "Diga que não encontrou essa informação na base. Não use conhecimento próprio e não invente."
-                )
-            else:
-                lines.append(
-                    "Pergunta técnica detectada: nenhuma fonte local relevante foi encontrada. "
-                    "Só responda pelo conhecimento geral se tiver certeza; caso contrário, admita incerteza."
-                )
-
-        if len(lines) == 1:
-            lines.append("Nenhuma consulta factual especial foi necessária.")
+        lines.append(
+            "Knowledge local: DESATIVADO nesta versão. "
+            "Pedidos de arquivo/chat devem ir por skills; perguntas gerais podem ir ao LLM sem base técnica local."
+        )
 
         return "\n".join(lines)
 
@@ -256,27 +254,6 @@ class PromptBuilder:
 
         if operation == "feedback":
             return "Responder ao feedback de Neitan de forma curta, sem repetir a consulta anterior e sem inventar informação técnica."
-
-        if retrieved.get("knowledge_status") == "FOUND":
-            entries = retrieved.get("knowledge_entries", [])
-            names = ", ".join(str(entry.get("name", "")).strip() for entry in entries if str(entry.get("name", "")).strip())
-            operation = retrieved.get("knowledge_operation", "search")
-
-            if operation == "count":
-                return "Responder com a quantidade exata recuperada pela consulta estrutural."
-
-            if entries:
-                if operation in {"same", "reformulate"}:
-                    return (
-                        f"Reexplicar a mesma entrada já selecionada ({names}) obedecendo ao formato pedido agora. "
-                        "Não realizar nova escolha e não acrescentar fatos ausentes na fonte."
-                    )
-
-                return (
-                    f"A consulta já selecionou a entrada correta: {names}. "
-                    "Explicar diretamente essa entrada usando somente os fatos explícitos do CONHECIMENTO RECUPERADO. "
-                    "Não pedir o nome da técnica/item, não sugerir outra opção e não acrescentar efeitos, riscos, requisitos ou locais ausentes."
-                )
 
         short_followups = [
             "qual", "qual?", "como assim", "como assim?", "por que", "por quê", "porque", "e aí", "e ai"

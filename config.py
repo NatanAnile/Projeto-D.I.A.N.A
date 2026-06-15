@@ -69,6 +69,7 @@ PUSH_TO_TALK_KEY = os.getenv("PUSH_TO_TALK_KEY", "right ctrl").strip().lower() o
 PTT_START_TIMEOUT_SECONDS = float(os.getenv("PTT_START_TIMEOUT_SECONDS", "3.0"))
 PTT_MAX_RECORD_SECONDS = float(os.getenv("PTT_MAX_RECORD_SECONDS", "12.0"))
 PTT_SILENCE_ABORT_SECONDS = float(os.getenv("PTT_SILENCE_ABORT_SECONDS", "2.0"))
+PTT_RELEASE_LOCKOUT_ENABLED = os.getenv("PTT_RELEASE_LOCKOUT_ENABLED", "true").lower().strip() not in ["0", "false", "no", "off"]
 
 # 🧠 SKILLS
 SKILL_MIN_COOLDOWN = 60
@@ -244,16 +245,17 @@ ALLOW_LIVE_REFERENCES_WITHOUT_CONTEXT = False
 # 📚 RECUPERAÇÃO DE CONTEXTO
 # =========================
 
-KNOWLEDGE_ROOT_PATH = "data/knowledge"
+KNOWLEDGE_ENABLED = False
+KNOWLEDGE_ROOT_PATH = ""
 STYLE_DICTIONARY_PATH = "data/style_dictionaries"
 STYLE_RETRIEVAL_LIMIT = 1
-KNOWLEDGE_RETRIEVAL_LIMIT = 4
+KNOWLEDGE_RETRIEVAL_LIMIT = 0
 
 # =========================
 # 🧩 DIANA 0.4 — MODELOS AUXILIARES
 # =========================
 
-PROJECT_VERSION = "0.5.1"
+PROJECT_VERSION = "0.5.8"
 
 # Os modelos auxiliares ficam DESATIVADOS por padrão.
 # Quando forem ativados, use outra instância do Ollama/porta para poder

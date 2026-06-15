@@ -1,0 +1,7 @@
+# CHANGELOG 0.5.8 — READFILE_FOLLOWUP_FUZZY_FIX
+
+- InputFirewall corrige typos de alta confiança em comandos de arquivo: `oa rquivo`, `rquivo`, `arquvio`, `arqivo`.
+- IntentRouter reconhece comandos corrigidos e follow-ups como `Resume ele agora`.
+- ReadFileSkill normaliza typos internamente antes de detectar pedidos.
+- ReadFileSkill usa o último arquivo lido quando o usuário pede `resume ele`, `analisa isso`, `explica ele`.
+- Diana.py bypassa o orçamento curto do ResponseCleaner quando a saída é leitura direta literal de arquivo.

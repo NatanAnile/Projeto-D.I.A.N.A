@@ -1,0 +1,43 @@
+# Diana 0.5.3 — PTT_EDGE_TERMINAL_FIX
+
+## Objetivo
+
+Impedir que o STT entre em loop depois de uma gravação quando o Windows/keyboard continuar reportando `RIGHT CTRL` como pressionado. O terminal deve continuar utilizável mesmo se o PTT ficar em estado preso.
+
+## Implementações
+
+- Adicionado `runtime/ptt_guard.py`.
+  - `PushToTalkGuard` controla PTT por borda: solto -> pressionado.
+  - Segurar a tecla não dispara novas gravações em loop.
+  - Se a gravação termina e a tecla ainda aparece pressionada, ativa lockout até soltar.
+  - `/ptt reset` limpa manualmente o lockout.
+
+- Atualizado `Diana.py`.
+  - `should_process_audio()` agora usa `ptt_guard.should_start()`.
+  - `record_audio()` usa `_is_ptt_pressed()` centralizado.
+  - Após gravar, `ptt_guard.finish_recording()` decide se entra em lockout.
+  - Adicionados `/ptt status` e `/ptt reset`.
+  - Fallback seguro se o Ollama recusar conexão e retornar resposta vazia.
+
+- Atualizado `runtime/input_firewall.py` e `brain/dialogue_act_gate.py`.
+  - Saudações curtas com vocativo agora viram `micro_ping`: `E ai Diana`, `oi Diana`, `salve Diana`.
+  - Isso evita mandar saudação curta para o LLM sem necessidade.
+
+- Atualizado `.env.example`.
+  - `PTT_RELEASE_LOCKOUT_ENABLED=true`.
+
+- CI atualizado.
+  - Teste atual: `test_continuidade_0_5_3_v17_ptt_edge_terminal_fix.py`.
+  - Compila `runtime/ptt_guard.py`.
+
+## Validação
+
+- Teste v17 verifica:
+  - versão 0.5.3;
+  - PTT edge-trigger;
+  - lockout até soltar;
+  - reset de PTT;
+  - comandos `/ptt status` e `/ptt reset`;
+  - `E ai Diana` como micro_ping direto;
+  - InputFirewall/joke fast-path preservados;
+  - ConversationLedger preservado.

@@ -1056,12 +1056,49 @@ class OwnerFactsRetriever:
         return "\n".join(lines)
 
 
+
+class DisabledKnowledgeRetriever:
+    """Stub modular: Knowledge foi removido da Diana 0.5.5.
+
+    A interface mínima fica para que o módulo possa voltar melhorado depois,
+    sem deixar o runtime puxar base local por acidente.
+    """
+
+    def __init__(self, *args, **kwargs):
+        self.entries = []
+        self.last_collection = ""
+        self.last_entry = None
+
+    def _result(self, entries=None, collection="", operation="disabled", excluded_names=None, query=""):
+        return {
+            "entries": [],
+            "collection": "",
+            "operation": operation or "disabled",
+            "count": None,
+            "requested_field": "",
+            "requested_fields": [],
+            "source_required": False,
+            "excluded_names": set(),
+        }
+
+    def retrieve(self, *args, **kwargs):
+        return self._result(operation="disabled")
+
+    def format_context(self, result):
+        return ""
+
+    def get_field_value(self, entry, field):
+        return {"status": "unknown", "value": None}
+
+    def infer_collection(self, text):
+        return ""
+
 class ContextRetriever:
 
     def __init__(self, debug=True, mem0_memory=None):
         self.debug = debug
         self.style = StyleRetriever(max_results=1)
-        self.knowledge = KnowledgeRetriever(max_results=4)
+        self.knowledge = DisabledKnowledgeRetriever()
         self.owner_facts = OwnerFactsRetriever()
         self.mem0_memory = mem0_memory
         self.last_result = None
@@ -1069,8 +1106,14 @@ class ContextRetriever:
     def retrieve(self, user_text, history_text="", query_plan=None):
         query_plan = query_plan or {}
         normalized = _normalizar(user_text)
-        diana_self_target = _is_diana_self_target(user_text)
-        personal_query = (not diana_self_target) and (query_plan.get("source") == "owner" or self._is_personal_fact_query(user_text, history_text))
+        dialogue_act = str(query_plan.get("dialogue_act", "") or "").strip()
+        dialogue_target = str(query_plan.get("dialogue_target", "") or "").upper().strip()
+        diana_self_target = dialogue_target == "DIANA_SELF" or _is_diana_self_target(user_text)
+
+        # Fatos pessoais do Neitan só entram quando o DialogueAct autorizou
+        # explicitamente uma pergunta sobre preferência do owner. Isso impede
+        # perguntas para a Diana de puxarem owner.known_preferences.* por acidente.
+        personal_query = (not diana_self_target) and dialogue_act == "owner_preference_query"
 
         # Caminho rápido: cumprimento/zoeira curta não precisa varrer knowledge/style/mem0.
         # Isso reduz latência nas interações de live e evita ruído em memória.
@@ -1095,7 +1138,7 @@ class ContextRetriever:
                 "style_entries": [],
                 "style_context": "",
                 "personal_status": "NOT_APPLICABLE",
-                "knowledge_status": "NOT_APPLICABLE",
+                "knowledge_status": "DISABLED",
                 "query_plan": query_plan
             }
             self.last_result = result
@@ -1105,14 +1148,14 @@ class ContextRetriever:
 
         style_entries = self.style.retrieve(user_text)
         knowledge_result = self.knowledge.retrieve(user_text, history_text=history_text, query_plan=query_plan)
-        non_query_operation = knowledge_result.get("operation") in {"feedback", "correction", "topic_change", "topic_setup", "skipped"}
-        technical_query = False if non_query_operation else (query_plan.get("source") == "knowledge" or self._is_technical_query(user_text))
+        non_query_operation = True
+        technical_query = False
         owner_facts = self.owner_facts.retrieve(user_text, history_text=history_text) if personal_query else []
         mem0_memories = self._retrieve_mem0(
             user_text=user_text,
             personal_query=personal_query,
             technical_query=technical_query,
-            knowledge_status="FOUND" if (knowledge_result["entries"] or knowledge_result.get("operation") == "count") else "NOT_FOUND"
+            knowledge_status="DISABLED"
         )
 
         result = {
@@ -1134,7 +1177,7 @@ class ContextRetriever:
             "style_entries": style_entries,
             "style_context": self.style.format_context(style_entries),
             "personal_status": "FOUND" if owner_facts else ("NOT_FOUND" if personal_query else "NOT_APPLICABLE"),
-            "knowledge_status": "FOUND" if (knowledge_result["entries"] or knowledge_result.get("operation") == "count") else ("NOT_APPLICABLE" if non_query_operation else ("NOT_FOUND" if technical_query or knowledge_result["source_required"] else "NOT_APPLICABLE")),
+            "knowledge_status": "DISABLED",
             "query_plan": query_plan
         }
         self.last_result = result
