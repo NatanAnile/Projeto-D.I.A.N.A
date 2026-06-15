@@ -1,0 +1,31 @@
+REFATORAÇÃO DIANA BRAIN — RECUPERAÇÃO LOCAL
+
+Fluxo atual:
+1. Entrada do usuário
+2. Skills operacionais diretas: ReadChat, ReadFile e ReadScreen
+3. Recuperação local de contexto
+   - fatos pessoais relevantes
+   - conhecimento JSON relevante
+   - no máximo uma expressão de estilo relevante
+4. Histórico real das últimas interações
+5. Diana Brain
+6. LLM
+7. ActionParser
+8. Limpeza e TTS
+
+Princípios:
+- O StyleDictionary altera somente a forma da fala.
+- O KnowledgeRetriever fornece os fatos.
+- A base de conhecimento pode crescer sem ser injetada inteira no prompt.
+- Perguntas pessoais sem fonte encontrada devem receber "não sei", sem palpite.
+- Exemplos do Brain são apenas ritmo e formato, nunca memória.
+
+Pastas principais:
+- brain/context_retriever.py
+- data/style_dictionaries/
+- data/knowledge/super_metroid/
+- data/knowledge/speedrun/
+
+Critério de avaliação:
+- Nota 7 ou mais: passou; afinação futura.
+- Abaixo de 7: corrigir agora.

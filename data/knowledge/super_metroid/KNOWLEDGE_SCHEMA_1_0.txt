@@ -1,0 +1,20 @@
+# DIANA KNOWLEDGE SCHEMA 1.0
+
+Todos os JSONs em data/knowledge/super_metroid devem usar:
+
+{
+  "schema_version": "1.0",
+  "game": "Super Metroid",
+  "collection": "items|techniques|rooms|bosses|...",
+  "entries": []
+}
+
+Campos comuns: id, name, aliases, entry_type, summary, area, room, requirements, acquisition, effects, uses, related_entries, tags, source.
+
+Status válidos: known, none, unknown, not_applicable.
+- unknown: a informação ainda não foi cadastrada.
+- none: sabemos que não existe.
+- known: existe informação confiável no campo.
+- not_applicable: o campo não se aplica.
+
+Área e sala são campos de uma entrada, não coleções. Perguntas como "em que área ele está?" reutilizam a última entrada ativa.

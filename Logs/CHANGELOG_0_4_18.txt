@@ -1,0 +1,10 @@
+Diana 0.4.18 — Query/Memory/Cleaner/Activity Fix
+
+- QueryGate: corrigidos falsos positivos com "não usa knowledge", "testar continuidade" e "não precisa procurar no Mem0".
+- OwnerFactsRetriever: categorias compostas agora tentam versões progressivamente mais gerais, ex.: tipo_de_live_de_canal -> tipo_de_live.
+- SessionContext/Diana Mem0 direct: categorias com artigo inicial agora removem o artigo, corrigindo "na real a categoria favorita é...".
+- ResponseCleaner: rede de segurança ampliada contra presença física, meiguice indireta e termos grudados detectados no teste v5.
+- ActivityContext: aceita "brincar de <atividade>" e "chat contra" como início de minigame.
+- Incluído na raiz o teste test_continuidade_0_4_18_v6_500.py.
+
+- Ajustes extras v6: QueryGate skip de conhecimento local/separador; ContextRetriever tenta categoria base; ActivityContext reconhece charadas e encerramento por fim/termina.

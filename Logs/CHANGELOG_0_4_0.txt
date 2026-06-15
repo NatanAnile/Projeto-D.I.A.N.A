@@ -1,0 +1,34 @@
+# PROJETO DIANA 0.4.0 — ARQUITETURA DE TRÊS RESPONSABILIDADES
+
+Base: Diana 0.3.3 Retrieval Contextual Estável.
+
+## Modelo principal
+- Continua sendo qwen2.5:7b-Instruct.
+- Continua responsável por personagem, conversa e resposta final.
+- Temperatura padrão: 0.7.
+
+## Query Planner auxiliar
+- Estrutura pronta, desativada por padrão.
+- Transforma linguagem natural em consulta JSON.
+- Não escolhe personalidade e não responde ao usuário.
+- O KnowledgeRetriever continua executando e validando a consulta real.
+- Se desativado, o retrieval determinístico da 0.3.3 continua funcionando.
+
+## Resumidor episódico auxiliar
+- Estrutura pronta, desativada por padrão.
+- Acumula turnos apenas quando ativado.
+- Resume lotes em thread separada.
+- Mantém resumo antigo + últimas interações completas.
+- Não trata exemplos do Brain como memória.
+- Não é carregado durante a conversa normal.
+- Usa keep_alive=0 para solicitar descarregamento após cada chamada.
+
+## Separação de responsabilidades
+- Query Planner: encontra como consultar.
+- KnowledgeRetriever: consulta arquivos e valida resultados.
+- Session Summarizer: compacta contexto antigo.
+- Diana principal: responde com personalidade.
+
+## Compatibilidade
+- Com todos os auxiliares desativados, a 0.4 se comporta como a 0.3.3 estável.
+- Nenhuma segunda inferência ocorre por padrão.

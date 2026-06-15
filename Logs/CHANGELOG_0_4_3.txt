@@ -1,0 +1,12 @@
+# PROJETO DIANA 0.4.3 — ROTEAMENTO CONTEXTUAL REVISADO
+
+- Exact match global aceita nomes e aliases entre parênteses, como Mockball (Machball).
+- Feedback e correções não disparam consulta de conhecimento.
+- Correção explícita invalida a entrada e coleção ativas.
+- Mudança de assunto limpa o contexto factual ativo.
+- Abertura de tópico, como “vamos falar de Super Metroid”, não escolhe entrada aleatória.
+- Normalização leve para typos comuns: mue/meu, tasquihna/diana, Grappling Bram/Beam.
+- Consultas pessoais curtas reconhecem “e o Metroid?”, “e o Doom?” e equivalentes.
+- Consultas com vários campos retornam todos os campos pedidos, como localização + requisitos.
+- Área, sala e aquisição continuam sendo campos da entrada ativa, não coleções.
+- Query Planner e resumidor auxiliar continuam desativados por padrão.

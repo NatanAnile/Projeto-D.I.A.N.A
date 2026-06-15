@@ -1,0 +1,22 @@
+# Projeto Diana V4 — dependências base
+requests
+numpy
+scipy
+sounddevice
+keyboard
+python-dotenv
+
+# Memória / vetores
+qdrant-client
+mem0ai
+fastembed
+
+# STT/TTS opcionais conforme configuração local
+faster-whisper
+torch
+torchaudio
+onnxruntime-gpu
+
+# Integrações opcionais futuras
+discord.py
+PyNaCl

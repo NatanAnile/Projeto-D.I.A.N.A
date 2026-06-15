@@ -1,0 +1,14 @@
+# CHANGELOG 0.4.13 — UpdateParser e 150/150 leve
+
+- Adicionado parser de atualização/correção de preferências:
+  - `meu X favorito não é A, é B`
+  - `troca/muda/atualiza/corrige meu X favorito para B`
+- Consultas pós-update agora resolvem expressões como:
+  - `depois da correção`
+  - `depois da troca`
+  - `atualizado/corrigido`
+  - `qual foi o X atualizado`
+- Corrigidas consultas femininas `ficou salva/anotada`.
+- Corrigido alias `area_favorito` / `area_favorita`.
+- QueryGate agora entende `tem relação com` / `relacionado a` como consulta factual/knowledge.
+- Mantidos parser genérico, STT externo, Mem0 smart, modelo auxiliar, query planner, resumidor auxiliar e raiz limpa.

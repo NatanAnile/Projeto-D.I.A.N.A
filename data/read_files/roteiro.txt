@@ -1,0 +1,77 @@
+Sabe quando você acha que já viu todos os desafios possíveis de Super Metroid… e aí aparece uma ideia tão absurda que nem parece viável? Então. Dessa vez eu fui longe demais.
+
+Nós vamos terminar Super Metroid com quase nada! Nada do que faz a Samus… ser a Samus. Nada de pular mais alto, nada de correr em alta velocidade,
+nada de congelar inimigos pra fazer plataforma improvisada. E, pior: várias áreas que o jogo presume que você só chegaria equipado até os dentes com itens porretas… 
+
+eu simplesmente ignorei todos esses itens porque são iguais os Reserve Tanks, inúteis!!!
+
+Esse desafio parece meio torto, improvisado e completamente fora da lógica original... e é!
+Além do mais, aqui usamos algumas técnicas meio obscuras que poucas pessoas no mundo conseguem fazer!
+ 
+
+Mas pra chegar nisso, foi necessário desmantelar o mapa inteiro do jogo,  ignorar todas as rotas convencionais e navegar Super Metroid 
+como se fosse um labirinto maldoso que o jogo esconde propositalmente a saida de você.
+
+Pensado originalmente pelo Edu207, um dos mais antigos speedrunners de Super Metroid aqui no Brasil, 
+O desafio de 3 Itens foi uma experiência bem diferente. SIM, vamos usar apenas 3 itens de upgrade da samus!
+
+
+colocar trecho 12:43 "seguinte..." até 13:10 / 13:48 "qual é a restrição..." até 14:28 "itens únicos tem restrição"
+
+OK... restrições e regras estabelecidas vamos analizar antes de qualquer coisa, item por item até chegar no que usamos pra completar esse desafio:
+
+
+
+A primeira dificuldade é Norfair, implicando na coleta da Varia Suit, PORÉM, podemos lidar com o dano de calor coletando todas as Energy Tanks disponíveis e munição o bastante
+para fazer pelo menos 2 Crystal Flashes, que é essa habilidade que recarrega até 1400 de energia, usando munição.
+
+
+Vamos montar a rota com base na coleta da Varia Suit, já que precisamos lidar com o dano de calor em 90% das salas da área.
+
+Para acessarmos Lower norfair, na progressão original do jogo, precisamos de Gravity Suit + Space jump para atravessar o Lava Lake
+e como já pegamos o nosso 3º item, não iremos coletar nenhum item exta. 
+
+É possível acessar o Lava Lake sem gravity e sem o SPACE jump E existem 2 formas para isso: 
+A primeira forma é usando a hi-jump boots mas isso vai implicar em coletar mais um item único então não vamos fazer. 
+A segunda forma é fazer sem a Hi-Jump, E esse aqui é bem mais difícil de se fazer e como não temos restrição de coleta de energia teremos uma boa margem de segurança.
+Essa segunda forma resolve o problema da coleta dos itens unicos, como nós temos Varia Suit, vamos precisar de 2 tanques de energia pra isso, é possível fazer com 1 mas deixa isso pra Speedrun.
+e como não Estamos fazendo uma speedrun, então vamos pegar quantas energias pudermos.
+
+Nessa configuração é possível fazer 100% de norfair e lower norfair com Ridley incluso com ou sem Varia. Sem varia vai ser extremamente difícil pois precisamos 
+tomar um dano e abusar dos iframes para fazer walljump nos espinhos, e os projeteis das Namihe causam 200 de dano sem os trajes. Isso são 2 energy tanks + 1 de energia.
+
+
+Saindo daqui precisamos ir para marídia e aqui a porca torce o rabo pélo menos um zilhão de vezes. Definitivamente não conseguimos fazer absolutamente NADA em Maridia.
+Podemos usar o impulso da quebra do vidro pra tentar alcançar Main Street e se conseguirmos, não vamos conseguir subir a sala.
+A coleta da Varia Suit então será um problema pois não teremos item de movimentação vertical para continuar esacalando as profundezas da sua irmã de Maridia.
+
+Temos então alguns itens que poderão nos ajudar, já que Varia Suit não precisa ser coletada optaremos por um deles. 
+Tendo em mente que fizemos toda a sessão Norfair + Lower Norfair perfeitamente, em uma única visita e sem morrer, vamos considerar nosso 3º item a Hi-Jump Boots.
+Ainda assim, não conseguimos acessar nem a primeira plataforma de Main Street então desconsideraremos a botinha de pular alto. 
+O 2º item em questão é o Ice Beam e agora sim podemos subir toda Main Street usando os inimigos como plataforma até chegar no Mount Everest.
+Para escalar essa sala precisamos de Grappling Beam, e por ser um item único e não conseguirmos acessar sem o Ice Beam, o item está desconsiderado.
+A outra meneira seria fazer a Crab Climb mas sem a Hi-Jump Boots essa subida só não é literalmente infernal porque Maridia é uma área aquatica.
+Você precisa carregar dois crabs ao mesmo tempo até o topo da direita da sala e continuar essa subida, usando eles de plataformas.
+Sem hijump, é algo infernal de complicado então boa sorte pra você que quiser tentar. Principalmente por conta de Draygon.
+A luta contra a lagosta abacateira é chatissima. Precisamos primeiramente armazenar uma Blue Suit durante a luta. A única forma de fazer isso é:
+Interromper um Crystal Flash fazendo Draygon agarrar a samus para armazenar uma Flash Suit, porque é o que acontece quando um Crystal Flash é interrompido,
+depois, precisamos interromper um shinespark fazendo Draygon agarrar novamente. Sempre que interrompemos um Shinespark, o jogo entende que ele ainda está em execução,
+fazendo a samus ficar no estado permanente da speedbooster carregada, que é esse estado azul, dai o nome BLue Suit.
+Depois disso, precisamos fazer a lagosta agarrar a samus da Esquerda para a direita, isso aqui é importante porque PRECISA obrigatoriamente ser nessa direção, fazer ela
+levar a samus até a porta e se desprender popusando na plataforma. Feito isso, como não temos charge beam, espero que se você tenha chegado até aqui tenha MUITA munição pra tentar dar os
+últimos hits na Draygon ali em por cima. Assim que conseguir, é só usar a Blue Suit para sairmos de Precisous Room e ai é só fazer todo o caminho de volta até sairmos de Maridia.
+
+Podemos então desconsiderar todos os outros itens como dispensáveis para esse desafio, só que não! Além do ice beam tem um outro item que nós conseguimos usar para fazer todo o joguinho
+sem problema nenhum. Quer dizer, até você chegar nessa sala aqui (sala pé botwoon) 
+O item em questão é a Gravity Suit e ela vai resolver 2 grandes problemas pra esse desafio. Além de remover o atrito da água e conceder 25% de defesa, a Gravity Suit também
+protege contra o calor. Pegando a gravity suit então vamos resolver também, toda a BAGUNÇA que é Maridia, facilitando horrores nossa movimentação no jogo, e foi o que fizemos.
+
+Para acessar Wrecked Ship, fizemos o Continuous Wall Jump, um trick pixel e talvez uns 2 frames perfects, se não for frame perfect, enchemos o frangoon de missil,
+corremos até as panquecas magicas e as devoramos, dali já fomos direto pra maridia resolver o problema da sala pré botwoon.
+Como nós não temos Ice Beam pra fazer o mocktroid clip e nem a speedbooster pra passar a sala no modo normal, teremos de usar um trick que é bem chatinho de se pegar o timing.
+Eu precisei inclusive ver o tutorial do Jaychalke, que é gente bonissima, se inscreve no canal dele inclusive, pra pegar o timing certinho.
+O trick em questão é o Crystal Flash Clip, definiticamente ele tá sendo a estrelinha do vídeo.  Quando realizamos o Crystal Flash, ele joga a samus quase um bloco pra cima e isso é o bastante
+pra conseguirmos clipar os crumble blocks o bastante pra hitbox da samus pousar exatamente em cima e quebrar os blocos e pimba, só triturar a cobrinha e depois esmirilhar a lagosta. 
+Como temos bomb, podemos fazer o bomb jump ou o gravity jump pra sair da sala. Dali fomos direto pra Norfair. Pra cruzar o lava Lake fizemos um Gravity jump, passamos por toda
+Lower norfair até chegar em Ridley e derrotar ele. Por último fizemos o Kraid porque só faltava ele e ai partimos direto pra Mother Brain que foi melzinho na chupeta, correr
+até a nave e GG, desafio concluido com sucesso!

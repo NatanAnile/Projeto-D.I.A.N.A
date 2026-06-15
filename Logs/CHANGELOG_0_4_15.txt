@@ -1,0 +1,32 @@
+# Projeto Diana 0.4.15 — ACTIVITY CONTEXT MINIGAME
+
+Correção do comportamento de minigames/conversas-jogo que existia conceitualmente na linha 0.8.
+
+## Novo
+
+- `brain/activity_context.py`
+- Estado temporário de atividade ativa:
+  - kind
+  - domain
+  - participantes
+  - papéis
+  - regras
+  - placar
+  - rodada
+  - turno
+  - última ação
+  - próxima ação esperada
+
+## Corrigido
+
+- "batalha de piadas" não vira mais apenas improviso do LLM.
+- "você cuida do placar, eu julgo" registra papéis e regra.
+- "eu começo: ..." registra jogada do Neitan e prepara turno da Diana.
+- "sua vez" injeta tarefa obrigatória para a Diana executar a jogada, não só comentar.
+- "ponto pra mim / ponto pra você" atualiza placar determinístico.
+- "qual o placar?" responde placar direto.
+- "acabou/encerra" finaliza atividade temporária.
+
+## Importante
+
+Não é hardcode de piada. Piada é o domínio da atividade; a estrutura é genérica para minigames como rimas, perguntas, Diana vs chat etc.

@@ -1,0 +1,8 @@
+# Diana 0.4.8 — Mem0 auto-save inteligente + caminho rápido
+
+- Corrigido ruído do Mem0 em cumprimentos como "E aí?".
+- `MEM0_AUTO_SAVE_INTERACTIONS` continua ligado por padrão.
+- Adicionado filtro leve: auto-save só chama Mem0 quando a fala parece ter valor de memória.
+- Cumprimentos/zoeira curta não são enviados ao Mem0.
+- Adicionado caminho rápido no ContextRetriever para interações simples, evitando varrer knowledge/style/mem0 sem necessidade.
+- Mantidos modelo auxiliar, Query Planner auxiliar e Resumidor auxiliar.

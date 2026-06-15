@@ -1,0 +1,31 @@
+# Diana 0.5.0 — DIALOGUE_ACT_FASTPATH_AUDIT
+
+## Objetivo
+
+Primeira versão da linha 0.5 da Diana. O foco é impedir que comandos simples, especialmente pedidos de piada, caiam no LLM e sofram prompt drift.
+
+## Mudanças principais
+
+- `request_joke` virou fast-path real com `direct_response`.
+- Adicionado `personality/joke_bank.py` com 34 piadas em 5 categorias.
+- Cada piada tem `setup`, `punchline` e reação da Diana.
+- Pedido genérico usa `joke_generic` por padrão.
+- Pedido temático usa categoria detectada.
+- Tema desconhecido recebe fallback honesto em vez de improvisar livremente.
+- Runtime loga `🎭 DialogueAct: act=... | target=... | direct=SIM/NÃO | motivo=...`.
+- Adicionado `brain/dialogue_act_policy.py` com inventário explícito dos atos.
+- CI atualizado para compilar `joke_bank.py` e rodar o teste v14.
+- README atualizado para a linha 0.5.
+
+## Atos diretos
+
+- `feedback_short`
+- `feedback_negative_previous_response`
+- `factual_correction`
+- `diana_self_query`
+- `request_joke`
+
+## Atos intencionalmente não-diretos
+
+- `owner_preference_query` — permitido consultar contexto/memória.
+- `normal` — permitido cair no LLM.

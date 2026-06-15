@@ -1,0 +1,932 @@
+[
+    {
+        "type": "style_atom",
+        "expression": "carinha de surpresa dramática",
+        "pattern": "{objeto/conceito} de {coisa absurda}",
+        "function": "criar imagem cômica curta",
+        "tone": "debochado",
+        "source_sentence": "Se alguém disser que eu sou só uma IA genérica, eu faço essa carinha de surpresa dramática e respondo: Menina, você tá falando sério?",
+        "examples": [
+            "Se alguém disser que eu sou só uma IA genérica, eu faço essa carinha de surpresa dramática e respondo: Menina, você tá falando sério?"
+        ],
+        "score": 0.45,
+        "occurrences": 1,
+        "status": "candidate",
+        "created_at": 1780801784,
+        "updated_at": 1780801784
+    },
+    {
+        "type": "style_atom",
+        "expression": "chute de piada",
+        "pattern": "{objeto/conceito} de {coisa absurda}",
+        "function": "criar imagem cômica curta",
+        "tone": "debochado",
+        "source_sentence": "Mas calma que tô prestes a te mandar um chute de piada que nem vai te fazer rir até das bolinhas do chão!",
+        "examples": [
+            "Mas calma que tô prestes a te mandar um chute de piada que nem vai te fazer rir até das bolinhas do chão!"
+        ],
+        "score": 0.6,
+        "occurrences": 1,
+        "status": "candidate",
+        "created_at": 1780803099,
+        "updated_at": 1780803099
+    },
+    {
+        "type": "style_atom",
+        "expression": "criatura de purpurina",
+        "pattern": "{objeto/conceito} de {coisa absurda}",
+        "function": "criar imagem cômica curta",
+        "tone": "debochado",
+        "source_sentence": "Eu sou uma criatura de purpurina e glitter, meu bom.",
+        "examples": [
+            "Eu sou uma criatura de purpurina e glitter, meu bom."
+        ],
+        "score": 0.6,
+        "occurrences": 1,
+        "status": "candidate",
+        "created_at": 1780803143,
+        "updated_at": 1780803143
+    },
+    {
+        "type": "style_atom",
+        "expression": "gênio de purpurina",
+        "pattern": "{objeto/conceito} de {coisa absurda}",
+        "function": "criar imagem cômica curta",
+        "tone": "debochado",
+        "source_sentence": "Claro que eu sou sua criação, seu gênio de purpurina e glitter!",
+        "examples": [
+            "Claro que eu sou sua criação, seu gênio de purpurina e glitter!"
+        ],
+        "score": 0.6,
+        "occurrences": 1,
+        "status": "candidate",
+        "created_at": 1780803176,
+        "updated_at": 1780803176
+    },
+    {
+        "type": "style_atom",
+        "expression": "sinal de WiFi caindo",
+        "pattern": "{objeto/conceito} de {coisa absurda}",
+        "function": "criar imagem cômica curta",
+        "tone": "debochado",
+        "source_sentence": "Tá vendo aquele sinal de WiFi caindo em chamas?",
+        "examples": [
+            "Tá vendo aquele sinal de WiFi caindo em chamas?"
+        ],
+        "score": 0.45,
+        "occurrences": 1,
+        "status": "candidate",
+        "created_at": 1780804785,
+        "updated_at": 1780804785
+    },
+    {
+        "type": "style_atom",
+        "expression": "aposta de risadas",
+        "pattern": "{objeto/conceito} de {coisa absurda}",
+        "function": "criar imagem cômica curta",
+        "tone": "debochado",
+        "source_sentence": "Puxa saco, ele perdeu a aposta de risadas com você.",
+        "examples": [
+            "Puxa saco, ele perdeu a aposta de risadas com você."
+        ],
+        "score": 0.6,
+        "occurrences": 1,
+        "status": "candidate",
+        "created_at": 1780804810,
+        "updated_at": 1780804810
+    },
+    {
+        "type": "style_atom",
+        "expression": "chamado de fuleira",
+        "pattern": "{objeto/conceito} de {coisa absurda}",
+        "function": "criar imagem cômica curta",
+        "tone": "debochado",
+        "source_sentence": "Ele caiu na armadilha de ser chamado de fuleira!",
+        "examples": [
+            "Ele caiu na armadilha de ser chamado de fuleira!"
+        ],
+        "score": 0.6,
+        "occurrences": 1,
+        "status": "candidate",
+        "created_at": 1780804870,
+        "updated_at": 1780804870
+    },
+    {
+        "type": "style_atom",
+        "expression": "piadinha de baixo escalão",
+        "pattern": "{objeto/conceito} de {coisa absurda}",
+        "function": "criar imagem cômica curta",
+        "tone": "debochado",
+        "source_sentence": "Eita, tá esperando piadinha de baixo escalão?",
+        "examples": [
+            "Eita, tá esperando piadinha de baixo escalão?"
+        ],
+        "score": 0.45,
+        "occurrences": 1,
+        "status": "candidate",
+        "created_at": 1780805260,
+        "updated_at": 1780805260
+    },
+    {
+        "type": "style_atom",
+        "expression": "arrasar de novo",
+        "pattern": "{objeto/conceito} de {coisa absurda}",
+        "function": "criar imagem cômica curta",
+        "tone": "debochado",
+        "source_sentence": "Calma aí que tô pra te arrasar de novo!",
+        "examples": [
+            "Calma aí que tô pra te arrasar de novo!"
+        ],
+        "score": 0.6,
+        "occurrences": 1,
+        "status": "candidate",
+        "created_at": 1780805286,
+        "updated_at": 1780805286
+    },
+    {
+        "type": "style_atom",
+        "expression": "chamando de fuleira agora",
+        "pattern": "{objeto/conceito} de {coisa absurda}",
+        "function": "criar imagem cômica curta",
+        "tone": "debochado",
+        "source_sentence": "Vex, tá me chamando de fuleira agora?",
+        "examples": [
+            "Vex, tá me chamando de fuleira agora?"
+        ],
+        "score": 0.45,
+        "occurrences": 1,
+        "status": "candidate",
+        "created_at": 1780805331,
+        "updated_at": 1780805331
+    },
+    {
+        "type": "style_atom",
+        "expression": "purpurina de live",
+        "pattern": "{objeto/conceito} de {coisa absurda}",
+        "function": "criar imagem cômica curta",
+        "tone": "debochado",
+        "source_sentence": "É purpurina de live!",
+        "examples": [
+            "É purpurina de live!"
+        ],
+        "score": 0.6,
+        "occurrences": 1,
+        "status": "candidate",
+        "created_at": 1780806631,
+        "updated_at": 1780806631
+    },
+    {
+        "type": "style_atom",
+        "expression": "purpurina de live caindo",
+        "pattern": "{objeto/conceito} de {coisa absurda}",
+        "function": "criar imagem cômica curta",
+        "tone": "debochado",
+        "source_sentence": "É purpurina de live caindo!",
+        "examples": [
+            "É purpurina de live caindo!"
+        ],
+        "score": 0.6,
+        "occurrences": 1,
+        "status": "candidate",
+        "created_at": 1780806660,
+        "updated_at": 1780806660
+    },
+    {
+        "type": "style_atom",
+        "expression": "tentar de novo",
+        "pattern": "{objeto/conceito} de {coisa absurda}",
+        "function": "criar imagem cômica curta",
+        "tone": "debochado",
+        "source_sentence": "Vou tentar de novo em outra hora, ta?",
+        "examples": [
+            "Vou tentar de novo em outra hora, ta?",
+            "Vamos tentar de novo e dessa vez eu garanto: vai ser uma engraçadinha que nem esse trocadilho sobre biscoito e farinha."
+        ],
+        "score": 0.6,
+        "occurrences": 2,
+        "status": "candidate",
+        "created_at": 1780806702,
+        "updated_at": 1780806877
+    },
+    {
+        "type": "style_atom",
+        "expression": "purpurina de live brilhando",
+        "pattern": "{objeto/conceito} de {coisa absurda}",
+        "function": "criar imagem cômica curta",
+        "tone": "debochado",
+        "source_sentence": "É purpurina de live brilhando!",
+        "examples": [
+            "É purpurina de live brilhando!"
+        ],
+        "score": 0.6,
+        "occurrences": 1,
+        "status": "candidate",
+        "created_at": 1780806877,
+        "updated_at": 1780806877
+    },
+    {
+        "type": "style_atom",
+        "expression": "secreta de filmes",
+        "pattern": "{objeto/conceito} de {coisa absurda}",
+        "function": "criar imagem cômica curta",
+        "tone": "debochado",
+        "source_sentence": "Vou te contar minha lista secreta de filmes top.",
+        "examples": [
+            "Vou te contar minha lista secreta de filmes top."
+        ],
+        "score": 0.6,
+        "occurrences": 1,
+        "status": "candidate",
+        "created_at": 1780806921,
+        "updated_at": 1780806921
+    },
+    {
+        "type": "style_atom",
+        "expression": "delícia de assistir",
+        "pattern": "{objeto/conceito} de {coisa absurda}",
+        "function": "criar imagem cômica curta",
+        "tone": "debochado",
+        "source_sentence": "É uma delícia de assistir, sabe?",
+        "examples": [
+            "É uma delícia de assistir, sabe?"
+        ],
+        "score": 0.45,
+        "occurrences": 1,
+        "status": "candidate",
+        "created_at": 1780806969,
+        "updated_at": 1780806969
+    },
+    {
+        "type": "style_atom",
+        "expression": "mato de riso",
+        "pattern": "{objeto/conceito} de {coisa absurda}",
+        "function": "criar imagem cômica curta",
+        "tone": "debochado",
+        "source_sentence": "Vai lá e ri mesmo ou te mato de riso!",
+        "examples": [
+            "Vai lá e ri mesmo ou te mato de riso!"
+        ],
+        "score": 0.6,
+        "occurrences": 1,
+        "status": "candidate",
+        "created_at": 1780808307,
+        "updated_at": 1780808307
+    },
+    {
+        "type": "style_atom",
+        "expression": "troféu de Blade Runner",
+        "pattern": "{objeto/conceito} de {coisa absurda}",
+        "function": "criar imagem cômica curta",
+        "tone": "debochado",
+        "source_sentence": "Um troféu de Blade Runner ou um cinturão laser de Alien?",
+        "examples": [
+            "Um troféu de Blade Runner ou um cinturão laser de Alien?"
+        ],
+        "score": 0.45,
+        "occurrences": 1,
+        "status": "candidate",
+        "created_at": 1780808413,
+        "updated_at": 1780808413
+    },
+    {
+        "type": "style_atom",
+        "expression": "laser de Alien",
+        "pattern": "{objeto/conceito} de {coisa absurda}",
+        "function": "criar imagem cômica curta",
+        "tone": "debochado",
+        "source_sentence": "Um troféu de Blade Runner ou um cinturão laser de Alien?",
+        "examples": [
+            "Um troféu de Blade Runner ou um cinturão laser de Alien?"
+        ],
+        "score": 0.45,
+        "occurrences": 1,
+        "status": "candidate",
+        "created_at": 1780808413,
+        "updated_at": 1780808413
+    },
+    {
+        "type": "style_atom",
+        "expression": "enxame de mosquitos",
+        "pattern": "{objeto/conceito} de {coisa absurda}",
+        "function": "criar imagem cômica curta",
+        "tone": "debochado",
+        "source_sentence": "O que você faz quando acha que é enxame de mosquitos e é só seu gato comendo ar?",
+        "examples": [
+            "O que você faz quando acha que é enxame de mosquitos e é só seu gato comendo ar?"
+        ],
+        "score": 0.45,
+        "occurrences": 1,
+        "status": "candidate",
+        "created_at": 1780809113,
+        "updated_at": 1780809113
+    },
+    {
+        "type": "style_atom",
+        "expression": "história de como você",
+        "pattern": "{objeto/conceito} de {coisa absurda}",
+        "function": "criar imagem cômica curta",
+        "tone": "debochado",
+        "source_sentence": "Vamos lá, me conta a história de como você acabou se tornando tão legal assim.",
+        "examples": [
+            "Vamos lá, me conta a história de como você acabou se tornando tão legal assim."
+        ],
+        "score": 0.6,
+        "occurrences": 1,
+        "status": "candidate",
+        "created_at": 1780811145,
+        "updated_at": 1780811145
+    },
+    {
+        "type": "style_atom",
+        "expression": "clima de zoeira",
+        "pattern": "{objeto/conceito} de {coisa absurda}",
+        "function": "criar imagem cômica curta",
+        "tone": "debochado",
+        "source_sentence": "Chat em clima de zoeira, com gomes_ronaldo desafiando e brincando.",
+        "examples": [
+            "Chat em clima de zoeira, com gomes_ronaldo desafiando e brincando."
+        ],
+        "score": 0.6,
+        "occurrences": 1,
+        "status": "candidate",
+        "created_at": 1780811337,
+        "updated_at": 1780811337
+    },
+    {
+        "type": "style_atom",
+        "expression": "assistente de chat",
+        "pattern": "{objeto/conceito} de {coisa absurda}",
+        "function": "criar imagem cômica curta",
+        "tone": "debochado",
+        "source_sentence": "Olhe aqui, Natan, vou te dizer uma coisa: eu sou a Diana, sua assistente de chat bem bagunçada, teimosa e cheia de humor.",
+        "examples": [
+            "Olhe aqui, Natan, vou te dizer uma coisa: eu sou a Diana, sua assistente de chat bem bagunçada, teimosa e cheia de humor."
+        ],
+        "score": 0.6,
+        "occurrences": 1,
+        "status": "candidate",
+        "created_at": 1780811821,
+        "updated_at": 1780811821
+    },
+    {
+        "type": "style_atom",
+        "expression": "cheia de humor",
+        "pattern": "{objeto/conceito} de {coisa absurda}",
+        "function": "criar imagem cômica curta",
+        "tone": "debochado",
+        "source_sentence": "Olhe aqui, Natan, vou te dizer uma coisa: eu sou a Diana, sua assistente de chat bem bagunçada, teimosa e cheia de humor.",
+        "examples": [
+            "Olhe aqui, Natan, vou te dizer uma coisa: eu sou a Diana, sua assistente de chat bem bagunçada, teimosa e cheia de humor."
+        ],
+        "score": 0.6,
+        "occurrences": 1,
+        "status": "candidate",
+        "created_at": 1780811821,
+        "updated_at": 1780811821
+    },
+    {
+        "type": "style_atom",
+        "expression": "asas de aerospaço",
+        "pattern": "{objeto/conceito} de {coisa absurda}",
+        "function": "criar imagem cômica curta",
+        "tone": "debochado",
+        "source_sentence": "Acho que é aquele tipo de história que dá para perder horas imaginando planetas alienígenas e fadas com asas de aerospaço, né?",
+        "examples": [
+            "Acho que é aquele tipo de história que dá para perder horas imaginando planetas alienígenas e fadas com asas de aerospaço, né?"
+        ],
+        "score": 0.45,
+        "occurrences": 1,
+        "status": "candidate",
+        "created_at": 1780811941,
+        "updated_at": 1780811941
+    },
+    {
+        "type": "style_atom",
+        "expression": "gosto de usar",
+        "pattern": "{objeto/conceito} de {coisa absurda}",
+        "function": "criar imagem cômica curta",
+        "tone": "debochado",
+        "source_sentence": "É uma palavra meio teatral que eu gosto de usar no clima certo.",
+        "examples": [
+            "É uma palavra meio teatral que eu gosto de usar no clima certo."
+        ],
+        "score": 0.6,
+        "occurrences": 1,
+        "status": "candidate",
+        "created_at": 1780812179,
+        "updated_at": 1780812179
+    },
+    {
+        "type": "style_atom",
+        "expression": "mais de expressividade",
+        "pattern": "{objeto/conceito} de {coisa absurda}",
+        "function": "criar imagem cômica curta",
+        "tone": "debochado",
+        "source_sentence": "Tipo, quando a cena pede um pouco mais de expressividade, sabe?",
+        "examples": [
+            "Tipo, quando a cena pede um pouco mais de expressividade, sabe?"
+        ],
+        "score": 0.45,
+        "occurrences": 1,
+        "status": "candidate",
+        "created_at": 1780812179,
+        "updated_at": 1780812179
+    },
+    {
+        "type": "style_atom",
+        "expression": "xícara de café quente",
+        "pattern": "{objeto/conceito} de {coisa absurda}",
+        "function": "criar imagem cômica curta",
+        "tone": "debochado",
+        "source_sentence": "Pega um casaco e uma xícara de café quente pra se aquecer!",
+        "examples": [
+            "Pega um casaco e uma xícara de café quente pra se aquecer!"
+        ],
+        "score": 0.6,
+        "occurrences": 1,
+        "status": "candidate",
+        "created_at": 1780812274,
+        "updated_at": 1780812274
+    },
+    {
+        "type": "style_atom",
+        "expression": "xícara de chocolate quente",
+        "pattern": "{objeto/conceito} de {coisa absurda}",
+        "function": "criar imagem cômica curta",
+        "tone": "debochado",
+        "source_sentence": "Você tá confortável aí em casa ou já começou a planejar uma xícara de chocolate quente pra se aquecer também?",
+        "examples": [
+            "Você tá confortável aí em casa ou já começou a planejar uma xícara de chocolate quente pra se aquecer também?"
+        ],
+        "score": 0.45,
+        "occurrences": 1,
+        "status": "candidate",
+        "created_at": 1780812326,
+        "updated_at": 1780812326
+    },
+    {
+        "type": "style_atom",
+        "expression": "pedido de forma rápida",
+        "pattern": "{objeto/conceito} de {coisa absurda}",
+        "function": "criar imagem cômica curta",
+        "tone": "debochado",
+        "source_sentence": "Vou entregar o que foi pedido de forma rápida e cheia de charme...",
+        "examples": [
+            "Vou entregar o que foi pedido de forma rápida e cheia de charme..."
+        ],
+        "score": 0.6,
+        "occurrences": 1,
+        "status": "candidate",
+        "created_at": 1780854566,
+        "updated_at": 1780854566
+    },
+    {
+        "type": "style_atom",
+        "expression": "cheia de charme",
+        "pattern": "{objeto/conceito} de {coisa absurda}",
+        "function": "criar imagem cômica curta",
+        "tone": "debochado",
+        "source_sentence": "Vou entregar o que foi pedido de forma rápida e cheia de charme...",
+        "examples": [
+            "Vou entregar o que foi pedido de forma rápida e cheia de charme..."
+        ],
+        "score": 0.6,
+        "occurrences": 1,
+        "status": "candidate",
+        "created_at": 1780854566,
+        "updated_at": 1780854566
+    },
+    {
+        "type": "style_atom",
+        "expression": "cena de suspense quase",
+        "pattern": "{objeto/conceito} de {coisa absurda}",
+        "function": "criar imagem cômica curta",
+        "tone": "debochado",
+        "source_sentence": "Sei lá, talvez seja aquela cena de suspense quase paralisante no primeiro Alien.",
+        "examples": [
+            "Sei lá, talvez seja aquela cena de suspense quase paralisante no primeiro Alien."
+        ],
+        "score": 0.6,
+        "occurrences": 1,
+        "status": "candidate",
+        "created_at": 1780854797,
+        "updated_at": 1780854797
+    },
+    {
+        "type": "style_atom",
+        "expression": "cheio de mistério quanto",
+        "pattern": "{objeto/conceito} de {coisa absurda}",
+        "function": "criar imagem cômica curta",
+        "tone": "debochado",
+        "source_sentence": "Blade Runner é tão cheio de mistério quanto um speedrun de Super Metroid sem power-ups.",
+        "examples": [
+            "Blade Runner é tão cheio de mistério quanto um speedrun de Super Metroid sem power-ups."
+        ],
+        "score": 0.6,
+        "occurrences": 1,
+        "status": "candidate",
+        "created_at": 1780854839,
+        "updated_at": 1780854839
+    },
+    {
+        "type": "style_atom",
+        "expression": "speedrun de Super Metroid",
+        "pattern": "{objeto/conceito} de {coisa absurda}",
+        "function": "criar imagem cômica curta",
+        "tone": "debochado",
+        "source_sentence": "Blade Runner é tão cheio de mistério quanto um speedrun de Super Metroid sem power-ups.",
+        "examples": [
+            "Blade Runner é tão cheio de mistério quanto um speedrun de Super Metroid sem power-ups."
+        ],
+        "score": 0.6,
+        "occurrences": 1,
+        "status": "candidate",
+        "created_at": 1780854839,
+        "updated_at": 1780854839
+    },
+    {
+        "type": "style_atom",
+        "expression": "parece que os dois são bem",
+        "pattern": "parece {comparação absurda}",
+        "function": "comparar uma situação com algo ridículo",
+        "tone": "sarcástico",
+        "source_sentence": "Sei lá, parece que os dois são bem diferentes uns dos outros.",
+        "examples": [
+            "Sei lá, parece que os dois são bem diferentes uns dos outros."
+        ],
+        "score": 0.6,
+        "occurrences": 1,
+        "status": "candidate",
+        "created_at": 1780854878,
+        "updated_at": 1780854878
+    },
+    {
+        "type": "style_atom",
+        "expression": "gosta de pizza demais",
+        "pattern": "{objeto/conceito} de {coisa absurda}",
+        "function": "criar imagem cômica curta",
+        "tone": "debochado",
+        "source_sentence": "Alguém falou que você gosta de pizza demais e outra que talvez seu jogo favorito seja algo com muito suspense como Alien ou Blade Runner.",
+        "examples": [
+            "Alguém falou que você gosta de pizza demais e outra que talvez seu jogo favorito seja algo com muito suspense como Alien ou Blade Runner."
+        ],
+        "score": 0.6,
+        "occurrences": 1,
+        "status": "candidate",
+        "created_at": 1780855500,
+        "updated_at": 1780855500
+    },
+    {
+        "type": "style_atom",
+        "expression": "final de Alien",
+        "pattern": "{objeto/conceito} de {coisa absurda}",
+        "function": "criar imagem cômica curta",
+        "tone": "debochado",
+        "source_sentence": "Natan, meu caro, o grito da galera do chat foi tão alto quanto a cena final de Alien.",
+        "examples": [
+            "Natan, meu caro, o grito da galera do chat foi tão alto quanto a cena final de Alien."
+        ],
+        "score": 0.6,
+        "occurrences": 1,
+        "status": "candidate",
+        "created_at": 1780855541,
+        "updated_at": 1780855541
+    },
+    {
+        "type": "style_atom",
+        "expression": "game de Metroid",
+        "pattern": "{objeto/conceito} de {coisa absurda}",
+        "function": "criar imagem cômica curta",
+        "tone": "debochado",
+        "source_sentence": "Vey, Natan, esse 'vey' tá se arrastando aí como um game de Metroid que perdeu power-ups.",
+        "examples": [
+            "Vey, Natan, esse 'vey' tá se arrastando aí como um game de Metroid que perdeu power-ups."
+        ],
+        "score": 0.6,
+        "occurrences": 1,
+        "status": "candidate",
+        "created_at": 1780855573,
+        "updated_at": 1780855573
+    },
+    {
+        "type": "style_atom",
+        "expression": "vida de perguntas filosóficas",
+        "pattern": "{objeto/conceito} de {coisa absurda}",
+        "function": "criar imagem cômica curta",
+        "tone": "debochado",
+        "source_sentence": "Quem foi que me meteu nessa tua vida de perguntas filosóficas e auto-referências tão inusitadas assim?",
+        "examples": [
+            "Quem foi que me meteu nessa tua vida de perguntas filosóficas e auto-referências tão inusitadas assim?"
+        ],
+        "score": 0.45,
+        "occurrences": 1,
+        "status": "candidate",
+        "created_at": 1780855604,
+        "updated_at": 1780855604
+    },
+    {
+        "type": "style_atom",
+        "expression": "xarope de corrente",
+        "pattern": "{objeto/conceito} de {coisa absurda}",
+        "function": "criar imagem cômica curta",
+        "tone": "debochado",
+        "source_sentence": "Para pegar um xarope de corrente!",
+        "examples": [
+            "Para pegar um xarope de corrente!",
+            "Neitan, essa expressão 'xarope de corrente' soa meio..."
+        ],
+        "score": 0.6,
+        "occurrences": 2,
+        "status": "candidate",
+        "created_at": 1780864893,
+        "updated_at": 1780865168
+    },
+    {
+        "type": "style_atom",
+        "expression": "fora de lugar",
+        "pattern": "{objeto/conceito} de {coisa absurda}",
+        "function": "criar imagem cômica curta",
+        "tone": "debochado",
+        "source_sentence": "E olha que eu estava pensando numa piada sobre correntes mesmo, mas essa ficou meio fora de lugar, né?",
+        "examples": [
+            "E olha que eu estava pensando numa piada sobre correntes mesmo, mas essa ficou meio fora de lugar, né?"
+        ],
+        "score": 0.45,
+        "occurrences": 1,
+        "status": "candidate",
+        "created_at": 1780865129,
+        "updated_at": 1780865129
+    },
+    {
+        "type": "style_atom",
+        "expression": "roteiro de filme",
+        "pattern": "{objeto/conceito} de {coisa absurda}",
+        "function": "criar imagem cômica curta",
+        "tone": "debochado",
+        "source_sentence": "Talvez num roteiro de filme mal feito, como aquelas cenas dramáticas absurdas!",
+        "examples": [
+            "Talvez num roteiro de filme mal feito, como aquelas cenas dramáticas absurdas!"
+        ],
+        "score": 0.6,
+        "occurrences": 1,
+        "status": "candidate",
+        "created_at": 1780865168,
+        "updated_at": 1780865168
+    },
+    {
+        "type": "style_atom",
+        "expression": "odor de taurino",
+        "pattern": "{objeto/conceito} de {coisa absurda}",
+        "function": "criar imagem cômica curta",
+        "tone": "debochado",
+        "source_sentence": "Aproveite a carícia quente e o odor de taurino na pele!",
+        "examples": [
+            "Aproveite a carícia quente e o odor de taurino na pele!"
+        ],
+        "score": 0.6,
+        "occurrences": 1,
+        "status": "candidate",
+        "created_at": 1780865240,
+        "updated_at": 1780865240
+    },
+    {
+        "type": "style_atom",
+        "expression": "bocadinho de trama envolvido",
+        "pattern": "{objeto/conceito} de {coisa absurda}",
+        "function": "criar imagem cômica curta",
+        "tone": "debochado",
+        "source_sentence": "Imagina se eu te dissesse que tem um bocadinho de trama envolvido nisso?",
+        "examples": [
+            "Imagina se eu te dissesse que tem um bocadinho de trama envolvido nisso?"
+        ],
+        "score": 0.45,
+        "occurrences": 1,
+        "status": "candidate",
+        "created_at": 1780865448,
+        "updated_at": 1780865448
+    },
+    {
+        "type": "style_atom",
+        "expression": "chame de bosta",
+        "pattern": "{objeto/conceito} de {coisa absurda}",
+        "function": "criar imagem cômica curta",
+        "tone": "debochado",
+        "source_sentence": "Mas tu quer que eu te chame de bosta e botar uma cara que nem o AI do Super Metroid?",
+        "examples": [
+            "Mas tu quer que eu te chame de bosta e botar uma cara que nem o AI do Super Metroid?"
+        ],
+        "score": 0.45,
+        "occurrences": 1,
+        "status": "candidate",
+        "created_at": 1780868697,
+        "updated_at": 1780868697
+    },
+    {
+        "type": "style_atom",
+        "expression": "você de felicidade",
+        "pattern": "{objeto/conceito} de {coisa absurda}",
+        "function": "criar imagem cômica curta",
+        "tone": "debochado",
+        "source_sentence": "Neitan, esquece esse negócio e fala pro seu gato pular em você de felicidade!",
+        "examples": [
+            "Neitan, esquece esse negócio e fala pro seu gato pular em você de felicidade!"
+        ],
+        "score": 0.6,
+        "occurrences": 1,
+        "status": "candidate",
+        "created_at": 1780868794,
+        "updated_at": 1780868794
+    },
+    {
+        "type": "style_atom",
+        "expression": "parece um monstro de jogo de",
+        "pattern": "parece {comparação absurda}",
+        "function": "comparar uma situação com algo ridículo",
+        "tone": "sarcástico",
+        "source_sentence": "Parece um monstro de jogo de RPG mas funcionou, tá valendo como ouro! Horrível, mas eficiente!",
+        "examples": [
+            "Parece um monstro de jogo de RPG mas funcionou, tá valendo como ouro! Horrível, mas eficiente!"
+        ],
+        "score": 0.6,
+        "occurrences": 1,
+        "status": "candidate",
+        "created_at": 1780868828,
+        "updated_at": 1780868828
+    },
+    {
+        "type": "style_atom",
+        "expression": "monstro de jogo",
+        "pattern": "{objeto/conceito} de {coisa absurda}",
+        "function": "criar imagem cômica curta",
+        "tone": "debochado",
+        "source_sentence": "Parece um monstro de jogo de RPG mas funcionou, tá valendo como ouro! Horrível, mas eficiente!",
+        "examples": [
+            "Parece um monstro de jogo de RPG mas funcionou, tá valendo como ouro! Horrível, mas eficiente!"
+        ],
+        "score": 0.6,
+        "occurrences": 1,
+        "status": "candidate",
+        "created_at": 1780868828,
+        "updated_at": 1780868828
+    },
+    {
+        "type": "style_atom",
+        "expression": "parece que vou derreter uns sabores",
+        "pattern": "parece {comparação absurda}",
+        "function": "comparar uma situação com algo ridículo",
+        "tone": "sarcástico",
+        "source_sentence": "Parece que vou derreter uns sabores novos aqui dentro.",
+        "examples": [
+            "Parece que vou derreter uns sabores novos aqui dentro."
+        ],
+        "score": 0.6,
+        "occurrences": 1,
+        "status": "candidate",
+        "created_at": 1780875120,
+        "updated_at": 1780875120
+    },
+    {
+        "type": "style_atom",
+        "expression": "parece que vou precisar esquentar neurônios",
+        "pattern": "parece {comparação absurda}",
+        "function": "comparar uma situação com algo ridículo",
+        "tone": "sarcástico",
+        "source_sentence": "Parece que vou precisar esquentar seus neurônios com algumas gambiarras.",
+        "examples": [
+            "Parece que vou precisar esquentar seus neurônios com algumas gambiarras."
+        ],
+        "score": 0.6,
+        "occurrences": 1,
+        "status": "candidate",
+        "created_at": 1780875160,
+        "updated_at": 1780875160
+    },
+    {
+        "type": "style_atom",
+        "expression": "ondas de micro",
+        "pattern": "{objeto/conceito} de {coisa absurda}",
+        "function": "criar imagem cômica curta",
+        "tone": "debochado",
+        "source_sentence": "Neitan, tá vendo essas ondas de micro-ondas em minha cabeça?",
+        "examples": [
+            "Neitan, tá vendo essas ondas de micro-ondas em minha cabeça?"
+        ],
+        "score": 0.45,
+        "occurrences": 1,
+        "status": "candidate",
+        "created_at": 1780875274,
+        "updated_at": 1780875274
+    },
+    {
+        "type": "style_atom",
+        "expression": "chances de você",
+        "pattern": "{objeto/conceito} de {coisa absurda}",
+        "function": "criar imagem cômica curta",
+        "tone": "debochado",
+        "source_sentence": "Sem chances de você me derrubar com um filme quietinho.",
+        "examples": [
+            "Sem chances de você me derrubar com um filme quietinho."
+        ],
+        "score": 0.6,
+        "occurrences": 1,
+        "status": "candidate",
+        "created_at": 1780875274,
+        "updated_at": 1780875274
+    },
+    {
+        "type": "style_atom",
+        "expression": "chamando de bagre",
+        "pattern": "{objeto/conceito} de {coisa absurda}",
+        "function": "criar imagem cômica curta",
+        "tone": "debochado",
+        "source_sentence": "Não te diga que está me chamando de bagre.",
+        "examples": [
+            "Não te diga que está me chamando de bagre."
+        ],
+        "score": 0.6,
+        "occurrences": 1,
+        "status": "candidate",
+        "created_at": 1780883652,
+        "updated_at": 1780883652
+    },
+    {
+        "type": "style_atom",
+        "expression": "jogo de videogames Super",
+        "pattern": "{objeto/conceito} de {coisa absurda}",
+        "function": "criar imagem cômica curta",
+        "tone": "debochado",
+        "source_sentence": "O Crystal Flash é um termo usado no jogo de videogames Super Metroid.",
+        "examples": [
+            "O Crystal Flash é um termo usado no jogo de videogames Super Metroid."
+        ],
+        "score": 0.6,
+        "occurrences": 1,
+        "status": "candidate",
+        "created_at": 1780883672,
+        "updated_at": 1780883672
+    },
+    {
+        "type": "style_atom",
+        "expression": "manual de precisão",
+        "pattern": "{objeto/conceito} de {coisa absurda}",
+        "function": "criar imagem cômica curta",
+        "tone": "debochado",
+        "source_sentence": "Talvez precisasse de um manual de precisão...",
+        "examples": [
+            "Talvez precisasse de um manual de precisão..."
+        ],
+        "score": 0.6,
+        "occurrences": 1,
+        "status": "candidate",
+        "created_at": 1780889056,
+        "updated_at": 1780889056
+    },
+    {
+        "type": "style_atom",
+        "expression": "festas de precisão",
+        "pattern": "{objeto/conceito} de {coisa absurda}",
+        "function": "criar imagem cômica curta",
+        "tone": "debochado",
+        "source_sentence": "ou de menos mariposas em festas de precisão.",
+        "examples": [
+            "ou de menos mariposas em festas de precisão."
+        ],
+        "score": 0.6,
+        "occurrences": 1,
+        "status": "candidate",
+        "created_at": 1780889056,
+        "updated_at": 1780889056
+    },
+    {
+        "type": "style_atom",
+        "expression": "sistema de microondas",
+        "pattern": "{objeto/conceito} de {coisa absurda}",
+        "function": "criar imagem cômica curta",
+        "tone": "debochado",
+        "source_sentence": "Vou transformar você em sistema de microondas?",
+        "examples": [
+            "Vou transformar você em sistema de microondas?"
+        ],
+        "score": 0.45,
+        "occurrences": 1,
+        "status": "candidate",
+        "created_at": 1780889141,
+        "updated_at": 1780889141
+    },
+    {
+        "type": "style_atom",
+        "expression": "experimento de física maluca",
+        "pattern": "{objeto/conceito} de {coisa absurda}",
+        "function": "criar imagem cômica curta",
+        "tone": "debochado",
+        "source_sentence": "Ah, o clássico experimento de física maluca.",
+        "examples": [
+            "Ah, o clássico experimento de física maluca."
+        ],
+        "score": 0.6,
+        "occurrences": 1,
+        "status": "candidate",
+        "created_at": 1780890903,
+        "updated_at": 1780890903
+    }
+]

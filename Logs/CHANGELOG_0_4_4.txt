@@ -1,0 +1,12 @@
+PROJETO DIANA 0.4.4 — QUERY GATE E OPERAÇÕES ESTRUTURAIS
+
+- QueryGate determinístico antes do QueryPlanner e do KnowledgeRetriever.
+- Retrieval não dispara por mera menção de técnica/item.
+- Aliases genéricos bloqueados no exact match (ex.: Super).
+- Nome Super Metroid removido da consulta nominal.
+- Operações list e random adicionadas.
+- Filtro category=major_upgrade e limite numérico em listas.
+- Logs mostram decisão do Query Gate.
+- Referências de live/chat removidas do Brain e perfil base.
+- Contexto de Host Mode separado em brain/host_mode_context.json.
+- Personalidade liberada no tom, mantendo fatos rígidos.

@@ -1,0 +1,12 @@
+# PROJETO DIANA 0.4.2 — KNOWLEDGE SCHEMA 1.0
+
+- Novo contrato único para JSONs de conhecimento.
+- items.json e techniques.json convertidos para schema 1.0.
+- Exact match global antes da escolha de coleção.
+- Separação entre coleção, entrada ativa e campo solicitado.
+- Consultas contextuais de area, room, requirements, boss, effects, uses e acquisition.
+- status unknown não é tratado como none.
+- Feedback simples não dispara nova busca.
+- Correções do usuário invalidam a entrada ativa.
+- Filtro por requisitos usa campos estruturados.
+- Fora do Host Mode, live/chat não são presumidos.

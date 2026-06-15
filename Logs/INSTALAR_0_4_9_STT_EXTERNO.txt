@@ -1,0 +1,15 @@
+# Instalação / cache externo do Parakeet
+
+A partir da 0.4.9, o modelo STT não fica mais dentro da pasta do projeto.
+
+Padrão:
+
+%USERPROFILE%\.cache\diana\models\parakeet-tdt-0.6b-v3-ptBR-TAGARELA-onnx
+
+Config relevante em config.py:
+
+DIANA_CACHE_DIR = ~/.cache/diana
+PARAKEET_MODEL_PATH = DIANA_CACHE_DIR/models/parakeet-tdt-0.6b-v3-ptBR-TAGARELA-onnx
+PARAKEET_AUTO_DOWNLOAD = True
+
+Se existir uma pasta antiga `models/` dentro do projeto com o Parakeet baixado, ela pode ser apagada depois de confirmar que a 0.4.9 baixou/usa o cache externo.

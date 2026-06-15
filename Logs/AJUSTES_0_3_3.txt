@@ -1,0 +1,29 @@
+PROJETO DIANA 0.3.3 — RETRIEVAL CONTEXTUAL ESTÁVEL
+
+Base: Projeto Diana 0.3.2
+
+Principais ajustes:
+- Mantida a arquitetura sem TurnInterpreter.
+- Fatos pessoais consultam apenas owner.known_preferences e owner_session_preferences.
+- Perguntas curtas de continuação mantêm a preferência anterior, por exemplo Doom favorito.
+- Fatos pessoais encontrados viram resposta determinística e não podem ser substituídos pela LLM.
+- Busca técnica mantém a última coleção e a última entrada usada.
+- Pedidos como mesma técnica, reformula, mais simples e de forma engraçada reutilizam a última entrada.
+- Pedidos como outra, diferente, mais uma e o typo comum 'oura' excluem a entrada anterior.
+- Busca por requisito, como técnica que use X-Ray, filtra os campos da entrada em vez de escolher qualquer técnica.
+- Correspondência exata por nome retorna apenas a entrada exata.
+- Operações primeira, última e quantidade são tratadas de forma estrutural.
+- NOT_FOUND dentro de uma coleção retorna resposta determinística sem invenção.
+- StyleRetriever não usa mais o significado como gatilho e não escolhe estilo por coincidência fraca.
+- Brain ajustado para saudações simples, sem puxar live ou chamar Neitan de bagunceira.
+- techniques.json completo incluído e validado com 87 técnicas.
+
+Validações locais:
+- KnowledgeRetriever indexou 94 entradas.
+- Crystal Flash: busca direta OK.
+- Outra técnica: exclusão da anterior OK.
+- Mesma técnica/reformulação: reutilização da entrada atual OK.
+- Técnica com X-Ray: filtro por requisito OK.
+- Última técnica: Zebetite Glitch (Zeb Skip) OK.
+- Quantidade de técnicas: 87 OK.
+- Arquivos Python validados com compileall.

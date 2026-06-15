@@ -1,0 +1,8 @@
+# CHANGELOG 0.4.11 — Continuidade curta e chaves de memória
+
+- Corrigido follow-up curto de preferência: "E o celular?", "E o mouse?", "E o Doom?".
+- Corrigido lookup de comida favorita para priorizar `comida_favorita` em vez de `comida_favorito`.
+- Corrigido lookup de franquia favorita com fallback entre `franquia_de_jogo_favorito`, `franquia_de_jogo_favorita`, `franquia_favorita` e `franquia_favorito`.
+- Adicionados aliases para mouse, monitor, teclado e console no OwnerFactsRetriever.
+- Expandido ResponseCleaner contra presença/ação física falsa: "andar pelo quarto", "vou andar", "andar por aí", "estou no seu quarto" etc.
+- Mantidos: STT externo em `DianaModels`, Mem0 smart/direct import, modelo auxiliar, query planner, resumidor auxiliar e raiz limpa.

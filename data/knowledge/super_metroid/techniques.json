@@ -1,0 +1,3739 @@
+{
+  "schema_version": "1.0",
+  "game": "Super Metroid",
+  "collection": "techniques",
+  "description": "Técnicas, glitches e movimentos consultáveis pela Diana. Campos ausentes usam status explícito.",
+  "entries": [
+    {
+      "id": "aerial_bomb_spread",
+      "name": "Aerial Bomb Spread",
+      "aliases": [],
+      "entry_type": "technique",
+      "summary": "Variação do Bomb Spread feita no ar, permitindo espalhar cinco bombas antes de Samus tocar o chão.",
+      "area": null,
+      "room": null,
+      "requirements": {
+        "status": "known",
+        "all_items": [
+          "Morph Ball",
+          "Bombs",
+          "Charge Beam"
+        ],
+        "any_items": [],
+        "minimum_energy_tanks": null,
+        "minimum_reserve_tanks": null,
+        "maximum_current_energy": null,
+        "ammo": {},
+        "techniques": [],
+        "events": []
+      },
+      "acquisition": {
+        "status": "not_applicable",
+        "boss": null,
+        "miniboss": null,
+        "mechanism": null,
+        "event_type": null,
+        "event_target": null,
+        "normal_route_notes": null,
+        "prerequisite_events": [],
+        "bypass_possible": null,
+        "bypass_notes": null
+      },
+      "effects": [
+        "Variação do Bomb Spread feita no ar, permitindo espalhar cinco bombas antes de Samus tocar o chão."
+      ],
+      "uses": [],
+      "related_entries": [],
+      "tags": [
+        "technique"
+      ],
+      "source": []
+    },
+    {
+      "id": "alcatraz_escape",
+      "name": "Alcatraz Escape",
+      "aliases": [],
+      "entry_type": "technique",
+      "summary": "Sequência de movimentação usada para sair rapidamente da parte inferior da Parlor, normalmente combinando saltos precisos e manipulação de hitbox.",
+      "area": null,
+      "room": null,
+      "requirements": {
+        "status": "none",
+        "all_items": [],
+        "any_items": [],
+        "minimum_energy_tanks": null,
+        "minimum_reserve_tanks": null,
+        "maximum_current_energy": null,
+        "ammo": {},
+        "techniques": [],
+        "events": []
+      },
+      "acquisition": {
+        "status": "not_applicable",
+        "boss": null,
+        "miniboss": null,
+        "mechanism": null,
+        "event_type": null,
+        "event_target": null,
+        "normal_route_notes": null,
+        "prerequisite_events": [],
+        "bypass_possible": null,
+        "bypass_notes": null
+      },
+      "effects": [
+        "Sequência de movimentação usada para sair rapidamente da parte inferior da Parlor, normalmente combinando saltos precisos e manipulação de hitbox."
+      ],
+      "uses": [],
+      "related_entries": [],
+      "tags": [
+        "technique"
+      ],
+      "source": []
+    },
+    {
+      "id": "aligning_doors",
+      "name": "Aligning Doors",
+      "aliases": [],
+      "entry_type": "technique",
+      "summary": "Consiste em entrar no centro vertical de uma porta para reduzir o movimento automático de Samus durante a transição e economizar tempo.",
+      "area": null,
+      "room": null,
+      "requirements": {
+        "status": "none",
+        "all_items": [],
+        "any_items": [],
+        "minimum_energy_tanks": null,
+        "minimum_reserve_tanks": null,
+        "maximum_current_energy": null,
+        "ammo": {},
+        "techniques": [],
+        "events": []
+      },
+      "acquisition": {
+        "status": "not_applicable",
+        "boss": null,
+        "miniboss": null,
+        "mechanism": null,
+        "event_type": null,
+        "event_target": null,
+        "normal_route_notes": null,
+        "prerequisite_events": [],
+        "bypass_possible": null,
+        "bypass_notes": null
+      },
+      "effects": [
+        "Consiste em entrar no centro vertical de uma porta para reduzir o movimento automático de Samus durante a transição e economizar tempo."
+      ],
+      "uses": [],
+      "related_entries": [],
+      "tags": [
+        "technique"
+      ],
+      "source": []
+    },
+    {
+      "id": "arm_pumping",
+      "name": "Arm Pumping",
+      "aliases": [],
+      "entry_type": "technique",
+      "summary": "Alternar rapidamente os botões de mira durante uma corrida avança a animação dos braços e concede pequenos ganhos de posição.",
+      "area": null,
+      "room": null,
+      "requirements": {
+        "status": "none",
+        "all_items": [],
+        "any_items": [],
+        "minimum_energy_tanks": null,
+        "minimum_reserve_tanks": null,
+        "maximum_current_energy": null,
+        "ammo": {},
+        "techniques": [],
+        "events": []
+      },
+      "acquisition": {
+        "status": "not_applicable",
+        "boss": null,
+        "miniboss": null,
+        "mechanism": null,
+        "event_type": null,
+        "event_target": null,
+        "normal_route_notes": null,
+        "prerequisite_events": [],
+        "bypass_possible": null,
+        "bypass_notes": null
+      },
+      "effects": [
+        "Alternar rapidamente os botões de mira durante uma corrida avança a animação dos braços e concede pequenos ganhos de posição."
+      ],
+      "uses": [],
+      "related_entries": [],
+      "tags": [
+        "technique"
+      ],
+      "source": []
+    },
+    {
+      "id": "blue_suit_glitch",
+      "name": "Blue Suit Glitch",
+      "aliases": [],
+      "entry_type": "technique",
+      "summary": "Mantém permanentemente o estado azul do Speed Booster após um Shinespark ser interrompido antes da colisão final. Enquanto o estado durar, Samus destrói blocos e inimigos ao encostá-los.",
+      "area": null,
+      "room": null,
+      "requirements": {
+        "status": "known",
+        "all_items": [
+          "Speed Booster"
+        ],
+        "any_items": [],
+        "minimum_energy_tanks": null,
+        "minimum_reserve_tanks": null,
+        "maximum_current_energy": null,
+        "ammo": {},
+        "techniques": [],
+        "events": []
+      },
+      "acquisition": {
+        "status": "not_applicable",
+        "boss": null,
+        "miniboss": null,
+        "mechanism": null,
+        "event_type": null,
+        "event_target": null,
+        "normal_route_notes": null,
+        "prerequisite_events": [],
+        "bypass_possible": null,
+        "bypass_notes": null
+      },
+      "effects": [
+        "Mantém permanentemente o estado azul do Speed Booster após um Shinespark ser interrompido antes da colisão final. Enquanto o estado durar, Samus destrói blocos e inimigos ao encostá-los."
+      ],
+      "uses": [],
+      "related_entries": [],
+      "tags": [
+        "technique"
+      ],
+      "source": []
+    },
+    {
+      "id": "bomb_jump",
+      "name": "Bomb Jump",
+      "aliases": [],
+      "entry_type": "technique",
+      "summary": "Usa a explosão de uma bomba para impulsionar Samus enquanto ela está em Morph Ball.",
+      "area": null,
+      "room": null,
+      "requirements": {
+        "status": "known",
+        "all_items": [
+          "Morph Ball",
+          "Bombs"
+        ],
+        "any_items": [],
+        "minimum_energy_tanks": null,
+        "minimum_reserve_tanks": null,
+        "maximum_current_energy": null,
+        "ammo": {},
+        "techniques": [],
+        "events": []
+      },
+      "acquisition": {
+        "status": "not_applicable",
+        "boss": null,
+        "miniboss": null,
+        "mechanism": null,
+        "event_type": null,
+        "event_target": null,
+        "normal_route_notes": null,
+        "prerequisite_events": [],
+        "bypass_possible": null,
+        "bypass_notes": null
+      },
+      "effects": [
+        "Usa a explosão de uma bomba para impulsionar Samus enquanto ela está em Morph Ball."
+      ],
+      "uses": [],
+      "related_entries": [],
+      "tags": [
+        "technique"
+      ],
+      "source": []
+    },
+    {
+      "id": "bomb_spread",
+      "name": "Bomb Spread",
+      "aliases": [],
+      "entry_type": "technique",
+      "summary": "Ao carregar o feixe e entrar em Morph Ball, Samus solta cinco bombas em diferentes direções.",
+      "area": null,
+      "room": null,
+      "requirements": {
+        "status": "known",
+        "all_items": [
+          "Morph Ball",
+          "Bombs",
+          "Charge Beam"
+        ],
+        "any_items": [],
+        "minimum_energy_tanks": null,
+        "minimum_reserve_tanks": null,
+        "maximum_current_energy": null,
+        "ammo": {},
+        "techniques": [],
+        "events": []
+      },
+      "acquisition": {
+        "status": "not_applicable",
+        "boss": null,
+        "miniboss": null,
+        "mechanism": null,
+        "event_type": null,
+        "event_target": null,
+        "normal_route_notes": null,
+        "prerequisite_events": [],
+        "bypass_possible": null,
+        "bypass_notes": null
+      },
+      "effects": [
+        "Ao carregar o feixe e entrar em Morph Ball, Samus solta cinco bombas em diferentes direções."
+      ],
+      "uses": [],
+      "related_entries": [],
+      "tags": [
+        "technique"
+      ],
+      "source": []
+    },
+    {
+      "id": "bounceball_morph_ball_bounce",
+      "name": "Bounceball (Morph Ball Bounce)",
+      "aliases": [
+        "Morph Ball Bounce"
+      ],
+      "entry_type": "technique",
+      "summary": "Usa uma explosão de bomba para quicar em Morph Ball e conservar ou ajustar o movimento sem se destransformar.",
+      "area": null,
+      "room": null,
+      "requirements": {
+        "status": "known",
+        "all_items": [
+          "Morph Ball",
+          "Bombs"
+        ],
+        "any_items": [],
+        "minimum_energy_tanks": null,
+        "minimum_reserve_tanks": null,
+        "maximum_current_energy": null,
+        "ammo": {},
+        "techniques": [],
+        "events": []
+      },
+      "acquisition": {
+        "status": "not_applicable",
+        "boss": null,
+        "miniboss": null,
+        "mechanism": null,
+        "event_type": null,
+        "event_target": null,
+        "normal_route_notes": null,
+        "prerequisite_events": [],
+        "bypass_possible": null,
+        "bypass_notes": null
+      },
+      "effects": [
+        "Usa uma explosão de bomba para quicar em Morph Ball e conservar ou ajustar o movimento sem se destransformar."
+      ],
+      "uses": [],
+      "related_entries": [],
+      "tags": [
+        "technique"
+      ],
+      "source": []
+    },
+    {
+      "id": "buffered_spinjump",
+      "name": "Buffered Spinjump",
+      "aliases": [],
+      "entry_type": "technique",
+      "summary": "Um Spinjump preparado ao manter a direção antes de apertar pulo, garantindo que Samus já entre no salto girando.",
+      "area": null,
+      "room": null,
+      "requirements": {
+        "status": "none",
+        "all_items": [],
+        "any_items": [],
+        "minimum_energy_tanks": null,
+        "minimum_reserve_tanks": null,
+        "maximum_current_energy": null,
+        "ammo": {},
+        "techniques": [],
+        "events": []
+      },
+      "acquisition": {
+        "status": "not_applicable",
+        "boss": null,
+        "miniboss": null,
+        "mechanism": null,
+        "event_type": null,
+        "event_target": null,
+        "normal_route_notes": null,
+        "prerequisite_events": [],
+        "bypass_possible": null,
+        "bypass_notes": null
+      },
+      "effects": [
+        "Um Spinjump preparado ao manter a direção antes de apertar pulo, garantindo que Samus já entre no salto girando."
+      ],
+      "uses": [],
+      "related_entries": [],
+      "tags": [
+        "technique"
+      ],
+      "source": []
+    },
+    {
+      "id": "chainsaw_beam",
+      "name": "Chainsaw Beam",
+      "aliases": [],
+      "entry_type": "technique",
+      "summary": "Combinação inválida de Wave, Spazer e Plasma sem Ice que cria um feixe invisível, curto e de alta cadência. Alguns disparos ou combinações podem causar efeitos estranhos ou travar o jogo.",
+      "area": null,
+      "room": null,
+      "requirements": {
+        "status": "known",
+        "all_items": [
+          "Wave Beam",
+          "Spazer",
+          "Plasma Beam"
+        ],
+        "any_items": [],
+        "minimum_energy_tanks": null,
+        "minimum_reserve_tanks": null,
+        "maximum_current_energy": null,
+        "ammo": {},
+        "techniques": [],
+        "events": []
+      },
+      "acquisition": {
+        "status": "not_applicable",
+        "boss": null,
+        "miniboss": null,
+        "mechanism": null,
+        "event_type": null,
+        "event_target": null,
+        "normal_route_notes": null,
+        "prerequisite_events": [],
+        "bypass_possible": null,
+        "bypass_notes": null
+      },
+      "effects": [
+        "Combinação inválida de Wave, Spazer e Plasma sem Ice que cria um feixe invisível, curto e de alta cadência. Alguns disparos ou combinações podem causar efeitos estranhos ou travar o jogo."
+      ],
+      "uses": [],
+      "related_entries": [],
+      "tags": [
+        "technique"
+      ],
+      "source": []
+    },
+    {
+      "id": "charge_beam_combo",
+      "name": "Charge Beam Combo",
+      "aliases": [],
+      "entry_type": "technique",
+      "summary": "Ataque especial ativado ao selecionar Power Bombs e carregar o tiro com apenas um feixe elemental equipado. O efeito muda conforme Ice, Wave, Spazer ou Plasma.",
+      "area": null,
+      "room": null,
+      "requirements": {
+        "status": "known",
+        "all_items": [
+          "Charge Beam",
+          "Power Bombs"
+        ],
+        "any_items": [
+          "Ice Beam",
+          "Wave Beam",
+          "Spazer",
+          "Plasma Beam"
+        ],
+        "minimum_energy_tanks": null,
+        "minimum_reserve_tanks": null,
+        "maximum_current_energy": null,
+        "ammo": {},
+        "techniques": [],
+        "events": []
+      },
+      "acquisition": {
+        "status": "not_applicable",
+        "boss": null,
+        "miniboss": null,
+        "mechanism": null,
+        "event_type": null,
+        "event_target": null,
+        "normal_route_notes": null,
+        "prerequisite_events": [],
+        "bypass_possible": null,
+        "bypass_notes": null
+      },
+      "effects": [
+        "Ataque especial ativado ao selecionar Power Bombs e carregar o tiro com apenas um feixe elemental equipado. O efeito muda conforme Ice, Wave, Spazer ou Plasma."
+      ],
+      "uses": [],
+      "related_entries": [],
+      "tags": [
+        "technique"
+      ],
+      "source": []
+    },
+    {
+      "id": "checking_walljump_check",
+      "name": "Checking (Walljump Check)",
+      "aliases": [
+        "Walljump Check"
+      ],
+      "entry_type": "technique",
+      "summary": "Ao pressionar a direção contrária junto de uma parede durante um Spinjump, Samus entra por alguns frames na animação de preparação do Walljump.",
+      "area": null,
+      "room": null,
+      "requirements": {
+        "status": "none",
+        "all_items": [],
+        "any_items": [],
+        "minimum_energy_tanks": null,
+        "minimum_reserve_tanks": null,
+        "maximum_current_energy": null,
+        "ammo": {},
+        "techniques": [],
+        "events": []
+      },
+      "acquisition": {
+        "status": "not_applicable",
+        "boss": null,
+        "miniboss": null,
+        "mechanism": null,
+        "event_type": null,
+        "event_target": null,
+        "normal_route_notes": null,
+        "prerequisite_events": [],
+        "bypass_possible": null,
+        "bypass_notes": null
+      },
+      "effects": [
+        "Ao pressionar a direção contrária junto de uma parede durante um Spinjump, Samus entra por alguns frames na animação de preparação do Walljump."
+      ],
+      "uses": [],
+      "related_entries": [],
+      "tags": [
+        "technique"
+      ],
+      "source": []
+    },
+    {
+      "id": "continuous_wall_jump",
+      "name": "Continuous Wall Jump",
+      "aliases": [],
+      "entry_type": "technique",
+      "summary": "Encadeia Walljumps repetidamente na mesma parede, usando o reposicionamento de Samus para voltar a tocá-la após cada salto.",
+      "area": null,
+      "room": null,
+      "requirements": {
+        "status": "none",
+        "all_items": [],
+        "any_items": [],
+        "minimum_energy_tanks": null,
+        "minimum_reserve_tanks": null,
+        "maximum_current_energy": null,
+        "ammo": {},
+        "techniques": [],
+        "events": []
+      },
+      "acquisition": {
+        "status": "not_applicable",
+        "boss": null,
+        "miniboss": null,
+        "mechanism": null,
+        "event_type": null,
+        "event_target": null,
+        "normal_route_notes": null,
+        "prerequisite_events": [],
+        "bypass_possible": null,
+        "bypass_notes": null
+      },
+      "effects": [
+        "Encadeia Walljumps repetidamente na mesma parede, usando o reposicionamento de Samus para voltar a tocá-la após cada salto."
+      ],
+      "uses": [],
+      "related_entries": [],
+      "tags": [
+        "technique"
+      ],
+      "source": []
+    },
+    {
+      "id": "corner_jump",
+      "name": "Corner Jump",
+      "aliases": [],
+      "entry_type": "technique",
+      "summary": "Explora a colisão no canto de uma plataforma para iniciar um salto a partir de uma posição que normalmente não permitiria apoio.",
+      "area": null,
+      "room": null,
+      "requirements": {
+        "status": "none",
+        "all_items": [],
+        "any_items": [],
+        "minimum_energy_tanks": null,
+        "minimum_reserve_tanks": null,
+        "maximum_current_energy": null,
+        "ammo": {},
+        "techniques": [],
+        "events": []
+      },
+      "acquisition": {
+        "status": "not_applicable",
+        "boss": null,
+        "miniboss": null,
+        "mechanism": null,
+        "event_type": null,
+        "event_target": null,
+        "normal_route_notes": null,
+        "prerequisite_events": [],
+        "bypass_possible": null,
+        "bypass_notes": null
+      },
+      "effects": [
+        "Explora a colisão no canto de uma plataforma para iniciar um salto a partir de uma posição que normalmente não permitiria apoio."
+      ],
+      "uses": [],
+      "related_entries": [],
+      "tags": [
+        "technique"
+      ],
+      "source": []
+    },
+    {
+      "id": "crouch_jump",
+      "name": "Crouch Jump",
+      "aliases": [],
+      "entry_type": "technique",
+      "summary": "Começar o salto agachado altera a hitbox inicial de Samus e permite passar mais cedo por tetos ou bordas apertadas.",
+      "area": null,
+      "room": null,
+      "requirements": {
+        "status": "none",
+        "all_items": [],
+        "any_items": [],
+        "minimum_energy_tanks": null,
+        "minimum_reserve_tanks": null,
+        "maximum_current_energy": null,
+        "ammo": {},
+        "techniques": [],
+        "events": []
+      },
+      "acquisition": {
+        "status": "not_applicable",
+        "boss": null,
+        "miniboss": null,
+        "mechanism": null,
+        "event_type": null,
+        "event_target": null,
+        "normal_route_notes": null,
+        "prerequisite_events": [],
+        "bypass_possible": null,
+        "bypass_notes": null
+      },
+      "effects": [
+        "Começar o salto agachado altera a hitbox inicial de Samus e permite passar mais cedo por tetos ou bordas apertadas."
+      ],
+      "uses": [],
+      "related_entries": [],
+      "tags": [
+        "technique"
+      ],
+      "source": []
+    },
+    {
+      "id": "crouch_lock",
+      "name": "Crouch Lock",
+      "aliases": [],
+      "entry_type": "technique",
+      "summary": "Coloca Samus em um estado de agachamento travado por meio de certas transições de pose, permitindo interações incomuns com colisões e túneis baixos.",
+      "area": null,
+      "room": null,
+      "requirements": {
+        "status": "none",
+        "all_items": [],
+        "any_items": [],
+        "minimum_energy_tanks": null,
+        "minimum_reserve_tanks": null,
+        "maximum_current_energy": null,
+        "ammo": {},
+        "techniques": [],
+        "events": []
+      },
+      "acquisition": {
+        "status": "not_applicable",
+        "boss": null,
+        "miniboss": null,
+        "mechanism": null,
+        "event_type": null,
+        "event_target": null,
+        "normal_route_notes": null,
+        "prerequisite_events": [],
+        "bypass_possible": null,
+        "bypass_notes": null
+      },
+      "effects": [
+        "Coloca Samus em um estado de agachamento travado por meio de certas transições de pose, permitindo interações incomuns com colisões e túneis baixos."
+      ],
+      "uses": [],
+      "related_entries": [],
+      "tags": [
+        "technique"
+      ],
+      "source": []
+    },
+    {
+      "id": "crystal_flash",
+      "name": "Crystal Flash",
+      "aliases": [],
+      "entry_type": "technique",
+      "summary": "Técnica secreta que consome munição para recuperar completamente a energia quando Samus está com 50 pontos de energia ou menos e sem reservas disponíveis.",
+      "area": null,
+      "room": null,
+      "requirements": {
+        "status": "known",
+        "all_items": [
+          "Morph Ball",
+          "Power Bombs",
+          "Missiles",
+          "Super Missiles"
+        ],
+        "any_items": [],
+        "minimum_energy_tanks": null,
+        "minimum_reserve_tanks": null,
+        "maximum_current_energy": null,
+        "ammo": {},
+        "techniques": [],
+        "events": []
+      },
+      "acquisition": {
+        "status": "not_applicable",
+        "boss": null,
+        "miniboss": null,
+        "mechanism": null,
+        "event_type": null,
+        "event_target": null,
+        "normal_route_notes": null,
+        "prerequisite_events": [],
+        "bypass_possible": null,
+        "bypass_notes": null
+      },
+      "effects": [
+        "Técnica secreta que consome munição para recuperar completamente a energia quando Samus está com 50 pontos de energia ou menos e sem reservas disponíveis."
+      ],
+      "uses": [],
+      "related_entries": [],
+      "tags": [
+        "technique"
+      ],
+      "source": []
+    },
+    {
+      "id": "damage_boost",
+      "name": "Damage Boost",
+      "aliases": [],
+      "entry_type": "technique",
+      "summary": "Usa o knockback recebido de um inimigo ou obstáculo para lançar Samus na direção desejada.",
+      "area": null,
+      "room": null,
+      "requirements": {
+        "status": "none",
+        "all_items": [],
+        "any_items": [],
+        "minimum_energy_tanks": null,
+        "minimum_reserve_tanks": null,
+        "maximum_current_energy": null,
+        "ammo": {},
+        "techniques": [],
+        "events": []
+      },
+      "acquisition": {
+        "status": "not_applicable",
+        "boss": null,
+        "miniboss": null,
+        "mechanism": null,
+        "event_type": null,
+        "event_target": null,
+        "normal_route_notes": null,
+        "prerequisite_events": [],
+        "bypass_possible": null,
+        "bypass_notes": null
+      },
+      "effects": [
+        "Usa o knockback recebido de um inimigo ou obstáculo para lançar Samus na direção desejada."
+      ],
+      "uses": [],
+      "related_entries": [],
+      "tags": [
+        "technique"
+      ],
+      "source": []
+    },
+    {
+      "id": "delayed_walljump",
+      "name": "Delayed Walljump",
+      "aliases": [],
+      "entry_type": "technique",
+      "summary": "Atrasa o botão de pulo depois do Walljump Check para ganhar mais deslocamento lateral e contornar saliências.",
+      "area": null,
+      "room": null,
+      "requirements": {
+        "status": "none",
+        "all_items": [],
+        "any_items": [],
+        "minimum_energy_tanks": null,
+        "minimum_reserve_tanks": null,
+        "maximum_current_energy": null,
+        "ammo": {},
+        "techniques": [],
+        "events": []
+      },
+      "acquisition": {
+        "status": "not_applicable",
+        "boss": null,
+        "miniboss": null,
+        "mechanism": null,
+        "event_type": null,
+        "event_target": null,
+        "normal_route_notes": null,
+        "prerequisite_events": [],
+        "bypass_possible": null,
+        "bypass_notes": null
+      },
+      "effects": [
+        "Atrasa o botão de pulo depois do Walljump Check para ganhar mais deslocamento lateral e contornar saliências."
+      ],
+      "uses": [],
+      "related_entries": [],
+      "tags": [
+        "technique"
+      ],
+      "source": []
+    },
+    {
+      "id": "door_processing",
+      "name": "Door Processing",
+      "aliases": [],
+      "entry_type": "technique",
+      "summary": "Manipula o momento em que o jogo processa uma transição de porta para preservar estados, alterar posições ou produzir comportamentos incomuns.",
+      "area": null,
+      "room": null,
+      "requirements": {
+        "status": "none",
+        "all_items": [],
+        "any_items": [],
+        "minimum_energy_tanks": null,
+        "minimum_reserve_tanks": null,
+        "maximum_current_energy": null,
+        "ammo": {},
+        "techniques": [],
+        "events": []
+      },
+      "acquisition": {
+        "status": "not_applicable",
+        "boss": null,
+        "miniboss": null,
+        "mechanism": null,
+        "event_type": null,
+        "event_target": null,
+        "normal_route_notes": null,
+        "prerequisite_events": [],
+        "bypass_possible": null,
+        "bypass_notes": null
+      },
+      "effects": [
+        "Manipula o momento em que o jogo processa uma transição de porta para preservar estados, alterar posições ou produzir comportamentos incomuns."
+      ],
+      "uses": [],
+      "related_entries": [],
+      "tags": [
+        "technique"
+      ],
+      "source": []
+    },
+    {
+      "id": "door_skip",
+      "name": "Door Skip",
+      "aliases": [],
+      "entry_type": "technique",
+      "summary": "Ignora ou atravessa uma transição de porta de forma não convencional por meio de posicionamento, velocidade ou estados corrompidos.",
+      "area": null,
+      "room": null,
+      "requirements": {
+        "status": "none",
+        "all_items": [],
+        "any_items": [],
+        "minimum_energy_tanks": null,
+        "minimum_reserve_tanks": null,
+        "maximum_current_energy": null,
+        "ammo": {},
+        "techniques": [],
+        "events": []
+      },
+      "acquisition": {
+        "status": "not_applicable",
+        "boss": null,
+        "miniboss": null,
+        "mechanism": null,
+        "event_type": null,
+        "event_target": null,
+        "normal_route_notes": null,
+        "prerequisite_events": [],
+        "bypass_possible": null,
+        "bypass_notes": null
+      },
+      "effects": [
+        "Ignora ou atravessa uma transição de porta de forma não convencional por meio de posicionamento, velocidade ou estados corrompidos."
+      ],
+      "uses": [],
+      "related_entries": [],
+      "tags": [
+        "technique"
+      ],
+      "source": []
+    },
+    {
+      "id": "doppler_effect",
+      "name": "Doppler Effect",
+      "aliases": [],
+      "entry_type": "technique",
+      "summary": "Dispara Missiles em intervalos precisos para continuar acertando Phantoon durante o curto período em que ele tenta fechar o olho e desaparecer.",
+      "area": null,
+      "room": null,
+      "requirements": {
+        "status": "known",
+        "all_items": [
+          "Missiles"
+        ],
+        "any_items": [],
+        "minimum_energy_tanks": null,
+        "minimum_reserve_tanks": null,
+        "maximum_current_energy": null,
+        "ammo": {},
+        "techniques": [],
+        "events": []
+      },
+      "acquisition": {
+        "status": "not_applicable",
+        "boss": null,
+        "miniboss": null,
+        "mechanism": null,
+        "event_type": null,
+        "event_target": null,
+        "normal_route_notes": null,
+        "prerequisite_events": [],
+        "bypass_possible": null,
+        "bypass_notes": null
+      },
+      "effects": [
+        "Dispara Missiles em intervalos precisos para continuar acertando Phantoon durante o curto período em que ele tenta fechar o olho e desaparecer."
+      ],
+      "uses": [],
+      "related_entries": [],
+      "tags": [
+        "technique"
+      ],
+      "source": []
+    },
+    {
+      "id": "downback",
+      "name": "Downback",
+      "aliases": [],
+      "entry_type": "technique",
+      "summary": "Pressionar para baixo e para trás em situações específicas muda a pose e a hitbox de Samus sem perder imediatamente todo o movimento.",
+      "area": null,
+      "room": null,
+      "requirements": {
+        "status": "none",
+        "all_items": [],
+        "any_items": [],
+        "minimum_energy_tanks": null,
+        "minimum_reserve_tanks": null,
+        "maximum_current_energy": null,
+        "ammo": {},
+        "techniques": [],
+        "events": []
+      },
+      "acquisition": {
+        "status": "not_applicable",
+        "boss": null,
+        "miniboss": null,
+        "mechanism": null,
+        "event_type": null,
+        "event_target": null,
+        "normal_route_notes": null,
+        "prerequisite_events": [],
+        "bypass_possible": null,
+        "bypass_notes": null
+      },
+      "effects": [
+        "Pressionar para baixo e para trás em situações específicas muda a pose e a hitbox de Samus sem perder imediatamente todo o movimento."
+      ],
+      "uses": [],
+      "related_entries": [],
+      "tags": [
+        "technique"
+      ],
+      "source": []
+    },
+    {
+      "id": "downgrab",
+      "name": "Downgrab",
+      "aliases": [],
+      "entry_type": "technique",
+      "summary": "Usa a mudança de hitbox ao mirar para baixo para encaixar Samus em uma borda e subir por um espaço estreito.",
+      "area": null,
+      "room": null,
+      "requirements": {
+        "status": "none",
+        "all_items": [],
+        "any_items": [],
+        "minimum_energy_tanks": null,
+        "minimum_reserve_tanks": null,
+        "maximum_current_energy": null,
+        "ammo": {},
+        "techniques": [],
+        "events": []
+      },
+      "acquisition": {
+        "status": "not_applicable",
+        "boss": null,
+        "miniboss": null,
+        "mechanism": null,
+        "event_type": null,
+        "event_target": null,
+        "normal_route_notes": null,
+        "prerequisite_events": [],
+        "bypass_possible": null,
+        "bypass_notes": null
+      },
+      "effects": [
+        "Usa a mudança de hitbox ao mirar para baixo para encaixar Samus em uma borda e subir por um espaço estreito."
+      ],
+      "uses": [],
+      "related_entries": [],
+      "tags": [
+        "technique"
+      ],
+      "source": []
+    },
+    {
+      "id": "early_landing",
+      "name": "Early Landing",
+      "aliases": [],
+      "entry_type": "technique",
+      "summary": "Faz a hitbox de Samus tocar o chão antes do esperado ao mudar sua pose durante a queda, encerrando o salto alguns frames mais cedo.",
+      "area": null,
+      "room": null,
+      "requirements": {
+        "status": "none",
+        "all_items": [],
+        "any_items": [],
+        "minimum_energy_tanks": null,
+        "minimum_reserve_tanks": null,
+        "maximum_current_energy": null,
+        "ammo": {},
+        "techniques": [],
+        "events": []
+      },
+      "acquisition": {
+        "status": "not_applicable",
+        "boss": null,
+        "miniboss": null,
+        "mechanism": null,
+        "event_type": null,
+        "event_target": null,
+        "normal_route_notes": null,
+        "prerequisite_events": [],
+        "bypass_possible": null,
+        "bypass_notes": null
+      },
+      "effects": [
+        "Faz a hitbox de Samus tocar o chão antes do esperado ao mudar sua pose durante a queda, encerrando o salto alguns frames mais cedo."
+      ],
+      "uses": [],
+      "related_entries": [],
+      "tags": [
+        "technique"
+      ],
+      "source": []
+    },
+    {
+      "id": "edge_boost_corner_boost",
+      "name": "Edge Boost (Corner Boost)",
+      "aliases": [
+        "Corner Boost"
+      ],
+      "entry_type": "technique",
+      "summary": "Colidir com o canto de uma plataforma durante uma mudança de pose reposiciona Samus e concede um pequeno avanço.",
+      "area": null,
+      "room": null,
+      "requirements": {
+        "status": "none",
+        "all_items": [],
+        "any_items": [],
+        "minimum_energy_tanks": null,
+        "minimum_reserve_tanks": null,
+        "maximum_current_energy": null,
+        "ammo": {},
+        "techniques": [],
+        "events": []
+      },
+      "acquisition": {
+        "status": "not_applicable",
+        "boss": null,
+        "miniboss": null,
+        "mechanism": null,
+        "event_type": null,
+        "event_target": null,
+        "normal_route_notes": null,
+        "prerequisite_events": [],
+        "bypass_possible": null,
+        "bypass_notes": null
+      },
+      "effects": [
+        "Colidir com o canto de uma plataforma durante uma mudança de pose reposiciona Samus e concede um pequeno avanço."
+      ],
+      "uses": [],
+      "related_entries": [],
+      "tags": [
+        "technique"
+      ],
+      "source": []
+    },
+    {
+      "id": "elevator_grab",
+      "name": "Elevator Grab",
+      "aliases": [],
+      "entry_type": "technique",
+      "summary": "Interage com um elevador enquanto Samus está em uma animação incomum, reduzindo movimento ou ajustando sua posição na plataforma.",
+      "area": null,
+      "room": null,
+      "requirements": {
+        "status": "none",
+        "all_items": [],
+        "any_items": [],
+        "minimum_energy_tanks": null,
+        "minimum_reserve_tanks": null,
+        "maximum_current_energy": null,
+        "ammo": {},
+        "techniques": [],
+        "events": []
+      },
+      "acquisition": {
+        "status": "not_applicable",
+        "boss": null,
+        "miniboss": null,
+        "mechanism": null,
+        "event_type": null,
+        "event_target": null,
+        "normal_route_notes": null,
+        "prerequisite_events": [],
+        "bypass_possible": null,
+        "bypass_notes": null
+      },
+      "effects": [
+        "Interage com um elevador enquanto Samus está em uma animação incomum, reduzindo movimento ou ajustando sua posição na plataforma."
+      ],
+      "uses": [],
+      "related_entries": [],
+      "tags": [
+        "technique"
+      ],
+      "source": []
+    },
+    {
+      "id": "full_halfie",
+      "name": "Full Halfie",
+      "aliases": [],
+      "entry_type": "technique",
+      "summary": "Versão completa do Halfie que usa um Shinespark para atravessar e subir grande parte da Halfie Climb Room.",
+      "area": null,
+      "room": null,
+      "requirements": {
+        "status": "known",
+        "all_items": [
+          "Speed Booster"
+        ],
+        "any_items": [],
+        "minimum_energy_tanks": null,
+        "minimum_reserve_tanks": null,
+        "maximum_current_energy": null,
+        "ammo": {},
+        "techniques": [],
+        "events": []
+      },
+      "acquisition": {
+        "status": "not_applicable",
+        "boss": null,
+        "miniboss": null,
+        "mechanism": null,
+        "event_type": null,
+        "event_target": null,
+        "normal_route_notes": null,
+        "prerequisite_events": [],
+        "bypass_possible": null,
+        "bypass_notes": null
+      },
+      "effects": [
+        "Versão completa do Halfie que usa um Shinespark para atravessar e subir grande parte da Halfie Climb Room."
+      ],
+      "uses": [],
+      "related_entries": [],
+      "tags": [
+        "technique"
+      ],
+      "source": []
+    },
+    {
+      "id": "g_mode",
+      "name": "G-Mode",
+      "aliases": [],
+      "entry_type": "technique",
+      "summary": "Estado glitched criado ao usar o X-Ray durante uma transição enquanto as reservas automáticas salvam Samus da morte. Ele impede o funcionamento normal de vários PLMs, permitindo atravessar certos blocos, portões e outras barreiras.",
+      "area": null,
+      "room": null,
+      "requirements": {
+        "status": "known",
+        "all_items": [
+          "X-Ray Scope",
+          "Reserve Tank"
+        ],
+        "any_items": [],
+        "minimum_energy_tanks": null,
+        "minimum_reserve_tanks": null,
+        "maximum_current_energy": null,
+        "ammo": {},
+        "techniques": [],
+        "events": []
+      },
+      "acquisition": {
+        "status": "not_applicable",
+        "boss": null,
+        "miniboss": null,
+        "mechanism": null,
+        "event_type": null,
+        "event_target": null,
+        "normal_route_notes": null,
+        "prerequisite_events": [],
+        "bypass_possible": null,
+        "bypass_notes": null
+      },
+      "effects": [
+        "Estado glitched criado ao usar o X-Ray durante uma transição enquanto as reservas automáticas salvam Samus da morte. Ele impede o funcionamento normal de vários PLMs, permitindo atravessar certos blocos, portões e outras barreiras."
+      ],
+      "uses": [],
+      "related_entries": [],
+      "tags": [
+        "technique"
+      ],
+      "source": []
+    },
+    {
+      "id": "gap_skip",
+      "name": "Gap Skip",
+      "aliases": [],
+      "entry_type": "technique",
+      "summary": "Manipula a hitbox de Samus durante um salto para atravessar um vão estreito sem cair ou precisar do movimento normalmente esperado.",
+      "area": null,
+      "room": null,
+      "requirements": {
+        "status": "none",
+        "all_items": [],
+        "any_items": [],
+        "minimum_energy_tanks": null,
+        "minimum_reserve_tanks": null,
+        "maximum_current_energy": null,
+        "ammo": {},
+        "techniques": [],
+        "events": []
+      },
+      "acquisition": {
+        "status": "not_applicable",
+        "boss": null,
+        "miniboss": null,
+        "mechanism": null,
+        "event_type": null,
+        "event_target": null,
+        "normal_route_notes": null,
+        "prerequisite_events": [],
+        "bypass_possible": null,
+        "bypass_notes": null
+      },
+      "effects": [
+        "Manipula a hitbox de Samus durante um salto para atravessar um vão estreito sem cair ou precisar do movimento normalmente esperado."
+      ],
+      "uses": [],
+      "related_entries": [],
+      "tags": [
+        "technique"
+      ],
+      "source": []
+    },
+    {
+      "id": "gate_glitch_blue_gate_glitch_green_gate_glitch",
+      "name": "Gate Glitch (Blue Gate Glitch / Green Gate Glitch)",
+      "aliases": [
+        "Blue Gate Glitch",
+        "Green Gate Glitch"
+      ],
+      "entry_type": "technique",
+      "summary": "Permite atingir o interruptor de um portão pelo lado oposto ao pretendido. Portões azuis aceitam Missiles ou Supers, enquanto os verdes exigem Super Missiles.",
+      "area": null,
+      "room": null,
+      "requirements": {
+        "status": "known",
+        "all_items": [],
+        "any_items": [
+          "Missiles",
+          "Super Missiles"
+        ],
+        "minimum_energy_tanks": null,
+        "minimum_reserve_tanks": null,
+        "maximum_current_energy": null,
+        "ammo": {},
+        "techniques": [],
+        "events": []
+      },
+      "acquisition": {
+        "status": "not_applicable",
+        "boss": null,
+        "miniboss": null,
+        "mechanism": null,
+        "event_type": null,
+        "event_target": null,
+        "normal_route_notes": null,
+        "prerequisite_events": [],
+        "bypass_possible": null,
+        "bypass_notes": null
+      },
+      "effects": [
+        "Permite atingir o interruptor de um portão pelo lado oposto ao pretendido. Portões azuis aceitam Missiles ou Supers, enquanto os verdes exigem Super Missiles."
+      ],
+      "uses": [],
+      "related_entries": [],
+      "tags": [
+        "technique"
+      ],
+      "source": []
+    },
+    {
+      "id": "grapple_clipping",
+      "name": "Grapple Clipping",
+      "aliases": [],
+      "entry_type": "technique",
+      "summary": "Usa a movimentação e o reposicionamento causados pelo Grapple para inserir Samus parcialmente em paredes ou outras colisões.",
+      "area": null,
+      "room": null,
+      "requirements": {
+        "status": "known",
+        "all_items": [
+          "Grapple Beam"
+        ],
+        "any_items": [],
+        "minimum_energy_tanks": null,
+        "minimum_reserve_tanks": null,
+        "maximum_current_energy": null,
+        "ammo": {},
+        "techniques": [],
+        "events": []
+      },
+      "acquisition": {
+        "status": "not_applicable",
+        "boss": null,
+        "miniboss": null,
+        "mechanism": null,
+        "event_type": null,
+        "event_target": null,
+        "normal_route_notes": null,
+        "prerequisite_events": [],
+        "bypass_possible": null,
+        "bypass_notes": null
+      },
+      "effects": [
+        "Usa a movimentação e o reposicionamento causados pelo Grapple para inserir Samus parcialmente em paredes ou outras colisões."
+      ],
+      "uses": [],
+      "related_entries": [],
+      "tags": [
+        "technique"
+      ],
+      "source": []
+    },
+    {
+      "id": "grapple_jump",
+      "name": "Grapple Jump",
+      "aliases": [],
+      "entry_type": "technique",
+      "summary": "Soltar o Grapple com o timing correto transforma o balanço em impulso para alcançar mais altura ou distância.",
+      "area": null,
+      "room": null,
+      "requirements": {
+        "status": "known",
+        "all_items": [
+          "Grapple Beam"
+        ],
+        "any_items": [],
+        "minimum_energy_tanks": null,
+        "minimum_reserve_tanks": null,
+        "maximum_current_energy": null,
+        "ammo": {},
+        "techniques": [],
+        "events": []
+      },
+      "acquisition": {
+        "status": "not_applicable",
+        "boss": null,
+        "miniboss": null,
+        "mechanism": null,
+        "event_type": null,
+        "event_target": null,
+        "normal_route_notes": null,
+        "prerequisite_events": [],
+        "bypass_possible": null,
+        "bypass_notes": null
+      },
+      "effects": [
+        "Soltar o Grapple com o timing correto transforma o balanço em impulso para alcançar mais altura ou distância."
+      ],
+      "uses": [],
+      "related_entries": [],
+      "tags": [
+        "technique"
+      ],
+      "source": []
+    },
+    {
+      "id": "grapple_supersink",
+      "name": "Grapple Supersink",
+      "aliases": [],
+      "entry_type": "technique",
+      "summary": "Explora um estado do Grapple para afundar Samus rapidamente ou atravessar certas colisões verticais.",
+      "area": null,
+      "room": null,
+      "requirements": {
+        "status": "known",
+        "all_items": [
+          "Grapple Beam"
+        ],
+        "any_items": [],
+        "minimum_energy_tanks": null,
+        "minimum_reserve_tanks": null,
+        "maximum_current_energy": null,
+        "ammo": {},
+        "techniques": [],
+        "events": []
+      },
+      "acquisition": {
+        "status": "not_applicable",
+        "boss": null,
+        "miniboss": null,
+        "mechanism": null,
+        "event_type": null,
+        "event_target": null,
+        "normal_route_notes": null,
+        "prerequisite_events": [],
+        "bypass_possible": null,
+        "bypass_notes": null
+      },
+      "effects": [
+        "Explora um estado do Grapple para afundar Samus rapidamente ou atravessar certas colisões verticais."
+      ],
+      "uses": [],
+      "related_entries": [],
+      "tags": [
+        "technique"
+      ],
+      "source": []
+    },
+    {
+      "id": "grapple_teleportation",
+      "name": "Grapple Teleportation",
+      "aliases": [],
+      "entry_type": "technique",
+      "summary": "Uma interação glitched do Grapple reposiciona Samus instantaneamente para outro ponto da sala em condições específicas.",
+      "area": null,
+      "room": null,
+      "requirements": {
+        "status": "known",
+        "all_items": [
+          "Grapple Beam"
+        ],
+        "any_items": [],
+        "minimum_energy_tanks": null,
+        "minimum_reserve_tanks": null,
+        "maximum_current_energy": null,
+        "ammo": {},
+        "techniques": [],
+        "events": []
+      },
+      "acquisition": {
+        "status": "not_applicable",
+        "boss": null,
+        "miniboss": null,
+        "mechanism": null,
+        "event_type": null,
+        "event_target": null,
+        "normal_route_notes": null,
+        "prerequisite_events": [],
+        "bypass_possible": null,
+        "bypass_notes": null
+      },
+      "effects": [
+        "Uma interação glitched do Grapple reposiciona Samus instantaneamente para outro ponto da sala em condições específicas."
+      ],
+      "uses": [],
+      "related_entries": [],
+      "tags": [
+        "technique"
+      ],
+      "source": []
+    },
+    {
+      "id": "grapple_bomb_hanging",
+      "name": "Grapple-Bomb Hanging",
+      "aliases": [],
+      "entry_type": "technique",
+      "summary": "Combina o Grapple preso a um ponto com uma explosão de bomba para manter ou alterar a posição de Samus de maneira não convencional.",
+      "area": null,
+      "room": null,
+      "requirements": {
+        "status": "known",
+        "all_items": [
+          "Grapple Beam",
+          "Morph Ball",
+          "Bombs"
+        ],
+        "any_items": [],
+        "minimum_energy_tanks": null,
+        "minimum_reserve_tanks": null,
+        "maximum_current_energy": null,
+        "ammo": {},
+        "techniques": [],
+        "events": []
+      },
+      "acquisition": {
+        "status": "not_applicable",
+        "boss": null,
+        "miniboss": null,
+        "mechanism": null,
+        "event_type": null,
+        "event_target": null,
+        "normal_route_notes": null,
+        "prerequisite_events": [],
+        "bypass_possible": null,
+        "bypass_notes": null
+      },
+      "effects": [
+        "Combina o Grapple preso a um ponto com uma explosão de bomba para manter ou alterar a posição de Samus de maneira não convencional."
+      ],
+      "uses": [],
+      "related_entries": [],
+      "tags": [
+        "technique"
+      ],
+      "source": []
+    },
+    {
+      "id": "grapple_bombjump_jump",
+      "name": "Grapple-Bombjump-Jump",
+      "aliases": [],
+      "entry_type": "technique",
+      "summary": "Encadeia Grapple, impulso de bomba e salto para produzir uma subida ou lançamento que não seria possível com cada ação isolada.",
+      "area": null,
+      "room": null,
+      "requirements": {
+        "status": "known",
+        "all_items": [
+          "Grapple Beam",
+          "Morph Ball",
+          "Bombs"
+        ],
+        "any_items": [],
+        "minimum_energy_tanks": null,
+        "minimum_reserve_tanks": null,
+        "maximum_current_energy": null,
+        "ammo": {},
+        "techniques": [],
+        "events": []
+      },
+      "acquisition": {
+        "status": "not_applicable",
+        "boss": null,
+        "miniboss": null,
+        "mechanism": null,
+        "event_type": null,
+        "event_target": null,
+        "normal_route_notes": null,
+        "prerequisite_events": [],
+        "bypass_possible": null,
+        "bypass_notes": null
+      },
+      "effects": [
+        "Encadeia Grapple, impulso de bomba e salto para produzir uma subida ou lançamento que não seria possível com cada ação isolada."
+      ],
+      "uses": [],
+      "related_entries": [],
+      "tags": [
+        "technique"
+      ],
+      "source": []
+    },
+    {
+      "id": "gravity_jump",
+      "name": "Gravity Jump",
+      "aliases": [],
+      "entry_type": "technique",
+      "summary": "Durante um salto na água, remover a Gravity Suit no menu preserva a velocidade inicial do salto com a desaceleração de Samus sem o traje, alcançando grande altura.",
+      "area": null,
+      "room": null,
+      "requirements": {
+        "status": "known",
+        "all_items": [
+          "Gravity Suit"
+        ],
+        "any_items": [],
+        "minimum_energy_tanks": null,
+        "minimum_reserve_tanks": null,
+        "maximum_current_energy": null,
+        "ammo": {},
+        "techniques": [],
+        "events": []
+      },
+      "acquisition": {
+        "status": "not_applicable",
+        "boss": null,
+        "miniboss": null,
+        "mechanism": null,
+        "event_type": null,
+        "event_target": null,
+        "normal_route_notes": null,
+        "prerequisite_events": [],
+        "bypass_possible": null,
+        "bypass_notes": null
+      },
+      "effects": [
+        "Durante um salto na água, remover a Gravity Suit no menu preserva a velocidade inicial do salto com a desaceleração de Samus sem o traje, alcançando grande altura."
+      ],
+      "uses": [],
+      "related_entries": [],
+      "tags": [
+        "technique"
+      ],
+      "source": []
+    },
+    {
+      "id": "halfie",
+      "name": "Halfie",
+      "aliases": [],
+      "entry_type": "technique",
+      "summary": "Usa um Shinespark cuidadosamente posicionado para ganhar altura e acelerar a travessia da Halfie Climb Room.",
+      "area": null,
+      "room": null,
+      "requirements": {
+        "status": "known",
+        "all_items": [
+          "Speed Booster"
+        ],
+        "any_items": [],
+        "minimum_energy_tanks": null,
+        "minimum_reserve_tanks": null,
+        "maximum_current_energy": null,
+        "ammo": {},
+        "techniques": [],
+        "events": []
+      },
+      "acquisition": {
+        "status": "not_applicable",
+        "boss": null,
+        "miniboss": null,
+        "mechanism": null,
+        "event_type": null,
+        "event_target": null,
+        "normal_route_notes": null,
+        "prerequisite_events": [],
+        "bypass_possible": null,
+        "bypass_notes": null
+      },
+      "effects": [
+        "Usa um Shinespark cuidadosamente posicionado para ganhar altura e acelerar a travessia da Halfie Climb Room."
+      ],
+      "uses": [],
+      "related_entries": [],
+      "tags": [
+        "technique"
+      ],
+      "source": []
+    },
+    {
+      "id": "hero_shot",
+      "name": "Hero Shot",
+      "aliases": [],
+      "entry_type": "technique",
+      "summary": "Disparo feito antes de o alvo estar acessível na tela, que só o atinge depois que o scroll da sala reposiciona o projétil em relação ao cenário.",
+      "area": null,
+      "room": null,
+      "requirements": {
+        "status": "none",
+        "all_items": [],
+        "any_items": [],
+        "minimum_energy_tanks": null,
+        "minimum_reserve_tanks": null,
+        "maximum_current_energy": null,
+        "ammo": {},
+        "techniques": [],
+        "events": []
+      },
+      "acquisition": {
+        "status": "not_applicable",
+        "boss": null,
+        "miniboss": null,
+        "mechanism": null,
+        "event_type": null,
+        "event_target": null,
+        "normal_route_notes": null,
+        "prerequisite_events": [],
+        "bypass_possible": null,
+        "bypass_notes": null
+      },
+      "effects": [
+        "Disparo feito antes de o alvo estar acessível na tela, que só o atinge depois que o scroll da sala reposiciona o projétil em relação ao cenário."
+      ],
+      "uses": [],
+      "related_entries": [],
+      "tags": [
+        "technique"
+      ],
+      "source": []
+    },
+    {
+      "id": "horizontal_bomb_jump",
+      "name": "Horizontal Bomb Jump",
+      "aliases": [],
+      "entry_type": "technique",
+      "summary": "Sequência de bombas temporizadas para deslocar Samus lateralmente enquanto ela permanece em Morph Ball.",
+      "area": null,
+      "room": null,
+      "requirements": {
+        "status": "known",
+        "all_items": [
+          "Morph Ball",
+          "Bombs"
+        ],
+        "any_items": [],
+        "minimum_energy_tanks": null,
+        "minimum_reserve_tanks": null,
+        "maximum_current_energy": null,
+        "ammo": {},
+        "techniques": [],
+        "events": []
+      },
+      "acquisition": {
+        "status": "not_applicable",
+        "boss": null,
+        "miniboss": null,
+        "mechanism": null,
+        "event_type": null,
+        "event_target": null,
+        "normal_route_notes": null,
+        "prerequisite_events": [],
+        "bypass_possible": null,
+        "bypass_notes": null
+      },
+      "effects": [
+        "Sequência de bombas temporizadas para deslocar Samus lateralmente enquanto ela permanece em Morph Ball."
+      ],
+      "uses": [],
+      "related_entries": [],
+      "tags": [
+        "technique"
+      ],
+      "source": []
+    },
+    {
+      "id": "horizontal_speed",
+      "name": "Horizontal Speed",
+      "aliases": [],
+      "entry_type": "technique",
+      "summary": "Conhecimento e manipulação da velocidade horizontal preservada entre corrida, salto, mudanças de pose e colisões.",
+      "area": null,
+      "room": null,
+      "requirements": {
+        "status": "none",
+        "all_items": [],
+        "any_items": [],
+        "minimum_energy_tanks": null,
+        "minimum_reserve_tanks": null,
+        "maximum_current_energy": null,
+        "ammo": {},
+        "techniques": [],
+        "events": []
+      },
+      "acquisition": {
+        "status": "not_applicable",
+        "boss": null,
+        "miniboss": null,
+        "mechanism": null,
+        "event_type": null,
+        "event_target": null,
+        "normal_route_notes": null,
+        "prerequisite_events": [],
+        "bypass_possible": null,
+        "bypass_notes": null
+      },
+      "effects": [
+        "Conhecimento e manipulação da velocidade horizontal preservada entre corrida, salto, mudanças de pose e colisões."
+      ],
+      "uses": [],
+      "related_entries": [],
+      "tags": [
+        "technique"
+      ],
+      "source": []
+    },
+    {
+      "id": "ice_shield",
+      "name": "Ice Shield",
+      "aliases": [],
+      "entry_type": "technique",
+      "summary": "Charge Beam Combo do Ice Beam que cria projéteis congelantes ao redor de Samus.",
+      "area": null,
+      "room": null,
+      "requirements": {
+        "status": "known",
+        "all_items": [
+          "Charge Beam",
+          "Ice Beam",
+          "Power Bombs"
+        ],
+        "any_items": [],
+        "minimum_energy_tanks": null,
+        "minimum_reserve_tanks": null,
+        "maximum_current_energy": null,
+        "ammo": {},
+        "techniques": [],
+        "events": []
+      },
+      "acquisition": {
+        "status": "not_applicable",
+        "boss": null,
+        "miniboss": null,
+        "mechanism": null,
+        "event_type": null,
+        "event_target": null,
+        "normal_route_notes": null,
+        "prerequisite_events": [],
+        "bypass_possible": null,
+        "bypass_notes": null
+      },
+      "effects": [
+        "Charge Beam Combo do Ice Beam que cria projéteis congelantes ao redor de Samus."
+      ],
+      "uses": [],
+      "related_entries": [],
+      "tags": [
+        "technique"
+      ],
+      "source": []
+    },
+    {
+      "id": "infinite_bomb_jump",
+      "name": "Infinite Bomb Jump",
+      "aliases": [],
+      "entry_type": "technique",
+      "summary": "Repete Bomb Jumps com ritmo constante para subir indefinidamente enquanto houver espaço vertical.",
+      "area": null,
+      "room": null,
+      "requirements": {
+        "status": "known",
+        "all_items": [
+          "Morph Ball",
+          "Bombs"
+        ],
+        "any_items": [],
+        "minimum_energy_tanks": null,
+        "minimum_reserve_tanks": null,
+        "maximum_current_energy": null,
+        "ammo": {},
+        "techniques": [],
+        "events": []
+      },
+      "acquisition": {
+        "status": "not_applicable",
+        "boss": null,
+        "miniboss": null,
+        "mechanism": null,
+        "event_type": null,
+        "event_target": null,
+        "normal_route_notes": null,
+        "prerequisite_events": [],
+        "bypass_possible": null,
+        "bypass_notes": null
+      },
+      "effects": [
+        "Repete Bomb Jumps com ritmo constante para subir indefinidamente enquanto houver espaço vertical."
+      ],
+      "uses": [],
+      "related_entries": [],
+      "tags": [
+        "technique"
+      ],
+      "source": []
+    },
+    {
+      "id": "jesuswalk",
+      "name": "Jesuswalk",
+      "aliases": [],
+      "entry_type": "technique",
+      "summary": "Aplicação de Door X-Mode usada para atravessar Mt. Everest andando pelo ar ou pela superfície da água sem os itens de mobilidade normalmente necessários.",
+      "area": null,
+      "room": null,
+      "requirements": {
+        "status": "known",
+        "all_items": [
+          "X-Ray Scope"
+        ],
+        "any_items": [],
+        "minimum_energy_tanks": null,
+        "minimum_reserve_tanks": null,
+        "maximum_current_energy": null,
+        "ammo": {},
+        "techniques": [],
+        "events": []
+      },
+      "acquisition": {
+        "status": "not_applicable",
+        "boss": null,
+        "miniboss": null,
+        "mechanism": null,
+        "event_type": null,
+        "event_target": null,
+        "normal_route_notes": null,
+        "prerequisite_events": [],
+        "bypass_possible": null,
+        "bypass_notes": null
+      },
+      "effects": [
+        "Aplicação de Door X-Mode usada para atravessar Mt. Everest andando pelo ar ou pela superfície da água sem os itens de mobilidade normalmente necessários."
+      ],
+      "uses": [],
+      "related_entries": [],
+      "tags": [
+        "technique"
+      ],
+      "source": []
+    },
+    {
+      "id": "kagoing",
+      "name": "Kagoing",
+      "aliases": [],
+      "entry_type": "technique",
+      "summary": "Virar no momento de receber dano altera a animação de knockback e pode reduzir ou redirecionar o deslocamento causado pelo golpe.",
+      "area": null,
+      "room": null,
+      "requirements": {
+        "status": "none",
+        "all_items": [],
+        "any_items": [],
+        "minimum_energy_tanks": null,
+        "minimum_reserve_tanks": null,
+        "maximum_current_energy": null,
+        "ammo": {},
+        "techniques": [],
+        "events": []
+      },
+      "acquisition": {
+        "status": "not_applicable",
+        "boss": null,
+        "miniboss": null,
+        "mechanism": null,
+        "event_type": null,
+        "event_target": null,
+        "normal_route_notes": null,
+        "prerequisite_events": [],
+        "bypass_possible": null,
+        "bypass_notes": null
+      },
+      "effects": [
+        "Virar no momento de receber dano altera a animação de knockback e pode reduzir ou redirecionar o deslocamento causado pelo golpe."
+      ],
+      "uses": [],
+      "related_entries": [],
+      "tags": [
+        "technique"
+      ],
+      "source": []
+    },
+    {
+      "id": "l_r_walljumping",
+      "name": "L+R Walljumping",
+      "aliases": [],
+      "entry_type": "technique",
+      "summary": "Usa os dois botões de mira simultaneamente para produzir Walljumps e ajustes de pose que não são possíveis com um controle padrão sem entradas simultâneas modificadas.",
+      "area": null,
+      "room": null,
+      "requirements": {
+        "status": "none",
+        "all_items": [],
+        "any_items": [],
+        "minimum_energy_tanks": null,
+        "minimum_reserve_tanks": null,
+        "maximum_current_energy": null,
+        "ammo": {},
+        "techniques": [],
+        "events": []
+      },
+      "acquisition": {
+        "status": "not_applicable",
+        "boss": null,
+        "miniboss": null,
+        "mechanism": null,
+        "event_type": null,
+        "event_target": null,
+        "normal_route_notes": null,
+        "prerequisite_events": [],
+        "bypass_possible": null,
+        "bypass_notes": null
+      },
+      "effects": [
+        "Usa os dois botões de mira simultaneamente para produzir Walljumps e ajustes de pose que não são possíveis com um controle padrão sem entradas simultâneas modificadas."
+      ],
+      "uses": [],
+      "related_entries": [],
+      "tags": [
+        "technique"
+      ],
+      "source": []
+    },
+    {
+      "id": "lava_spark",
+      "name": "Lava Spark",
+      "aliases": [],
+      "entry_type": "technique",
+      "summary": "Executa um Shinespark através de lava para atravessar rapidamente uma seção perigosa antes que a energia acabe.",
+      "area": null,
+      "room": null,
+      "requirements": {
+        "status": "known",
+        "all_items": [
+          "Speed Booster"
+        ],
+        "any_items": [],
+        "minimum_energy_tanks": null,
+        "minimum_reserve_tanks": null,
+        "maximum_current_energy": null,
+        "ammo": {},
+        "techniques": [],
+        "events": []
+      },
+      "acquisition": {
+        "status": "not_applicable",
+        "boss": null,
+        "miniboss": null,
+        "mechanism": null,
+        "event_type": null,
+        "event_target": null,
+        "normal_route_notes": null,
+        "prerequisite_events": [],
+        "bypass_possible": null,
+        "bypass_notes": null
+      },
+      "effects": [
+        "Executa um Shinespark através de lava para atravessar rapidamente uma seção perigosa antes que a energia acabe."
+      ],
+      "uses": [],
+      "related_entries": [],
+      "tags": [
+        "technique"
+      ],
+      "source": []
+    },
+    {
+      "id": "ledgegrab",
+      "name": "Ledgegrab",
+      "aliases": [],
+      "entry_type": "technique",
+      "summary": "Muda a pose e a hitbox de Samus junto a uma borda para ganhar alguns pixels e pousar sobre a plataforma.",
+      "area": null,
+      "room": null,
+      "requirements": {
+        "status": "none",
+        "all_items": [],
+        "any_items": [],
+        "minimum_energy_tanks": null,
+        "minimum_reserve_tanks": null,
+        "maximum_current_energy": null,
+        "ammo": {},
+        "techniques": [],
+        "events": []
+      },
+      "acquisition": {
+        "status": "not_applicable",
+        "boss": null,
+        "miniboss": null,
+        "mechanism": null,
+        "event_type": null,
+        "event_target": null,
+        "normal_route_notes": null,
+        "prerequisite_events": [],
+        "bypass_possible": null,
+        "bypass_notes": null
+      },
+      "effects": [
+        "Muda a pose e a hitbox de Samus junto a uma borda para ganhar alguns pixels e pousar sobre a plataforma."
+      ],
+      "uses": [],
+      "related_entries": [],
+      "tags": [
+        "technique"
+      ],
+      "source": []
+    },
+    {
+      "id": "metroid_skip",
+      "name": "Metroid Skip",
+      "aliases": [],
+      "entry_type": "technique",
+      "summary": "Manipula os Metroids de Tourian para atravessar suas salas sem eliminar todos eles ou sem esperar o ciclo normal dos encontros.",
+      "area": null,
+      "room": null,
+      "requirements": {
+        "status": "none",
+        "all_items": [],
+        "any_items": [],
+        "minimum_energy_tanks": null,
+        "minimum_reserve_tanks": null,
+        "maximum_current_energy": null,
+        "ammo": {},
+        "techniques": [],
+        "events": []
+      },
+      "acquisition": {
+        "status": "not_applicable",
+        "boss": null,
+        "miniboss": null,
+        "mechanism": null,
+        "event_type": null,
+        "event_target": null,
+        "normal_route_notes": null,
+        "prerequisite_events": [],
+        "bypass_possible": null,
+        "bypass_notes": null
+      },
+      "effects": [
+        "Manipula os Metroids de Tourian para atravessar suas salas sem eliminar todos eles ou sem esperar o ciclo normal dos encontros."
+      ],
+      "uses": [],
+      "related_entries": [],
+      "tags": [
+        "technique"
+      ],
+      "source": []
+    },
+    {
+      "id": "mockball_machball",
+      "name": "Mockball (Machball)",
+      "aliases": [
+        "Machball"
+      ],
+      "entry_type": "technique",
+      "summary": "Preserva a velocidade de corrida ao entrar em Morph Ball durante um salto baixo, permitindo cruzar Pit Blocks antes que eles desapareçam.",
+      "area": null,
+      "room": null,
+      "requirements": {
+        "status": "known",
+        "all_items": [
+          "Morph Ball"
+        ],
+        "any_items": [],
+        "minimum_energy_tanks": null,
+        "minimum_reserve_tanks": null,
+        "maximum_current_energy": null,
+        "ammo": {},
+        "techniques": [],
+        "events": []
+      },
+      "acquisition": {
+        "status": "not_applicable",
+        "boss": null,
+        "miniboss": null,
+        "mechanism": null,
+        "event_type": null,
+        "event_target": null,
+        "normal_route_notes": null,
+        "prerequisite_events": [],
+        "bypass_possible": null,
+        "bypass_notes": null
+      },
+      "effects": [
+        "Preserva a velocidade de corrida ao entrar em Morph Ball durante um salto baixo, permitindo cruzar Pit Blocks antes que eles desapareçam."
+      ],
+      "uses": [],
+      "related_entries": [],
+      "tags": [
+        "technique"
+      ],
+      "source": []
+    },
+    {
+      "id": "moondance",
+      "name": "Moondance",
+      "aliases": [],
+      "entry_type": "technique",
+      "summary": "Combina Moonwalk com mudanças rápidas de direção para manipular movimento e animações enquanto Samus recua.",
+      "area": null,
+      "room": null,
+      "requirements": {
+        "status": "none",
+        "all_items": [],
+        "any_items": [],
+        "minimum_energy_tanks": null,
+        "minimum_reserve_tanks": null,
+        "maximum_current_energy": null,
+        "ammo": {},
+        "techniques": [],
+        "events": []
+      },
+      "acquisition": {
+        "status": "not_applicable",
+        "boss": null,
+        "miniboss": null,
+        "mechanism": null,
+        "event_type": null,
+        "event_target": null,
+        "normal_route_notes": null,
+        "prerequisite_events": [],
+        "bypass_possible": null,
+        "bypass_notes": null
+      },
+      "effects": [
+        "Combina Moonwalk com mudanças rápidas de direção para manipular movimento e animações enquanto Samus recua."
+      ],
+      "uses": [],
+      "related_entries": [],
+      "tags": [
+        "technique"
+      ],
+      "source": []
+    },
+    {
+      "id": "moonfall",
+      "name": "Moonfall",
+      "aliases": [],
+      "entry_type": "technique",
+      "summary": "Explora o Moonwalk no ar para remover o limite normal de velocidade de queda, fazendo Samus acelerar continuamente para baixo.",
+      "area": null,
+      "room": null,
+      "requirements": {
+        "status": "none",
+        "all_items": [],
+        "any_items": [],
+        "minimum_energy_tanks": null,
+        "minimum_reserve_tanks": null,
+        "maximum_current_energy": null,
+        "ammo": {},
+        "techniques": [],
+        "events": []
+      },
+      "acquisition": {
+        "status": "not_applicable",
+        "boss": null,
+        "miniboss": null,
+        "mechanism": null,
+        "event_type": null,
+        "event_target": null,
+        "normal_route_notes": null,
+        "prerequisite_events": [],
+        "bypass_possible": null,
+        "bypass_notes": null
+      },
+      "effects": [
+        "Explora o Moonwalk no ar para remover o limite normal de velocidade de queda, fazendo Samus acelerar continuamente para baixo."
+      ],
+      "uses": [],
+      "related_entries": [],
+      "tags": [
+        "technique"
+      ],
+      "source": []
+    },
+    {
+      "id": "moonwalk",
+      "name": "Moonwalk",
+      "aliases": [],
+      "entry_type": "technique",
+      "summary": "Movimento opcional do jogo que permite caminhar para trás sem virar Samus, desde que a opção esteja ativada no menu.",
+      "area": null,
+      "room": null,
+      "requirements": {
+        "status": "none",
+        "all_items": [],
+        "any_items": [],
+        "minimum_energy_tanks": null,
+        "minimum_reserve_tanks": null,
+        "maximum_current_energy": null,
+        "ammo": {},
+        "techniques": [],
+        "events": []
+      },
+      "acquisition": {
+        "status": "not_applicable",
+        "boss": null,
+        "miniboss": null,
+        "mechanism": null,
+        "event_type": null,
+        "event_target": null,
+        "normal_route_notes": null,
+        "prerequisite_events": [],
+        "bypass_possible": null,
+        "bypass_notes": null
+      },
+      "effects": [
+        "Movimento opcional do jogo que permite caminhar para trás sem virar Samus, desde que a opção esteja ativada no menu."
+      ],
+      "uses": [],
+      "related_entries": [],
+      "tags": [
+        "technique"
+      ],
+      "source": []
+    },
+    {
+      "id": "murder_beam",
+      "name": "Murder Beam",
+      "aliases": [],
+      "entry_type": "technique",
+      "summary": "Combinação inválida de todos os feixes, obtida equipando Spazer e Plasma juntos, que cria uma coluna persistente de dano. Dispará-la sem as condições corretas pode travar o jogo.",
+      "area": null,
+      "room": null,
+      "requirements": {
+        "status": "known",
+        "all_items": [
+          "Charge Beam",
+          "Ice Beam",
+          "Wave Beam",
+          "Spazer",
+          "Plasma Beam"
+        ],
+        "any_items": [],
+        "minimum_energy_tanks": null,
+        "minimum_reserve_tanks": null,
+        "maximum_current_energy": null,
+        "ammo": {},
+        "techniques": [],
+        "events": []
+      },
+      "acquisition": {
+        "status": "not_applicable",
+        "boss": null,
+        "miniboss": null,
+        "mechanism": null,
+        "event_type": null,
+        "event_target": null,
+        "normal_route_notes": null,
+        "prerequisite_events": [],
+        "bypass_possible": null,
+        "bypass_notes": null
+      },
+      "effects": [
+        "Combinação inválida de todos os feixes, obtida equipando Spazer e Plasma juntos, que cria uma coluna persistente de dano. Dispará-la sem as condições corretas pode travar o jogo."
+      ],
+      "uses": [],
+      "related_entries": [],
+      "tags": [
+        "technique"
+      ],
+      "source": []
+    },
+    {
+      "id": "ocean_fly",
+      "name": "Ocean Fly",
+      "aliases": [],
+      "entry_type": "technique",
+      "summary": "Usa um Shinespark horizontal para atravessar rapidamente a área externa da Wrecked Ship sobre o oceano.",
+      "area": null,
+      "room": null,
+      "requirements": {
+        "status": "known",
+        "all_items": [
+          "Speed Booster"
+        ],
+        "any_items": [],
+        "minimum_energy_tanks": null,
+        "minimum_reserve_tanks": null,
+        "maximum_current_energy": null,
+        "ammo": {},
+        "techniques": [],
+        "events": []
+      },
+      "acquisition": {
+        "status": "not_applicable",
+        "boss": null,
+        "miniboss": null,
+        "mechanism": null,
+        "event_type": null,
+        "event_target": null,
+        "normal_route_notes": null,
+        "prerequisite_events": [],
+        "bypass_possible": null,
+        "bypass_notes": null
+      },
+      "effects": [
+        "Usa um Shinespark horizontal para atravessar rapidamente a área externa da Wrecked Ship sobre o oceano."
+      ],
+      "uses": [],
+      "related_entries": [],
+      "tags": [
+        "technique"
+      ],
+      "source": []
+    },
+    {
+      "id": "out_of_bounds",
+      "name": "Out of Bounds",
+      "aliases": [],
+      "entry_type": "technique",
+      "summary": "Estado em que Samus sai da área normal de colisão da sala e passa a se mover fora do mapa visível.",
+      "area": null,
+      "room": null,
+      "requirements": {
+        "status": "none",
+        "all_items": [],
+        "any_items": [],
+        "minimum_energy_tanks": null,
+        "minimum_reserve_tanks": null,
+        "maximum_current_energy": null,
+        "ammo": {},
+        "techniques": [],
+        "events": []
+      },
+      "acquisition": {
+        "status": "not_applicable",
+        "boss": null,
+        "miniboss": null,
+        "mechanism": null,
+        "event_type": null,
+        "event_target": null,
+        "normal_route_notes": null,
+        "prerequisite_events": [],
+        "bypass_possible": null,
+        "bypass_notes": null
+      },
+      "effects": [
+        "Estado em que Samus sai da área normal de colisão da sala e passa a se mover fora do mapa visível."
+      ],
+      "uses": [],
+      "related_entries": [],
+      "tags": [
+        "technique"
+      ],
+      "source": []
+    },
+    {
+      "id": "pause_abuse",
+      "name": "Pause Abuse",
+      "aliases": [],
+      "entry_type": "technique",
+      "summary": "Usa o menu de pausa para alterar equipamentos, controlar timers ou tornar determinados inputs e interações mais consistentes.",
+      "area": null,
+      "room": null,
+      "requirements": {
+        "status": "none",
+        "all_items": [],
+        "any_items": [],
+        "minimum_energy_tanks": null,
+        "minimum_reserve_tanks": null,
+        "maximum_current_energy": null,
+        "ammo": {},
+        "techniques": [],
+        "events": []
+      },
+      "acquisition": {
+        "status": "not_applicable",
+        "boss": null,
+        "miniboss": null,
+        "mechanism": null,
+        "event_type": null,
+        "event_target": null,
+        "normal_route_notes": null,
+        "prerequisite_events": [],
+        "bypass_possible": null,
+        "bypass_notes": null
+      },
+      "effects": [
+        "Usa o menu de pausa para alterar equipamentos, controlar timers ou tornar determinados inputs e interações mais consistentes."
+      ],
+      "uses": [],
+      "related_entries": [],
+      "tags": [
+        "technique"
+      ],
+      "source": []
+    },
+    {
+      "id": "plasma_shield",
+      "name": "Plasma Shield",
+      "aliases": [],
+      "entry_type": "technique",
+      "summary": "Charge Beam Combo do Plasma Beam que cria quatro projéteis de alta potência ao redor de Samus.",
+      "area": null,
+      "room": null,
+      "requirements": {
+        "status": "known",
+        "all_items": [
+          "Charge Beam",
+          "Plasma Beam",
+          "Power Bombs"
+        ],
+        "any_items": [],
+        "minimum_energy_tanks": null,
+        "minimum_reserve_tanks": null,
+        "maximum_current_energy": null,
+        "ammo": {},
+        "techniques": [],
+        "events": []
+      },
+      "acquisition": {
+        "status": "not_applicable",
+        "boss": null,
+        "miniboss": null,
+        "mechanism": null,
+        "event_type": null,
+        "event_target": null,
+        "normal_route_notes": null,
+        "prerequisite_events": [],
+        "bypass_possible": null,
+        "bypass_notes": null
+      },
+      "effects": [
+        "Charge Beam Combo do Plasma Beam que cria quatro projéteis de alta potência ao redor de Samus."
+      ],
+      "uses": [],
+      "related_entries": [],
+      "tags": [
+        "technique"
+      ],
+      "source": []
+    },
+    {
+      "id": "post_load_modification_plm_manipulation",
+      "name": "Post Load Modification (PLM Manipulation)",
+      "aliases": [
+        "PLM Manipulation"
+      ],
+      "entry_type": "technique",
+      "summary": "Manipula objetos de sala processados pelo sistema de PLMs, como portas, itens, blocos, portões, areia e estações. Sob estados glitched ou sobrecarga, esses objetos podem deixar de funcionar ou assumir comportamentos incorretos.",
+      "area": null,
+      "room": null,
+      "requirements": {
+        "status": "none",
+        "all_items": [],
+        "any_items": [],
+        "minimum_energy_tanks": null,
+        "minimum_reserve_tanks": null,
+        "maximum_current_energy": null,
+        "ammo": {},
+        "techniques": [],
+        "events": []
+      },
+      "acquisition": {
+        "status": "not_applicable",
+        "boss": null,
+        "miniboss": null,
+        "mechanism": null,
+        "event_type": null,
+        "event_target": null,
+        "normal_route_notes": null,
+        "prerequisite_events": [],
+        "bypass_possible": null,
+        "bypass_notes": null
+      },
+      "effects": [
+        "Manipula objetos de sala processados pelo sistema de PLMs, como portas, itens, blocos, portões, areia e estações. Sob estados glitched ou sobrecarga, esses objetos podem deixar de funcionar ou assumir comportamentos incorretos."
+      ],
+      "uses": [],
+      "related_entries": [],
+      "tags": [
+        "technique"
+      ],
+      "source": []
+    },
+    {
+      "id": "pseudo_screw_attack",
+      "name": "Pseudo Screw Attack",
+      "aliases": [],
+      "entry_type": "technique",
+      "summary": "Entrar em Spinjump com o feixe totalmente carregado causa dano de contato e destrói muitos projéteis e inimigos.",
+      "area": null,
+      "room": null,
+      "requirements": {
+        "status": "known",
+        "all_items": [
+          "Charge Beam"
+        ],
+        "any_items": [],
+        "minimum_energy_tanks": null,
+        "minimum_reserve_tanks": null,
+        "maximum_current_energy": null,
+        "ammo": {},
+        "techniques": [],
+        "events": []
+      },
+      "acquisition": {
+        "status": "not_applicable",
+        "boss": null,
+        "miniboss": null,
+        "mechanism": null,
+        "event_type": null,
+        "event_target": null,
+        "normal_route_notes": null,
+        "prerequisite_events": [],
+        "bypass_possible": null,
+        "bypass_notes": null
+      },
+      "effects": [
+        "Entrar em Spinjump com o feixe totalmente carregado causa dano de contato e destrói muitos projéteis e inimigos."
+      ],
+      "uses": [],
+      "related_entries": [],
+      "tags": [
+        "technique"
+      ],
+      "source": []
+    },
+    {
+      "id": "quick_charge",
+      "name": "Quick Charge",
+      "aliases": [],
+      "entry_type": "technique",
+      "summary": "Atrasa o botão de corrida após iniciar o movimento para avançar mais rapidamente o contador interno do Speed Booster.",
+      "area": null,
+      "room": null,
+      "requirements": {
+        "status": "known",
+        "all_items": [
+          "Speed Booster"
+        ],
+        "any_items": [],
+        "minimum_energy_tanks": null,
+        "minimum_reserve_tanks": null,
+        "maximum_current_energy": null,
+        "ammo": {},
+        "techniques": [],
+        "events": []
+      },
+      "acquisition": {
+        "status": "not_applicable",
+        "boss": null,
+        "miniboss": null,
+        "mechanism": null,
+        "event_type": null,
+        "event_target": null,
+        "normal_route_notes": null,
+        "prerequisite_events": [],
+        "bypass_possible": null,
+        "bypass_notes": null
+      },
+      "effects": [
+        "Atrasa o botão de corrida após iniciar o movimento para avançar mais rapidamente o contador interno do Speed Booster."
+      ],
+      "uses": [],
+      "related_entries": [],
+      "tags": [
+        "technique"
+      ],
+      "source": []
+    },
+    {
+      "id": "quick_drop",
+      "name": "Quick Drop",
+      "aliases": [],
+      "entry_type": "technique",
+      "summary": "Interrompe rapidamente uma animação aérea para começar a cair antes do que ocorreria em um salto normal.",
+      "area": null,
+      "room": null,
+      "requirements": {
+        "status": "none",
+        "all_items": [],
+        "any_items": [],
+        "minimum_energy_tanks": null,
+        "minimum_reserve_tanks": null,
+        "maximum_current_energy": null,
+        "ammo": {},
+        "techniques": [],
+        "events": []
+      },
+      "acquisition": {
+        "status": "not_applicable",
+        "boss": null,
+        "miniboss": null,
+        "mechanism": null,
+        "event_type": null,
+        "event_target": null,
+        "normal_route_notes": null,
+        "prerequisite_events": [],
+        "bypass_possible": null,
+        "bypass_notes": null
+      },
+      "effects": [
+        "Interrompe rapidamente uma animação aérea para começar a cair antes do que ocorreria em um salto normal."
+      ],
+      "uses": [],
+      "related_entries": [],
+      "tags": [
+        "technique"
+      ],
+      "source": []
+    },
+    {
+      "id": "r_mode",
+      "name": "R-Mode",
+      "aliases": [],
+      "entry_type": "technique",
+      "summary": "Estado glitched criado ao manter o X-Ray enquanto reservas automáticas são ativadas durante uma transição. Sua principal aplicação é forçar Samus a ficar em pé quando as reservas disparam novamente.",
+      "area": null,
+      "room": null,
+      "requirements": {
+        "status": "known",
+        "all_items": [
+          "X-Ray Scope",
+          "Reserve Tank"
+        ],
+        "any_items": [],
+        "minimum_energy_tanks": null,
+        "minimum_reserve_tanks": null,
+        "maximum_current_energy": null,
+        "ammo": {},
+        "techniques": [],
+        "events": []
+      },
+      "acquisition": {
+        "status": "not_applicable",
+        "boss": null,
+        "miniboss": null,
+        "mechanism": null,
+        "event_type": null,
+        "event_target": null,
+        "normal_route_notes": null,
+        "prerequisite_events": [],
+        "bypass_possible": null,
+        "bypass_notes": null
+      },
+      "effects": [
+        "Estado glitched criado ao manter o X-Ray enquanto reservas automáticas são ativadas durante uma transição. Sua principal aplicação é forçar Samus a ficar em pé quando as reservas disparam novamente."
+      ],
+      "uses": [],
+      "related_entries": [],
+      "tags": [
+        "technique"
+      ],
+      "source": []
+    },
+    {
+      "id": "shinespark",
+      "name": "Shinespark",
+      "aliases": [],
+      "entry_type": "technique",
+      "summary": "Após carregar o Speed Booster e agachar, Samus pode se lançar verticalmente, horizontalmente ou na diagonal em alta velocidade, consumindo energia durante o trajeto.",
+      "area": null,
+      "room": null,
+      "requirements": {
+        "status": "known",
+        "all_items": [
+          "Speed Booster"
+        ],
+        "any_items": [],
+        "minimum_energy_tanks": null,
+        "minimum_reserve_tanks": null,
+        "maximum_current_energy": null,
+        "ammo": {},
+        "techniques": [],
+        "events": []
+      },
+      "acquisition": {
+        "status": "not_applicable",
+        "boss": null,
+        "miniboss": null,
+        "mechanism": null,
+        "event_type": null,
+        "event_target": null,
+        "normal_route_notes": null,
+        "prerequisite_events": [],
+        "bypass_possible": null,
+        "bypass_notes": null
+      },
+      "effects": [
+        "Após carregar o Speed Booster e agachar, Samus pode se lançar verticalmente, horizontalmente ou na diagonal em alta velocidade, consumindo energia durante o trajeto."
+      ],
+      "uses": [],
+      "related_entries": [],
+      "tags": [
+        "technique"
+      ],
+      "source": []
+    },
+    {
+      "id": "shinespark_suit_yellow_suit_glitch_flash_suit",
+      "name": "Shinespark Suit (Yellow Suit Glitch / Flash Suit)",
+      "aliases": [
+        "Yellow Suit Glitch",
+        "Flash Suit"
+      ],
+      "entry_type": "technique",
+      "summary": "Preserva indefinidamente uma carga de Shinespark por meio de uma interrupção ou estado glitched, permitindo ativá-la muito depois do tempo normal.",
+      "area": null,
+      "room": null,
+      "requirements": {
+        "status": "known",
+        "all_items": [
+          "Speed Booster"
+        ],
+        "any_items": [],
+        "minimum_energy_tanks": null,
+        "minimum_reserve_tanks": null,
+        "maximum_current_energy": null,
+        "ammo": {},
+        "techniques": [],
+        "events": []
+      },
+      "acquisition": {
+        "status": "not_applicable",
+        "boss": null,
+        "miniboss": null,
+        "mechanism": null,
+        "event_type": null,
+        "event_target": null,
+        "normal_route_notes": null,
+        "prerequisite_events": [],
+        "bypass_possible": null,
+        "bypass_notes": null
+      },
+      "effects": [
+        "Preserva indefinidamente uma carga de Shinespark por meio de uma interrupção ou estado glitched, permitindo ativá-la muito depois do tempo normal."
+      ],
+      "uses": [],
+      "related_entries": [],
+      "tags": [
+        "technique"
+      ],
+      "source": []
+    },
+    {
+      "id": "short_charge",
+      "name": "Short Charge",
+      "aliases": [],
+      "entry_type": "technique",
+      "summary": "Usa passos e toques de corrida cuidadosamente ritmados para carregar o Speed Booster em uma distância menor que a normal.",
+      "area": null,
+      "room": null,
+      "requirements": {
+        "status": "known",
+        "all_items": [
+          "Speed Booster"
+        ],
+        "any_items": [],
+        "minimum_energy_tanks": null,
+        "minimum_reserve_tanks": null,
+        "maximum_current_energy": null,
+        "ammo": {},
+        "techniques": [],
+        "events": []
+      },
+      "acquisition": {
+        "status": "not_applicable",
+        "boss": null,
+        "miniboss": null,
+        "mechanism": null,
+        "event_type": null,
+        "event_target": null,
+        "normal_route_notes": null,
+        "prerequisite_events": [],
+        "bypass_possible": null,
+        "bypass_notes": null
+      },
+      "effects": [
+        "Usa passos e toques de corrida cuidadosamente ritmados para carregar o Speed Booster em uma distância menor que a normal."
+      ],
+      "uses": [],
+      "related_entries": [],
+      "tags": [
+        "technique"
+      ],
+      "source": []
+    },
+    {
+      "id": "slopespark",
+      "name": "Slopespark",
+      "aliases": [],
+      "entry_type": "technique",
+      "summary": "Termina um Damage Boost sobre uma inclinação e ativa um Shinespark durante os frames restantes do knockback.",
+      "area": null,
+      "room": null,
+      "requirements": {
+        "status": "known",
+        "all_items": [
+          "Speed Booster"
+        ],
+        "any_items": [],
+        "minimum_energy_tanks": null,
+        "minimum_reserve_tanks": null,
+        "maximum_current_energy": null,
+        "ammo": {},
+        "techniques": [],
+        "events": []
+      },
+      "acquisition": {
+        "status": "not_applicable",
+        "boss": null,
+        "miniboss": null,
+        "mechanism": null,
+        "event_type": null,
+        "event_target": null,
+        "normal_route_notes": null,
+        "prerequisite_events": [],
+        "bypass_possible": null,
+        "bypass_notes": null
+      },
+      "effects": [
+        "Termina um Damage Boost sobre uma inclinação e ativa um Shinespark durante os frames restantes do knockback."
+      ],
+      "uses": [],
+      "related_entries": [],
+      "tags": [
+        "technique"
+      ],
+      "source": []
+    },
+    {
+      "id": "spacetime_beam",
+      "name": "Spacetime Beam",
+      "aliases": [],
+      "entry_type": "technique",
+      "summary": "Combinação inválida de feixes com Spazer e Plasma equipados sem Wave que pode sobrescrever memória, resetar o mundo ou produzir Wrong Warps. O efeito varia conforme a sala e o estado anterior do jogo.",
+      "area": null,
+      "room": null,
+      "requirements": {
+        "status": "known",
+        "all_items": [
+          "Ice Beam",
+          "Spazer",
+          "Plasma Beam"
+        ],
+        "any_items": [],
+        "minimum_energy_tanks": null,
+        "minimum_reserve_tanks": null,
+        "maximum_current_energy": null,
+        "ammo": {},
+        "techniques": [],
+        "events": []
+      },
+      "acquisition": {
+        "status": "not_applicable",
+        "boss": null,
+        "miniboss": null,
+        "mechanism": null,
+        "event_type": null,
+        "event_target": null,
+        "normal_route_notes": null,
+        "prerequisite_events": [],
+        "bypass_possible": null,
+        "bypass_notes": null
+      },
+      "effects": [
+        "Combinação inválida de feixes com Spazer e Plasma equipados sem Wave que pode sobrescrever memória, resetar o mundo ou produzir Wrong Warps. O efeito varia conforme a sala e o estado anterior do jogo."
+      ],
+      "uses": [],
+      "related_entries": [],
+      "tags": [
+        "technique"
+      ],
+      "source": []
+    },
+    {
+      "id": "spazer_shield",
+      "name": "Spazer Shield",
+      "aliases": [],
+      "entry_type": "technique",
+      "summary": "Charge Beam Combo do Spazer que cria projéteis giratórios ao redor de Samus.",
+      "area": null,
+      "room": null,
+      "requirements": {
+        "status": "known",
+        "all_items": [
+          "Charge Beam",
+          "Spazer",
+          "Power Bombs"
+        ],
+        "any_items": [],
+        "minimum_energy_tanks": null,
+        "minimum_reserve_tanks": null,
+        "maximum_current_energy": null,
+        "ammo": {},
+        "techniques": [],
+        "events": []
+      },
+      "acquisition": {
+        "status": "not_applicable",
+        "boss": null,
+        "miniboss": null,
+        "mechanism": null,
+        "event_type": null,
+        "event_target": null,
+        "normal_route_notes": null,
+        "prerequisite_events": [],
+        "bypass_possible": null,
+        "bypass_notes": null
+      },
+      "effects": [
+        "Charge Beam Combo do Spazer que cria projéteis giratórios ao redor de Samus."
+      ],
+      "uses": [],
+      "related_entries": [],
+      "tags": [
+        "technique"
+      ],
+      "source": []
+    },
+    {
+      "id": "speedball",
+      "name": "Speedball",
+      "aliases": [],
+      "entry_type": "technique",
+      "summary": "Variação do Mockball realizada com o estado azul do Speed Booster, preservando velocidade e permitindo quebrar blocos em Morph Ball.",
+      "area": null,
+      "room": null,
+      "requirements": {
+        "status": "known",
+        "all_items": [
+          "Morph Ball",
+          "Speed Booster"
+        ],
+        "any_items": [],
+        "minimum_energy_tanks": null,
+        "minimum_reserve_tanks": null,
+        "maximum_current_energy": null,
+        "ammo": {},
+        "techniques": [],
+        "events": []
+      },
+      "acquisition": {
+        "status": "not_applicable",
+        "boss": null,
+        "miniboss": null,
+        "mechanism": null,
+        "event_type": null,
+        "event_target": null,
+        "normal_route_notes": null,
+        "prerequisite_events": [],
+        "bypass_possible": null,
+        "bypass_notes": null
+      },
+      "effects": [
+        "Variação do Mockball realizada com o estado azul do Speed Booster, preservando velocidade e permitindo quebrar blocos em Morph Ball."
+      ],
+      "uses": [],
+      "related_entries": [],
+      "tags": [
+        "technique"
+      ],
+      "source": []
+    },
+    {
+      "id": "speedkeep",
+      "name": "Speedkeep",
+      "aliases": [],
+      "entry_type": "technique",
+      "summary": "Preserva velocidade de corrida ou do Speed Booster através de ações e transições que normalmente fariam Samus desacelerar.",
+      "area": null,
+      "room": null,
+      "requirements": {
+        "status": "known",
+        "all_items": [
+          "Speed Booster"
+        ],
+        "any_items": [],
+        "minimum_energy_tanks": null,
+        "minimum_reserve_tanks": null,
+        "maximum_current_energy": null,
+        "ammo": {},
+        "techniques": [],
+        "events": []
+      },
+      "acquisition": {
+        "status": "not_applicable",
+        "boss": null,
+        "miniboss": null,
+        "mechanism": null,
+        "event_type": null,
+        "event_target": null,
+        "normal_route_notes": null,
+        "prerequisite_events": [],
+        "bypass_possible": null,
+        "bypass_notes": null
+      },
+      "effects": [
+        "Preserva velocidade de corrida ou do Speed Booster através de ações e transições que normalmente fariam Samus desacelerar."
+      ],
+      "uses": [],
+      "related_entries": [],
+      "tags": [
+        "technique"
+      ],
+      "source": []
+    },
+    {
+      "id": "spike_suit",
+      "name": "Spike Suit",
+      "aliases": [],
+      "entry_type": "technique",
+      "summary": "Gera um Shinespark Suit ao receber dano de espinhos enquanto Samus está em Morph Ball e ativar o Shinespark durante a mudança de pose.",
+      "area": null,
+      "room": null,
+      "requirements": {
+        "status": "known",
+        "all_items": [
+          "Morph Ball",
+          "Speed Booster"
+        ],
+        "any_items": [],
+        "minimum_energy_tanks": null,
+        "minimum_reserve_tanks": null,
+        "maximum_current_energy": null,
+        "ammo": {},
+        "techniques": [],
+        "events": []
+      },
+      "acquisition": {
+        "status": "not_applicable",
+        "boss": null,
+        "miniboss": null,
+        "mechanism": null,
+        "event_type": null,
+        "event_target": null,
+        "normal_route_notes": null,
+        "prerequisite_events": [],
+        "bypass_possible": null,
+        "bypass_notes": null
+      },
+      "effects": [
+        "Gera um Shinespark Suit ao receber dano de espinhos enquanto Samus está em Morph Ball e ativar o Shinespark durante a mudança de pose."
+      ],
+      "uses": [],
+      "related_entries": [],
+      "tags": [
+        "technique"
+      ],
+      "source": []
+    },
+    {
+      "id": "spinjump",
+      "name": "Spinjump",
+      "aliases": [],
+      "entry_type": "technique",
+      "summary": "Salto giratório iniciado ao pular enquanto Samus possui movimento horizontal.",
+      "area": null,
+      "room": null,
+      "requirements": {
+        "status": "none",
+        "all_items": [],
+        "any_items": [],
+        "minimum_energy_tanks": null,
+        "minimum_reserve_tanks": null,
+        "maximum_current_energy": null,
+        "ammo": {},
+        "techniques": [],
+        "events": []
+      },
+      "acquisition": {
+        "status": "not_applicable",
+        "boss": null,
+        "miniboss": null,
+        "mechanism": null,
+        "event_type": null,
+        "event_target": null,
+        "normal_route_notes": null,
+        "prerequisite_events": [],
+        "bypass_possible": null,
+        "bypass_notes": null
+      },
+      "effects": [
+        "Salto giratório iniciado ao pular enquanto Samus possui movimento horizontal."
+      ],
+      "uses": [],
+      "related_entries": [],
+      "tags": [
+        "technique"
+      ],
+      "source": []
+    },
+    {
+      "id": "standup_glitch",
+      "name": "Standup Glitch",
+      "aliases": [],
+      "entry_type": "technique",
+      "summary": "Força Samus a assumir a pose em pé em um local baixo ou dentro de uma colisão, permitindo clips e reposicionamentos anormais.",
+      "area": null,
+      "room": null,
+      "requirements": {
+        "status": "none",
+        "all_items": [],
+        "any_items": [],
+        "minimum_energy_tanks": null,
+        "minimum_reserve_tanks": null,
+        "maximum_current_energy": null,
+        "ammo": {},
+        "techniques": [],
+        "events": []
+      },
+      "acquisition": {
+        "status": "not_applicable",
+        "boss": null,
+        "miniboss": null,
+        "mechanism": null,
+        "event_type": null,
+        "event_target": null,
+        "normal_route_notes": null,
+        "prerequisite_events": [],
+        "bypass_possible": null,
+        "bypass_notes": null
+      },
+      "effects": [
+        "Força Samus a assumir a pose em pé em um local baixo ou dentro de uma colisão, permitindo clips e reposicionamentos anormais."
+      ],
+      "uses": [],
+      "related_entries": [],
+      "tags": [
+        "technique"
+      ],
+      "source": []
+    },
+    {
+      "id": "stop_on_a_dime",
+      "name": "Stop on a Dime",
+      "aliases": [],
+      "entry_type": "technique",
+      "summary": "Cancela rapidamente a velocidade horizontal de Samus por meio de uma mudança de direção ou animação bem temporizada.",
+      "area": null,
+      "room": null,
+      "requirements": {
+        "status": "none",
+        "all_items": [],
+        "any_items": [],
+        "minimum_energy_tanks": null,
+        "minimum_reserve_tanks": null,
+        "maximum_current_energy": null,
+        "ammo": {},
+        "techniques": [],
+        "events": []
+      },
+      "acquisition": {
+        "status": "not_applicable",
+        "boss": null,
+        "miniboss": null,
+        "mechanism": null,
+        "event_type": null,
+        "event_target": null,
+        "normal_route_notes": null,
+        "prerequisite_events": [],
+        "bypass_possible": null,
+        "bypass_notes": null
+      },
+      "effects": [
+        "Cancela rapidamente a velocidade horizontal de Samus por meio de uma mudança de direção ou animação bem temporizada."
+      ],
+      "uses": [],
+      "related_entries": [],
+      "tags": [
+        "technique"
+      ],
+      "source": []
+    },
+    {
+      "id": "superjump",
+      "name": "Superjump",
+      "aliases": [],
+      "entry_type": "technique",
+      "summary": "Ao iniciar um Shinespark dentro do X-Mode, Samus acumula velocidade vertical extrema e pode ser lançada para fora dos limites da sala.",
+      "area": null,
+      "room": null,
+      "requirements": {
+        "status": "known",
+        "all_items": [
+          "X-Ray Scope",
+          "Speed Booster"
+        ],
+        "any_items": [],
+        "minimum_energy_tanks": null,
+        "minimum_reserve_tanks": null,
+        "maximum_current_energy": null,
+        "ammo": {},
+        "techniques": [],
+        "events": []
+      },
+      "acquisition": {
+        "status": "not_applicable",
+        "boss": null,
+        "miniboss": null,
+        "mechanism": null,
+        "event_type": null,
+        "event_target": null,
+        "normal_route_notes": null,
+        "prerequisite_events": [],
+        "bypass_possible": null,
+        "bypass_notes": null
+      },
+      "effects": [
+        "Ao iniciar um Shinespark dentro do X-Mode, Samus acumula velocidade vertical extrema e pode ser lançada para fora dos limites da sala."
+      ],
+      "uses": [],
+      "related_entries": [],
+      "tags": [
+        "technique"
+      ],
+      "source": []
+    },
+    {
+      "id": "temporary_blue_suit",
+      "name": "Temporary Blue Suit",
+      "aliases": [],
+      "entry_type": "technique",
+      "summary": "Cria um estado azul temporário ao sair de um Speedball com o input correto. O estado pode ser transportado por pequenas distâncias enquanto Samus evita ações que o cancelam.",
+      "area": null,
+      "room": null,
+      "requirements": {
+        "status": "known",
+        "all_items": [
+          "Morph Ball",
+          "Speed Booster"
+        ],
+        "any_items": [],
+        "minimum_energy_tanks": null,
+        "minimum_reserve_tanks": null,
+        "maximum_current_energy": null,
+        "ammo": {},
+        "techniques": [],
+        "events": []
+      },
+      "acquisition": {
+        "status": "not_applicable",
+        "boss": null,
+        "miniboss": null,
+        "mechanism": null,
+        "event_type": null,
+        "event_target": null,
+        "normal_route_notes": null,
+        "prerequisite_events": [],
+        "bypass_possible": null,
+        "bypass_notes": null
+      },
+      "effects": [
+        "Cria um estado azul temporário ao sair de um Speedball com o input correto. O estado pode ser transportado por pequenas distâncias enquanto Samus evita ações que o cancelam."
+      ],
+      "uses": [],
+      "related_entries": [],
+      "tags": [
+        "technique"
+      ],
+      "source": []
+    },
+    {
+      "id": "underflow",
+      "name": "Underflow",
+      "aliases": [],
+      "entry_type": "technique",
+      "summary": "Faz um valor numérico passar abaixo de zero e retornar a um valor muito alto, produzindo efeitos inesperados em munição, coordenadas ou outros dados.",
+      "area": null,
+      "room": null,
+      "requirements": {
+        "status": "none",
+        "all_items": [],
+        "any_items": [],
+        "minimum_energy_tanks": null,
+        "minimum_reserve_tanks": null,
+        "maximum_current_energy": null,
+        "ammo": {},
+        "techniques": [],
+        "events": []
+      },
+      "acquisition": {
+        "status": "not_applicable",
+        "boss": null,
+        "miniboss": null,
+        "mechanism": null,
+        "event_type": null,
+        "event_target": null,
+        "normal_route_notes": null,
+        "prerequisite_events": [],
+        "bypass_possible": null,
+        "bypass_notes": null
+      },
+      "effects": [
+        "Faz um valor numérico passar abaixo de zero e retornar a um valor muito alto, produzindo efeitos inesperados em munição, coordenadas ou outros dados."
+      ],
+      "uses": [],
+      "related_entries": [],
+      "tags": [
+        "technique"
+      ],
+      "source": []
+    },
+    {
+      "id": "vertical_speed",
+      "name": "Vertical Speed",
+      "aliases": [],
+      "entry_type": "technique",
+      "summary": "Conhecimento e manipulação da velocidade vertical de Samus durante saltos, quedas, água, knockback e mudanças de pose.",
+      "area": null,
+      "room": null,
+      "requirements": {
+        "status": "none",
+        "all_items": [],
+        "any_items": [],
+        "minimum_energy_tanks": null,
+        "minimum_reserve_tanks": null,
+        "maximum_current_energy": null,
+        "ammo": {},
+        "techniques": [],
+        "events": []
+      },
+      "acquisition": {
+        "status": "not_applicable",
+        "boss": null,
+        "miniboss": null,
+        "mechanism": null,
+        "event_type": null,
+        "event_target": null,
+        "normal_route_notes": null,
+        "prerequisite_events": [],
+        "bypass_possible": null,
+        "bypass_notes": null
+      },
+      "effects": [
+        "Conhecimento e manipulação da velocidade vertical de Samus durante saltos, quedas, água, knockback e mudanças de pose."
+      ],
+      "uses": [],
+      "related_entries": [],
+      "tags": [
+        "technique"
+      ],
+      "source": []
+    },
+    {
+      "id": "walljump",
+      "name": "Walljump",
+      "aliases": [],
+      "entry_type": "technique",
+      "summary": "Durante um Spinjump junto a uma parede, pressionar a direção oposta e depois pular impulsiona Samus para longe dela.",
+      "area": null,
+      "room": null,
+      "requirements": {
+        "status": "none",
+        "all_items": [],
+        "any_items": [],
+        "minimum_energy_tanks": null,
+        "minimum_reserve_tanks": null,
+        "maximum_current_energy": null,
+        "ammo": {},
+        "techniques": [],
+        "events": []
+      },
+      "acquisition": {
+        "status": "not_applicable",
+        "boss": null,
+        "miniboss": null,
+        "mechanism": null,
+        "event_type": null,
+        "event_target": null,
+        "normal_route_notes": null,
+        "prerequisite_events": [],
+        "bypass_possible": null,
+        "bypass_notes": null
+      },
+      "effects": [
+        "Durante um Spinjump junto a uma parede, pressionar a direção oposta e depois pular impulsiona Samus para longe dela."
+      ],
+      "uses": [],
+      "related_entries": [],
+      "tags": [
+        "technique"
+      ],
+      "source": []
+    },
+    {
+      "id": "wave_shield_x_factor",
+      "name": "Wave Shield (X-Factor)",
+      "aliases": [
+        "X-Factor"
+      ],
+      "entry_type": "technique",
+      "summary": "Charge Beam Combo do Wave Beam que cria quatro partículas orbitais capazes de causar múltiplos acertos em inimigos e chefes.",
+      "area": null,
+      "room": null,
+      "requirements": {
+        "status": "known",
+        "all_items": [
+          "Charge Beam",
+          "Wave Beam",
+          "Power Bombs"
+        ],
+        "any_items": [],
+        "minimum_energy_tanks": null,
+        "minimum_reserve_tanks": null,
+        "maximum_current_energy": null,
+        "ammo": {},
+        "techniques": [],
+        "events": []
+      },
+      "acquisition": {
+        "status": "not_applicable",
+        "boss": null,
+        "miniboss": null,
+        "mechanism": null,
+        "event_type": null,
+        "event_target": null,
+        "normal_route_notes": null,
+        "prerequisite_events": [],
+        "bypass_possible": null,
+        "bypass_notes": null
+      },
+      "effects": [
+        "Charge Beam Combo do Wave Beam que cria quatro partículas orbitais capazes de causar múltiplos acertos em inimigos e chefes."
+      ],
+      "uses": [],
+      "related_entries": [],
+      "tags": [
+        "technique"
+      ],
+      "source": []
+    },
+    {
+      "id": "wrap_around_shot",
+      "name": "Wrap-around Shot",
+      "aliases": [],
+      "entry_type": "technique",
+      "summary": "Dispara um feixe para fora dos limites da sala para que sua colisão reapareça em outra linha de blocos, podendo abrir portas do lado oposto. Wave Beam é obrigatório e feixes mais largos facilitam alguns usos.",
+      "area": null,
+      "room": null,
+      "requirements": {
+        "status": "known",
+        "all_items": [
+          "Wave Beam"
+        ],
+        "any_items": [],
+        "minimum_energy_tanks": null,
+        "minimum_reserve_tanks": null,
+        "maximum_current_energy": null,
+        "ammo": {},
+        "techniques": [],
+        "events": []
+      },
+      "acquisition": {
+        "status": "not_applicable",
+        "boss": null,
+        "miniboss": null,
+        "mechanism": null,
+        "event_type": null,
+        "event_target": null,
+        "normal_route_notes": null,
+        "prerequisite_events": [],
+        "bypass_possible": null,
+        "bypass_notes": null
+      },
+      "effects": [
+        "Dispara um feixe para fora dos limites da sala para que sua colisão reapareça em outra linha de blocos, podendo abrir portas do lado oposto. Wave Beam é obrigatório e feixes mais largos facilitam alguns usos."
+      ],
+      "uses": [],
+      "related_entries": [],
+      "tags": [
+        "technique"
+      ],
+      "source": []
+    },
+    {
+      "id": "x_mode",
+      "name": "X-Mode",
+      "aliases": [],
+      "entry_type": "technique",
+      "summary": "Estado glitched ativado ao usar o X-Ray exatamente antes do fim do knockback, fazendo Samus permanecer em uma animação de corrida sem cair normalmente. Ele permite Jesuswalks, Blue Suits e Superjumps.",
+      "area": null,
+      "room": null,
+      "requirements": {
+        "status": "known",
+        "all_items": [
+          "X-Ray Scope"
+        ],
+        "any_items": [],
+        "minimum_energy_tanks": null,
+        "minimum_reserve_tanks": null,
+        "maximum_current_energy": null,
+        "ammo": {},
+        "techniques": [],
+        "events": []
+      },
+      "acquisition": {
+        "status": "not_applicable",
+        "boss": null,
+        "miniboss": null,
+        "mechanism": null,
+        "event_type": null,
+        "event_target": null,
+        "normal_route_notes": null,
+        "prerequisite_events": [],
+        "bypass_possible": null,
+        "bypass_notes": null
+      },
+      "effects": [
+        "Estado glitched ativado ao usar o X-Ray exatamente antes do fim do knockback, fazendo Samus permanecer em uma animação de corrida sem cair normalmente. Ele permite Jesuswalks, Blue Suits e Superjumps."
+      ],
+      "uses": [],
+      "related_entries": [],
+      "tags": [
+        "technique"
+      ],
+      "source": []
+    },
+    {
+      "id": "x_plasma_microwave_beam",
+      "name": "X-Plasma (Microwave Beam)",
+      "aliases": [
+        "Microwave Beam"
+      ],
+      "entry_type": "technique",
+      "summary": "Ativar repetidamente o X-Ray enquanto um tiro carregado de Plasma atravessa o ponto vulnerável de um chefe reinicia sua invencibilidade e faz o mesmo tiro acertar várias vezes.",
+      "area": null,
+      "room": null,
+      "requirements": {
+        "status": "known",
+        "all_items": [
+          "X-Ray Scope",
+          "Charge Beam",
+          "Plasma Beam"
+        ],
+        "any_items": [],
+        "minimum_energy_tanks": null,
+        "minimum_reserve_tanks": null,
+        "maximum_current_energy": null,
+        "ammo": {},
+        "techniques": [],
+        "events": []
+      },
+      "acquisition": {
+        "status": "not_applicable",
+        "boss": null,
+        "miniboss": null,
+        "mechanism": null,
+        "event_type": null,
+        "event_target": null,
+        "normal_route_notes": null,
+        "prerequisite_events": [],
+        "bypass_possible": null,
+        "bypass_notes": null
+      },
+      "effects": [
+        "Ativar repetidamente o X-Ray enquanto um tiro carregado de Plasma atravessa o ponto vulnerável de um chefe reinicia sua invencibilidade e faz o mesmo tiro acertar várias vezes."
+      ],
+      "uses": [],
+      "related_entries": [],
+      "tags": [
+        "technique"
+      ],
+      "source": []
+    },
+    {
+      "id": "x_ray_climb",
+      "name": "X-Ray Climb",
+      "aliases": [],
+      "entry_type": "technique",
+      "summary": "Quando Samus está presa dentro de uma parede ou porta, alternar o X-Ray e a direção reposiciona sua hitbox gradualmente para cima.",
+      "area": null,
+      "room": null,
+      "requirements": {
+        "status": "known",
+        "all_items": [
+          "X-Ray Scope"
+        ],
+        "any_items": [],
+        "minimum_energy_tanks": null,
+        "minimum_reserve_tanks": null,
+        "maximum_current_energy": null,
+        "ammo": {},
+        "techniques": [],
+        "events": []
+      },
+      "acquisition": {
+        "status": "not_applicable",
+        "boss": null,
+        "miniboss": null,
+        "mechanism": null,
+        "event_type": null,
+        "event_target": null,
+        "normal_route_notes": null,
+        "prerequisite_events": [],
+        "bypass_possible": null,
+        "bypass_notes": null
+      },
+      "effects": [
+        "Quando Samus está presa dentro de uma parede ou porta, alternar o X-Ray e a direção reposiciona sua hitbox gradualmente para cima."
+      ],
+      "uses": [],
+      "related_entries": [],
+      "tags": [
+        "technique"
+      ],
+      "source": []
+    },
+    {
+      "id": "zebetite_glitch_zeb_skip",
+      "name": "Zebetite Glitch (Zeb Skip)",
+      "aliases": [
+        "Zeb Skip"
+      ],
+      "entry_type": "technique",
+      "summary": "Permite atravessar ou contornar as Zebetites de Tourian sem destruir todas as barreiras na ordem normal.",
+      "area": null,
+      "room": null,
+      "requirements": {
+        "status": "none",
+        "all_items": [],
+        "any_items": [],
+        "minimum_energy_tanks": null,
+        "minimum_reserve_tanks": null,
+        "maximum_current_energy": null,
+        "ammo": {},
+        "techniques": [],
+        "events": []
+      },
+      "acquisition": {
+        "status": "not_applicable",
+        "boss": null,
+        "miniboss": null,
+        "mechanism": null,
+        "event_type": null,
+        "event_target": null,
+        "normal_route_notes": null,
+        "prerequisite_events": [],
+        "bypass_possible": null,
+        "bypass_notes": null
+      },
+      "effects": [
+        "Permite atravessar ou contornar as Zebetites de Tourian sem destruir todas as barreiras na ordem normal."
+      ],
+      "uses": [],
+      "related_entries": [],
+      "tags": [
+        "technique"
+      ],
+      "source": []
+    }
+  ]
+}

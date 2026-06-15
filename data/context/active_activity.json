@@ -1,0 +1,19 @@
+{
+    "active": false,
+    "kind": "",
+    "domain": "",
+    "participants": [
+        "Neitan",
+        "Diana"
+    ],
+    "roles": {},
+    "rules": [],
+    "score": {
+        "Neitan": 0,
+        "Diana": 0
+    },
+    "round": 1,
+    "turn": "",
+    "last_action": "",
+    "expected_next_action": ""
+}

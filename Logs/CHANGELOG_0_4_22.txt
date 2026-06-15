@@ -1,0 +1,18 @@
+# CHANGELOG 0.4.22 — SELFHOOD_GRAMMAR_FIX
+
+## Objetivo
+
+Corrigir as 10 falhas da bateria v10 de 500 casos sem alterar a arquitetura base aprovada.
+
+## Implementado
+
+- `IdentityGuard` agora reconhece posse direta da Diana em ordem invertida: `seu editor é qual?`, `tua série é qual?`, `e o seu favorito?`.
+- Marcadores explícitos do owner (`meu`, `minha`, `eu`, `Natan`, `Neitan`) continuam tendo prioridade para OWNER.
+- `DialogueActGate` agora remove vocativos e intensificadores antes de classificar feedback curto.
+- `massa demais` e `ok diana` passam a ser tratados como `feedback_short`.
+- Style Dictionary recebeu aliases novos para o bordão “monstrinho de 2000 linhas segurando uma faca de plástico”.
+- `StyleDictionaryContext` passou a considerar contexts/meaning/examples como score secundário de busca.
+
+## Validação esperada
+
+- v10 500 casos: 500/500.

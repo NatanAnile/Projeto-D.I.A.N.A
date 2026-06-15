@@ -1,0 +1,6 @@
+Diana 0.4.17 — STT Variants Pass + Push-to-talk Right Ctrl
+
+- PUSH_TO_TALK_KEY alterado de "f" para "right ctrl".
+- stt/stt_custom_variants.json recebeu variações extraídas das duas passadas reais do texto de calibração STT V1.
+- QueryGate: frases explícitas como "não precisa consultar" agora não ativam consulta.
+- Mantido o foco fora do Knowledge local.

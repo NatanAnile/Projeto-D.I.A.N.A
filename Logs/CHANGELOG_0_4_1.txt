@@ -1,0 +1,11 @@
+# PROJETO DIANA 0.4.1 — FIDELIDADE ÀS FONTES
+
+- StyleRetriever não injeta estilo em saudações simples.
+- O campo use_when deixou de funcionar como gatilho amplo de busca de estilo.
+- Conhecimento recuperado passa ao prompt em campos estruturados.
+- Quando a fonte local é encontrada, a consulta é considerada resolvida.
+- A Diana não deve pedir o nome de uma entrada que já foi selecionada.
+- Proibido acrescentar efeitos, riscos, requisitos, números, locais ou consequências ausentes.
+- Pedidos aleatórios executam diretamente a entrada selecionada.
+- Validação pós-resposta corrige fugas explícitas como “preciso do nome”.
+- Planner e resumidor auxiliares continuam preparados e desativados.

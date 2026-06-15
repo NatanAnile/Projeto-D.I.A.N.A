@@ -1,0 +1,9 @@
+# Diana 0.4.20 — Dialogue Act / Target Router / Anti-Repetition
+
+- Adicionado `brain/dialogue_act_gate.py` para classificar feedback curto, pedido de piada, pergunta sobre Neitan e pergunta sobre a própria Diana.
+- Feedback curto após piada agora recebe resposta curta e com personalidade, sem repetir a piada ou o tema anterior.
+- Perguntas com `você/seu/sua/Diana` não puxam mais `owner.known_preferences`.
+- Perguntas sobre preferências da Diana recebem resposta de self-profile/persona, não fatos pessoais do Neitan.
+- Reforçada a regra: personalidade da Diana é essência full-time, não camada opcional.
+- Removido default hardcoded de `ELEVENLABS_VOICE_ID`; agora só via variável de ambiente.
+- Novo teste raiz: `test_continuidade_0_4_20_v9_dialogue_target_repetition.py`.

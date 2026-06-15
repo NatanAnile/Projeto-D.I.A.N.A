@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.pytest_cache/
+
+# Ambientes locais
+.env
+.venv/
+venv/
+env/
+
+# Saídas temporárias / runtime
+*.wav
+*.mp3
+output.wav
+last_output.wav
+*.log
+current_session.json.v*bak
+
+# Sistema
+.DS_Store
+Thumbs.db
