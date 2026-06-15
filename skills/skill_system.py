@@ -125,7 +125,6 @@ class SkillManager:
         turn_context = turn_context or {}
         capability = str(turn_context.get("requested_capability", "none")).lower().strip()
         confidence = float(turn_context.get("confidence", 0.0) or 0.0)
-
         # Em modo operacional, não entra CommentSkill.
         if self.is_operational(capability):
             if capability == "read_chat" and confidence >= self.MIN_SEMANTIC_CONFIDENCE:

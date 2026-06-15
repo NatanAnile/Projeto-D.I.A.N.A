@@ -46,6 +46,15 @@ class DialogueActGate:
     Ele não manda na personalidade da Diana. Ele só decide quando uma fala é
     feedback/backchannel, quando pergunta sobre a própria Diana e quando é
     melhor deixar o fluxo normal seguir.
+
+    MUDANÇAS 0.5.9:
+    - micro_ping não retorna mais resposta hardcoded do banco: vai ao LLM com
+      instrução curta de persona, garantindo variação real de personagem.
+    - _is_micro_ping ficou mais conservador: só captura entradas onde o texto
+      INTEIRO (excluindo vocativo) é um micro-ping, não quando é prefixo.
+    - _is_diana_self_query não mais retorna resposta hardcoded por palavra-chave:
+      repassa ao LLM com dialogue_target=DIANA_SELF para a Diana responder com
+      sua própria voz e contexto completo de persona.
     """
 
     FEEDBACK_EXACT = {
@@ -61,10 +70,15 @@ class DialogueActGate:
         "brabo", "braba", "daora", "maneiro", "nice"
     }
 
+    # Apenas palavras que isoladas (com vocativo no máximo) são micro-pings.
+    # NÃO incluir "oi" ou "opa" aqui: eles podem ser prefixo de pergunta real.
     MICRO_PING_EXACT = {
-        "ai", "ei", "opa", "oi", "olha", "hm", "hmm", "uhum", "aham",
-        "fala", "salve", "e ai", "eai", "eae", "e aí"
+        "ai", "ei", "hm", "hmm", "uhum", "aham",
+        "e ai", "eai", "eae", "e aí"
     }
+
+    # Saudações que podem ser micro-ping SÓ se o texto inteiro (sem vocativo) for isso.
+    GREETING_EXACT = {"oi", "opa", "olha", "fala", "salve"}
 
     MICRO_VOCATIVOS = {"diana", "di", "dinhana", "neitan", "natan"}
 
@@ -72,7 +86,7 @@ class DialogueActGate:
         "joke", "piada", "piadoca", "trocadilho", "humor", "churrasco"
     }
 
-    FEEDBACK_VOCATIVOS = {"diana", "diana", "tasca"}
+    FEEDBACK_VOCATIVOS = {"diana", "tasca"}
     FEEDBACK_INTENSIFICADORES = {"demais", "muito", "hein", "bagarai", "caramba"}
 
     def analyze(self, user_text, conv_history=None, turn_context=None):
@@ -80,12 +94,14 @@ class DialogueActGate:
         turn_context = turn_context or {}
         intent_hint = str(turn_context.get("input_intent_hint", "") or "").strip()
 
+        # micro_ping: detectado pelo firewall ou classificado aqui.
+        # NÃO retorna mais resposta hardcoded — vai ao LLM com instrução curta.
         if intent_hint == "micro_ping" or self._is_micro_ping(text):
             return DialogueActResult(
                 act="micro_ping",
                 target=TARGET_OWNER,
-                direct_response=self._micro_ping_response(text),
-                reason="microentrada/backchannel curto — fast-path sem LLM",
+                direct_response="",   # LLM responde com instrução de persona
+                reason="microentrada/backchannel curto — LLM com instrução curta",
             )
 
         if self._is_session_history_query(text):
@@ -130,12 +146,14 @@ class DialogueActGate:
                 reason="crítica à última resposta da própria Diana",
             )
 
+        # Preferências da Diana: vai ao LLM com target DIANA_SELF.
+        # A resposta é gerada com personalidade completa, sem hardcode por palavra-chave.
         if self._is_diana_self_query(text):
             return DialogueActResult(
                 act="diana_self_query",
                 target=TARGET_DIANA_SELF,
-                direct_response=self._self_preference_response(text, conv_history=conv_history),
-                reason="pergunta usa você/seu/sua e mira a própria Diana",
+                direct_response="",   # LLM responde com persona completa
+                reason="pergunta sobre a própria Diana — LLM com target DIANA_SELF",
             )
 
         if self._is_feedback_short(text, conv_history=conv_history):
@@ -209,8 +227,6 @@ class DialogueActGate:
         if re.fullmatch(r"k{2,}k*|ha(ha)+|he(he)+", clean_text):
             return True
 
-        # Risada/reação curta com eco de uma palavra da fala anterior, ex.:
-        # "essa troça kkkkkkk". Não deve manter retrieval ativo nem chamar LLM.
         if len(clean_text) <= 90 and re.search(r"k{3,}|ha(ha)+|he(he)+", clean_text):
             return True
 
@@ -235,20 +251,31 @@ class DialogueActGate:
         return bool(command_marker)
 
     def _is_micro_ping(self, text):
+        """Micro-ping conservador: só captura quando o texto INTEIRO (sem vocativo) é ping.
+
+        Evita engolir "oi, qual é o bug" como micro-ping só pelo primeiro token.
+        """
         if not text:
             return False
         clean = str(text or "").strip()
+
+        # Exact match direto
         if clean in self.MICRO_PING_EXACT:
             return True
+
+        # Remove vocativos e testa novamente
         tokens = clean.split()
-        no_vocative = [token for token in tokens if token not in self.MICRO_VOCATIVOS]
-        if " ".join(no_vocative).strip() in self.MICRO_PING_EXACT:
+        no_vocative = [t for t in tokens if t not in self.MICRO_VOCATIVOS]
+        stripped = " ".join(no_vocative).strip()
+
+        if stripped in self.MICRO_PING_EXACT:
             return True
-        if len(tokens) <= 4:
-            if tokens and tokens[0] in {"oi", "opa", "salve"}:
-                return True
-            if len(tokens) >= 2 and tokens[0] == "e" and tokens[1] == "ai":
-                return True
+
+        # Saudações só são micro-ping se o texto INTEIRO (sem vocativo) for só a saudação
+        # e não houver nada mais depois (ex: "oi" sim, "oi qual o bug" não)
+        if stripped in self.GREETING_EXACT and len(no_vocative) <= 1:
+            return True
+
         return False
 
     def _is_session_history_query(self, text):
@@ -341,8 +368,6 @@ class DialogueActGate:
         if not text:
             return False
 
-        # Prioridade forte para pergunta direcionada à Diana, mesmo que o
-        # usuário complemente com "o meu é X" na mesma frase.
         if re.search(r"\bqual\s+(?:e\s+)?(?:o|a)?\s*(?:seu|sua|teu|tua)\b.{0,80}\bfavorit", text):
             return True
 
@@ -361,11 +386,9 @@ class DialogueActGate:
         if not text:
             return False
 
-        # Pedido criativo continua sendo pedido criativo.
         if self._asks_joke(text):
             return False
 
-        # Crítica de humor não é correção factual.
         if re.search(r"\b(piada|trocadilho)\b", text) and re.search(r"\b(ruim|horrivel|pessim[ao]|fraca|sem\s+graca|podre)\b", text):
             return False
 
@@ -390,8 +413,6 @@ class DialogueActGate:
         if not text:
             return False
 
-        # Pedido explícito de piada ruim continua sendo pedido criativo,
-        # não crítica à resposta anterior.
         if self._asks_joke(text):
             return False
 
@@ -450,12 +471,9 @@ class DialogueActGate:
         if mentions_subject:
             return True
 
-        # Frases curtas de rejeição costumam ser avaliação direta da última fala.
         if re.fullmatch(r"(?:nada\s+a\s+ver|que\s+ruim|bem\s+ruim|muito\s+ruim)", text):
             return True
 
-        # Quando a última fala foi uma piada, críticas curtas como "foi ruim",
-        # "bem ruim" ou "nossa que ruim" também pertencem à resposta anterior.
         if self._last_assistant_was_joke(conv_history) and len(text) <= 60:
             return True
 
@@ -477,34 +495,5 @@ class DialogueActGate:
             return choose_response("feedback_short_joke", text)
         return choose_response("feedback_short_general", text)
 
-    def _micro_ping_response(self, text):
-        return choose_response("micro_ping", text)
-
     def _joke_response(self, text):
         return get_joke_response(text)
-
-    def _self_preference_response(self, text, conv_history=None):
-        history_blob = ""
-        if conv_history and getattr(conv_history, "history", None):
-            recent = conv_history.history[-3:]
-            history_blob = " ".join(
-                (str(item.get("user", "")) + " " + str(item.get("assistant", "")))
-                for item in recent
-                if isinstance(item, dict)
-            )
-        context = normalize_text(str(text or "") + " " + history_blob)
-
-        if "jaeger" in context or "pacific rim" in context:
-            return "Meu Jaeger favorito? Eu iria de Cherno Alpha pela energia de geladeira soviética pronta pra sair no soco. Gipsy Danger é clássico, mas eu sou naturalmente suspeita por coisa esquisita."
-
-        if "filme" in text:
-            return "Eu curto terror espacial e ficção científica esquisita. Favorito cravado eu ainda não tenho, mas Alien fica rondando minha prateleira mental feito bicho folgado."
-        if "jogo" in text:
-            return "Eu gosto de jogo que dá margem pra caos controlado, rota torta e comentário atravessado. Favorito cravado meu ainda não está salvo."
-        if "comida" in text:
-            return "Eu não como, criatura. Mas se comesse, seria algo dramaticamente crocante só pra fazer barulho em momento inadequado."
-        if "editor" in text or "ferramenta" in text:
-            return "Eu ainda não tenho ferramenta favorita minha. Mas qualquer uma que não trave no export já começa com vantagem nessa rinha."
-        if "serie" in text or "série" in text:
-            return "Eu puxo mais pra ficção estranha, terror espacial e coisa com clima errado. Série favorita minha ainda não está cravada."
-        return "Eu tenho preferências de Diana, sim: caos útil, deboche bem aplicado e nenhuma vontade de virar assistente corporativa de sapatinho liso."

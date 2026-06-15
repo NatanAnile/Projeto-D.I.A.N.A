@@ -51,6 +51,12 @@ class OutputFirewall:
         return text
 
     def _trim_trailing_cta(self, text):
+        """Remove CTA genérico automático do final da resposta.
+
+        Conservador: só poda se a última frase for CTA puro sem conteúdo de
+        personagem. Não poda se tiver deboche, ironia ou referência de persona
+        (palavras como 'caos', 'goblin', 'patifaria', 'gambiarra' etc).
+        """
         text = str(text or "").strip()
         if not text:
             return text
@@ -61,6 +67,15 @@ class OutputFirewall:
 
         last = parts[-1].strip()
         last_norm = last.lower()
+
+        # Não poda se tiver marcadores de personagem — provavelmente é deboche intencional.
+        persona_markers = [
+            "caos", "goblin", "patifaria", "gambiarra", "fuleiro", "bagunc",
+            "zureta", "trocadilho", "piada", "deboch", "travess", "teimos"
+        ]
+        if any(m in last_norm for m in persona_markers):
+            return text
+
         if any(re.search(pattern, last_norm) for pattern in self.CTA_PATTERNS):
             return " ".join(parts[:-1]).strip()
         return text

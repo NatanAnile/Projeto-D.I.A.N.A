@@ -6,10 +6,17 @@
 
 """Respostas determinísticas curtas para atos de diálogo.
 
-Este módulo mantém respostas rápidas fora do DialogueActGate para evitar que o
-roteador vire um monstrinho de 2000 linhas segurando uma faca de plástico.
-As respostas continuam sem chamar LLM, mas ganham variedade suficiente para live.
+ARQUITETURA:
+- Cada categoria tem variantes suficientes para evitar repetição perceptível.
+- choose_response usa seleção por hash com salt temporal para evitar que o
+  mesmo texto produza sempre o mesmo índice entre sessões distintas.
+- micro_ping foi REMOVIDO deste banco: respostas de saudação/backchannel agora
+  vão ao LLM com instrução curta, para ter variação real de personagem.
+- _self_preference_response foi REMOVIDO daqui: preferências da Diana agora
+  vão ao LLM com contexto de persona, não hardcode fixo por palavra-chave.
 """
+
+import time
 
 RESPONSE_BANK = {
     "feedback_negative_joke": [
@@ -98,19 +105,6 @@ RESPONSE_BANK = {
         "Fechou. O caos está em modo de espera, mas respirando.",
         "Registrado. Sem palestra, sem sermão, só Diana funcionando na gambiarra elegante.",
     ],
-    "micro_ping": [
-        "Fala, seu fuleiro.",
-        "Desembucha, criatura.",
-        "Manda. Estou ouvindo com 40% de atenção e 60% de julgamento.",
-        "Solta. Mas se for bomba, pelo menos joga com estilo.",
-        "Pode falar, mas já cheguei desconfiada.",
-        "Tô aqui. Infelizmente para o sossego do sistema.",
-        "Vai, despeja a treta.",
-        "Opa. Qual é a patifaria da vez?",
-        "A Diana está ouvindo, e isso já devia te preocupar.",
-        "Fala logo antes que eu finja que estava ocupada.",
-    ],
-
     "behavior_boundary_feedback": [
         "Tá, verdade. Eu puxei contexto do lado errado. O alvo era Diana, não Neitan. Erro meu, goblin recolhendo o cabo.",
         "Boa chamada. Eu fui caçar memória sua quando a pergunta era pra mim. Vou parar de enfiar owner facts onde não foram convidados.",
@@ -134,13 +128,17 @@ RESPONSE_BANK = {
         "Pelo meu ledger, a primeira mensagem sua nesta sessão foi: '{value}'.",
         "Está registrado na ata da bagunça: você começou com '{value}'.",
     ],
-
 }
+
+
+# Salt temporal: muda a cada hora, quebrando repetição entre sessões sem depender de estado persistente.
+_SESSION_SALT = int(time.time()) // 3600
 
 
 def choose_response(category, seed_text=""):
     options = RESPONSE_BANK.get(category) or RESPONSE_BANK.get("feedback_short_general") or [""]
-    idx = sum(ord(ch) for ch in str(seed_text or "")) % len(options)
+    raw = sum(ord(ch) for ch in str(seed_text or ""))
+    idx = (raw + _SESSION_SALT) % len(options)
     return options[idx]
 
 

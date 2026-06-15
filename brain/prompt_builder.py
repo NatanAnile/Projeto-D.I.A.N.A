@@ -66,7 +66,7 @@ class PromptBuilder:
         self.last_query_plan = query_plan
         retrieved = self.context_retriever.retrieve(user_text, history_text=history_context, query_plan=query_plan)
         self.last_retrieval = retrieved
-        task = self._derive_task(user_text, capability, retrieved)
+        task = self._derive_task(user_text, capability, retrieved, turn_context=turn_context)
 
         parts = []
 
@@ -235,11 +235,33 @@ class PromptBuilder:
         except Exception:
             return ""
 
-    def _derive_task(self, user_text, capability, retrieved=None):
+    def _derive_task(self, user_text, capability, retrieved=None, turn_context=None):
 
         text = str(user_text or "").strip()
         lower = text.lower()
         retrieved = retrieved or {}
+        turn_context = turn_context or {}
+        dialogue_act = str(turn_context.get("dialogue_act", "") or "")
+
+        # micro_ping sem direct_response: resposta curtíssima em personagem.
+        # Sem saudação pronta, sem frase de banco — o LLM gera variação real.
+        if dialogue_act == "micro_ping":
+            return (
+                "Responder como a Diana responderia a um backchannel/saudação curta: "
+                "uma linha, no máximo duas, com personalidade travessa e sem frase de boas-vindas genérica. "
+                "Não use 'Olá', 'Oi', 'Oii' nem qualquer saudação padrão de chatbot. "
+                "Reaja com energia de quem estava ocupada e foi interrompida — debochada, direta, sem drama."
+            )
+
+        # diana_self_query sem direct_response: Diana responde sobre si mesma com persona completa.
+        # Sem hardcode por palavra-chave — o LLM tem o system prompt completo da Diana.
+        if dialogue_act == "diana_self_query":
+            return (
+                "A pergunta é sobre a própria Diana, não sobre Neitan. "
+                "Responda como a Diana responderia sobre si mesma: com personalidade, opinião real ou assumida, "
+                "sem inventar fato externo e sem responder com dado pessoal do Neitan. "
+                "Se não tiver preferência definida, admita com estilo — mas nunca responda igual a um FAQ."
+            )
 
         operation = retrieved.get("knowledge_operation", "")
 

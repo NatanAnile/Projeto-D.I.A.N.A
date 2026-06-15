@@ -194,19 +194,5 @@ EXPRESSION_RULES = {
         ]
     },
 
-    "PREENCHER ESSA BOSTA": {
-        "significado": "PREENCHER ESSA BOSTA",
 
-        "funcoes": [
-            "PREENCHER_ESSA_BOSTA"
-        ],
-
-        "tom": [
-            "PREENCHER_ESSA_BOSTA"
-        ],
-
-        "exemplos": [
-            "PREENCHER ESSA BOSTA"
-        ]
-    }
 }

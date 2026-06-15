@@ -133,7 +133,7 @@ class InputFirewall:
                 source=source,
                 quality="MICRO",
                 intent_hint="micro_ping",
-                allow_llm=False,
+                allow_llm=True,   # LLM responde com instrução curta de persona (sem banco fixo)
                 allow_memory=False,
                 allow_retrieval=False,
                 reason="microentrada/backchannel curto",

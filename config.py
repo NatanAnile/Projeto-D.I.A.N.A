@@ -255,7 +255,7 @@ KNOWLEDGE_RETRIEVAL_LIMIT = 0
 # 🧩 DIANA 0.4 — MODELOS AUXILIARES
 # =========================
 
-PROJECT_VERSION = "0.5.8"
+PROJECT_VERSION = "0.5.9"
 
 # Os modelos auxiliares ficam DESATIVADOS por padrão.
 # Quando forem ativados, use outra instância do Ollama/porta para poder

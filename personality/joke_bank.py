@@ -19,6 +19,7 @@ Categorias:
 """
 
 import re
+import time
 import unicodedata
 
 JOKE_BANK = {
@@ -222,17 +223,21 @@ def _format_joke(entry):
     return f"{setup} {punchline} — {reaction}"
 
 
-def pick_joke(category=None, seed_text=""):
-    """Escolhe uma piada do banco de forma determinística.
+_SESSION_SALT = int(time.time()) // 3600
 
-    Pedido genérico fica em joke_generic. Categoria específica só entra quando
-    detectada explicitamente pelo texto.
+
+def pick_joke(category=None, seed_text=""):
+    """Escolhe uma piada do banco com variação real entre sessões.
+
+    Usa salt temporal (muda a cada hora) combinado com hash do texto,
+    evitando que o mesmo pedido produza sempre a mesma piada.
     """
     if category not in JOKE_BANK:
         category = "joke_generic"
 
     pool = JOKE_BANK[category]
-    joke_idx = (sum(ord(ch) for ch in str(seed_text or "")) // max(len(pool), 1)) % len(pool)
+    raw = sum(ord(ch) for ch in str(seed_text or ""))
+    joke_idx = (raw + _SESSION_SALT) % len(pool)
     return _format_joke(pool[joke_idx])
 
 
