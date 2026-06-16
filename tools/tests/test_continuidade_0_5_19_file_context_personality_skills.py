@@ -29,7 +29,7 @@ def check(name, condition):
 
 
 # Versão
-check("versao_0_5_19", PROJECT_VERSION == "0.5.19")
+check("versao_0_5_19_ou_superior", PROJECT_VERSION in {"0.5.19", "0.5.20"})
 
 # IntentRouter: typos, listagem, escolha e follow-up de arquivo
 intent_cases = {

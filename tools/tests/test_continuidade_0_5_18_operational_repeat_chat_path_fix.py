@@ -31,7 +31,7 @@ def main():
     checks = []
 
     config = read("config.py")
-    checks.append(("versao_0_5_18_ou_superior", 'PROJECT_VERSION = "0.5.18"' in config or 'PROJECT_VERSION = "0.5.19"' in config))
+    checks.append(("versao_0_5_18_ou_superior", 'PROJECT_VERSION = "0.5.18"' in config or 'PROJECT_VERSION = "0.5.19"' in config or 'PROJECT_VERSION = "0.5.20"' in config or 'PROJECT_VERSION = "0.5.20"' in config))
 
     # Router: perguntas equivalentes sobre chat precisam virar skill operacional.
     from runtime.intent_router import detect_capability
@@ -105,7 +105,7 @@ def main():
     checks.append(("read_response_nao_usa_idle", calls["idle"] == 0))
 
     workflow = read(".github/workflows/tests.yml")
-    checks.append(("workflow_teste_atual", "test_continuidade_0_5_19_file_context_personality_skills.py" in workflow))
+    checks.append(("workflow_teste_atual", "test_continuidade_0_5_20_identity_gender_guard.py" in workflow))
 
     failed = [name for name, ok in checks if not ok]
     if failed:

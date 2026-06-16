@@ -1,0 +1,25 @@
+# VALIDATION — IDENTITY / GENDER GUARD — D.I.A.N.A. 0.5.20
+
+Comandos executados:
+
+python -m compileall -q .
+python tools/tests/test_continuidade_0_5_17_hostmode_read_response_auto.py
+python tools/tests/test_continuidade_0_5_18_operational_repeat_chat_path_fix.py
+python tools/tests/test_continuidade_0_5_19_file_context_personality_skills.py
+python tools/tests/test_continuidade_0_5_20_identity_gender_guard.py
+
+Resultados:
+
+OK — compileall concluído sem erros.
+OK — 7/7 checks passaram.
+OK — 20/20 checks passaram.
+OK — 25/25 checks passaram.
+OK — 14/14 checks passaram.
+
+Cobertura principal:
+
+- Constituição inclui identidade feminina fixa.
+- PromptBuilder injeta o bloco de identidade.
+- IdentityGuard detecta inversão de papel.
+- OutputFirewall e ResponseCleaner bloqueiam "sou o criador" e "posso te reativar".
+- Autorreferência masculina simples é corrigida para feminino.

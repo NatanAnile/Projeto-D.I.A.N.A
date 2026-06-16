@@ -6,6 +6,8 @@
 
 import re
 
+from brain.identity_guard import enforce_diana_identity
+
 
 class ResponseCleaner:
 
@@ -205,6 +207,7 @@ class ResponseCleaner:
         text = self.remover_cjk(text)
         text = self.remover_markdown_excessivo(text)
         text = self.substituir_expressoes_ruins(text)
+        text = enforce_diana_identity(text)
         text = self.remover_ingles_solto(text)
         text = self.remover_linhas_meta(text)
         text = self.remover_acoes_asterisco(text, mode)
@@ -240,6 +243,7 @@ class ResponseCleaner:
         text = self.remover_prefixos_de_fala(text)
         text = self.remover_artefatos_llm(text)
         text = self.substituir_expressoes_ruins(text)
+        text = enforce_diana_identity(text)
         text = self.remover_frases_proibidas(text)
         text = self.limpar_pontuacao(text)
         text = self.limpar_espacos(text)

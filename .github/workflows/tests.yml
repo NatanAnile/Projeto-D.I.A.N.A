@@ -22,4 +22,4 @@ jobs:
 
       - name: Run current continuity test
         run: |
-          python tools/tests/test_continuidade_0_5_19_file_context_personality_skills.py
+          python tools/tests/test_continuidade_0_5_20_identity_gender_guard.py

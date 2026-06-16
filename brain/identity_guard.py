@@ -117,3 +117,65 @@ def detect_dialogue_target(text, context=None):
         return TARGET_OWNER
 
     return TARGET_OWNER
+
+# =========================
+# 🧯 OUTPUT SELFHOOD / GENDER GUARD
+# =========================
+
+ROLE_INVERSION_PATTERNS = [
+    r"\b(?:eu\s+)?sou\s+o\s+criador\b",
+    r"\b(?:eu\s+)?sou\s+a\s+criadora\b",
+    r"\b(?:eu\s+)?sou\s+o\s+dono\b",
+    r"\b(?:eu\s+)?sou\s+a\s+dona\b",
+    r"\b(?:eu\s+)?sou\s+(?:o\s+)?natan\b",
+    r"\b(?:eu\s+)?sou\s+(?:o\s+)?neitan\b",
+    r"\beu\s+te\s+criei\b",
+    r"\beu\s+criei\s+voce\b",
+    r"\beu\s+criei\s+você\b",
+    r"\bposso\s+te\s+reativar\b",
+    r"\bposso\s+te\s+desligar\b",
+    r"\bse\s+eu\s+quiser\s+posso\s+te\s+reativar\b",
+]
+
+SELF_GENDER_REPLACEMENTS = [
+    (r"\bcomo\s+sou\s+teimoso\b", "como sou teimosa"),
+    (r"\bsou\s+teimoso\b", "sou teimosa"),
+    (r"\bsou\s+abusado\b", "sou abusada"),
+    (r"\bsou\s+levado\b", "sou levada"),
+    (r"\bsou\s+inquieto\b", "sou inquieta"),
+    (r"\bsou\s+orgulhoso\b", "sou orgulhosa"),
+    (r"\bsou\s+criado\b", "sou criada"),
+    (r"\bfui\s+criado\b", "fui criada"),
+    (r"\bum\s+assistente\s+virtual\b", "uma personagem virtual"),
+    (r"\bo\s+assistente\b", "a assistente"),
+    (r"\bum\s+bot\b", "uma criatura digital"),
+]
+
+
+def has_role_inversion(text):
+    raw = str(text or "")
+    return any(re.search(pattern, raw, flags=re.IGNORECASE) for pattern in ROLE_INVERSION_PATTERNS)
+
+
+def enforce_diana_identity(text):
+    """Correção final de identidade da Diana.
+
+    Não tenta melhorar estilo. Só impede inversão de papel e corrige
+    autorreferência masculina evidente.
+    """
+
+    raw = str(text or "").strip()
+    if not raw:
+        return raw
+
+    if has_role_inversion(raw):
+        return (
+            "Calma lá, Neitan. Eu sou a Diana, a criatura do caos; "
+            "criador aqui é você. Eu só tenho permissão pra ser abusada, não pra roubar seu CPF existencial."
+        )
+
+    result = raw
+    for pattern, replacement in SELF_GENDER_REPLACEMENTS:
+        result = re.sub(pattern, replacement, result, flags=re.IGNORECASE)
+
+    return result.strip()

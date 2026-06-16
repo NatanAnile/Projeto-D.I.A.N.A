@@ -6,6 +6,8 @@
 
 import re
 
+from brain.identity_guard import enforce_diana_identity
+
 
 class OutputFirewall:
     """Filtro final de persona.
@@ -37,6 +39,7 @@ class OutputFirewall:
         for pattern, replacement in self.NAME_REPLACEMENTS.items():
             result = re.sub(pattern, replacement, result, flags=re.IGNORECASE)
         result = self._sanitize_file_paths(result)
+        result = enforce_diana_identity(result)
         result = self._strip_verbal_tics(result)
         result = self._strip_emojis(result)
         result = self._trim_trailing_cta(result)

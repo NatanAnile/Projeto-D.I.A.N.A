@@ -1,0 +1,40 @@
+# CHANGELOG — D.I.A.N.A. 0.5.20 IDENTITY_GENDER_GUARD
+
+Base: 0.5.19_FILE_CONTEXT_PERSONALITY_SKILLS_FIX
+
+## Objetivo
+
+Corrigir bug crítico de identidade/selfhood: a LLM confundia o papel da Diana com o papel do Neitan/Natan e usava gênero masculino em autorreferência.
+
+## Correções
+
+- Reforçado contrato de identidade em brain/constitution.py.
+- Adicionado guard determinístico em brain/identity_guard.py.
+- OutputFirewall aplica enforce_diana_identity antes da entrega final.
+- ResponseCleaner também aplica enforce_diana_identity para cobrir Host Mode e fluxos que usam apenas cleaner.
+- Bloqueio de frases de inversão de papel:
+  - sou o criador
+  - sou o dono
+  - eu te criei
+  - posso te reativar
+  - posso te desligar
+  - sou Natan/Neitan
+- Correções de autorreferência feminina:
+  - sou teimoso -> sou teimosa
+  - fui criado -> fui criada
+  - sou criado -> sou criada
+  - sou abusado -> sou abusada
+
+## Arquivos alterados
+
+- brain/constitution.py
+- brain/identity_guard.py
+- runtime/output_firewall.py
+- utils/response_cleaner.py
+- config.py
+- README.md
+- .github/workflows/tests.yml
+- tools/tests/test_continuidade_0_5_17_hostmode_read_response_auto.py
+- tools/tests/test_continuidade_0_5_18_operational_repeat_chat_path_fix.py
+- tools/tests/test_continuidade_0_5_19_file_context_personality_skills.py
+- tools/tests/test_continuidade_0_5_20_identity_gender_guard.py

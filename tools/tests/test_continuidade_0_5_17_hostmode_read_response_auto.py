@@ -32,7 +32,7 @@ def main():
     checks = []
 
     config = read("config.py")
-    checks.append(("versao_0_5_17_ou_superior", 'PROJECT_VERSION = "0.5.17"' in config or 'PROJECT_VERSION = "0.5.18"' in config or 'PROJECT_VERSION = "0.5.19"' in config))
+    checks.append(("versao_0_5_17_ou_superior", 'PROJECT_VERSION = "0.5.17"' in config or 'PROJECT_VERSION = "0.5.18"' in config or 'PROJECT_VERSION = "0.5.19"' in config or 'PROJECT_VERSION = "0.5.20"' in config or 'PROJECT_VERSION = "0.5.20"' in config or 'PROJECT_VERSION = "0.5.20"' in config))
 
     from integrations.chat_host_mode import ChatHostMode
 
@@ -91,7 +91,7 @@ def main():
 
     # README/workflow atualizados.
     workflow = read(".github/workflows/tests.yml")
-    checks.append(("workflow_teste_atual", "test_continuidade_0_5_19_file_context_personality_skills.py" in workflow))
+    checks.append(("workflow_teste_atual", "test_continuidade_0_5_20_identity_gender_guard.py" in workflow))
 
     failed = [name for name, ok in checks if not ok]
     if failed:
