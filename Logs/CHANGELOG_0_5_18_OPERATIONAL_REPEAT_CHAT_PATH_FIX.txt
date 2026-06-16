@@ -1,0 +1,36 @@
+# Diana 0.5.18 — OPERATIONAL_REPEAT_CHAT_PATH_FIX
+
+Base: 0.5.17_HOSTMODE_READ_RESPONSE_AUTO_FIX
+
+Correções principais:
+
+- runtime/intent_router.py
+  - ampliada a detecção de pedidos equivalentes de chat.
+  - agora frases como "Consegue ver o chat?", "ve o chat pra mim" e "tem mensagem no chat?" ativam read_chat.
+  - adicionada capability repeat_last_operational_task para comandos como "tenta de novo", "faz de novo", "repete" e "mais uma vez".
+
+- skills/read_chat_skill.py
+  - detecção local de pedido de chat agora usa normalização sem acento.
+  - resposta de chat vazio não expõe mais caminho absoluto.
+  - fala final usa apenas o nome do arquivo, exemplo: live_chat.txt.
+
+- runtime/output_firewall.py
+  - adicionada sanitização final de caminhos absolutos Windows/Linux.
+  - se alguma skill vazar caminho completo, o output final mantém só o nome do arquivo.
+
+- brain/session_context.py
+  - adicionada memória de palco leve para última tarefa operacional.
+  - novo campo current_session.last_operational_task.
+
+- Diana.py
+  - registra última skill operacional repetível após execução direta.
+  - "tenta de novo" reexecuta a última skill operacional no mesmo turno, sem cair na LLM normal.
+  - replay operacional cobre read_chat, read_file e read_screen.
+
+- skills/skill_system.py / utils/response_cleaner.py
+  - repeat_last_operational_task reconhecida como capability operacional.
+
+Validação:
+
+- python -m compileall -q .: OK.
+- tools/tests/test_continuidade_0_5_18_operational_repeat_chat_path_fix.py: OK — 20/20 checks.

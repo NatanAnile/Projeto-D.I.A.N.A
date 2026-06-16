@@ -79,7 +79,8 @@ class SessionContext:
             "owner_session_preferences": {},
             "diana_session_notes": [],
             "style_feedback": [],
-            "last_topics": []
+            "last_topics": [],
+            "last_operational_task": None
         }
 
     # =========================
@@ -150,6 +151,48 @@ class SessionContext:
 
         lista.append(value)
         self.current[key] = lista[-limit:]
+
+    # =========================
+    # 🔁 ÚLTIMA TAREFA OPERACIONAL
+    # =========================
+
+    def set_last_operational_task(self, capability, user_text, payload=None):
+
+        capability = str(capability or "none").lower().strip()
+        user_text = str(user_text or "").strip()
+
+        if capability in ["", "none", "repeat_last_operational_task"]:
+            return
+
+        self.current["last_operational_task"] = {
+            "capability": capability,
+            "user_text": user_text,
+            "payload": payload or {}
+        }
+
+        self.save_current_session()
+
+    def get_last_operational_task(self):
+
+        task = self.current.get("last_operational_task")
+
+        if not isinstance(task, dict):
+            return None
+
+        capability = str(task.get("capability", "none") or "none").lower().strip()
+        user_text = str(task.get("user_text", "") or "").strip()
+
+        if capability in ["", "none", "repeat_last_operational_task"]:
+            return None
+
+        if not user_text:
+            return None
+
+        return {
+            "capability": capability,
+            "user_text": user_text,
+            "payload": task.get("payload") if isinstance(task.get("payload"), dict) else {}
+        }
 
     # =========================
     # 🧠 CONTEXTO PARA PROMPT

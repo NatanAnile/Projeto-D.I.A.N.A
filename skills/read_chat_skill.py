@@ -5,6 +5,8 @@
 # =========================
 
 from pathlib import Path
+import re
+import unicodedata
 
 from config import PROJECT_ROOT, CHAT_LOG_PATH, CHAT_READ_LAST_LINES, CHAT_BOT_USERS
 
@@ -30,40 +32,52 @@ class ReadChatSkill(BaseSkill):
         self.last_context = ""
 
     # =========================
+    # 🧼 NORMALIZAÇÃO LOCAL
+    # =========================
+
+    def normalizar_texto(self, text):
+
+        text = str(text or "").lower().strip()
+        text = unicodedata.normalize("NFD", text)
+        text = "".join(ch for ch in text if unicodedata.category(ch) != "Mn")
+        text = re.sub(r"[^a-z0-9_!.+\- /]+", " ", text)
+        text = re.sub(r"\s+", " ", text).strip()
+        return text
+
+    def nome_arquivo_visivel(self):
+
+        return self.chat_log_path.name
+
+    # =========================
     # 🔎 DETECTAR PEDIDO
     # =========================
 
     def detectar_pedido(self, user_text):
 
-        texto = user_text.lower().strip()
+        texto = self.normalizar_texto(user_text)
+
+        chat_terms = r"(?:chat|live chat|mensagem|mensagens|bate papo|bate-papo)"
+        action_terms = (
+            r"(?:le|leia|ler|ve|ver|olha|olhar|resuma|resume|resumir|"
+            r"confere|conferir|checa|checar|consulta|consultar|"
+            r"verifica|verificar|mostra|mostrar)"
+        )
+
+        if re.search(r"\b" + action_terms + r"\b.*\b" + chat_terms + r"\b", texto):
+            return True
 
         gatilhos = [
-            "lê o chat",
-            "le o chat",
-            "ler o chat",
-            "leia o chat",
-            "olha o chat",
-            "o que o chat falou",
-            "o que o chat disse",
-            "o que estão falando no chat",
-            "o que estao falando no chat",
-            "tem algo no chat",
-            "tem mensagem no chat",
-            "tem mensagens no chat",
-            "confere o chat",
-            "checa o chat",
-            "responde o chat",
-            "responda o chat",
-            "vê o chat",
-            "ve o chat"
+            r"\bconsegue\s+(ver|ler|checar|conferir|acessar)\b.*\b" + chat_terms + r"\b",
+            r"\b" + chat_terms + r"\b.*\b(tem|falou|disse|mandou|enviou|chegou|mexeu)\b",
+            r"\btem\s+(algo|alguma\s+coisa|mensagem|mensagens)\s+(no|do)\s+chat\b",
+            r"\bve\s+se\s+tem\b.*\b" + chat_terms + r"\b",
+            r"\bverifica\s+se\s+tem\b.*\b" + chat_terms + r"\b",
+            r"\bo\s+que\s+o\s+chat\s+(falou|disse|mandou)\b",
+            r"\bo\s+que\s+(estao|tao)\s+falando\s+no\s+chat\b",
+            r"\balguem\s+(falou|disse|mandou|perguntou)\b.*\bchat\b",
         ]
 
-        for gatilho in gatilhos:
-
-            if gatilho in texto:
-                return True
-
-        return False
+        return any(re.search(gatilho, texto) for gatilho in gatilhos)
 
     # =========================
     # 🧭 MODO DE LEITURA
@@ -352,7 +366,7 @@ class ReadChatSkill(BaseSkill):
             print("💬 Chat log lido:", str(self.chat_log_path), "| linhas=0")
             return (
                 "Ainda não encontrei mensagens recentes do chat. "
-                "Arquivo lido: " + str(self.chat_log_path)
+                "Arquivo lido: " + self.nome_arquivo_visivel()
             )
 
         print("🧩 Skill direta ativada: ReadChatSkill")

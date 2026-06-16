@@ -1,0 +1,53 @@
+# CHANGELOG — D.I.A.N.A. 0.5.19 FILE_CONTEXT_PERSONALITY_SKILLS_FIX
+
+Base: 0.5.18_OPERATIONAL_REPEAT_CHAT_PATH_FIX
+
+## Objetivo
+
+Corrigir falhas de roteamento/continuidade em leitura de arquivos e reinterpretar CommentSkill como camada dinâmica de comentário/persona, usando skill_actions.json como fonte das ações.
+
+## Correções de arquivo
+
+- Ampliada detecção de read_file no runtime/intent_router.py.
+- Corrigidas variações de STT/typo: arrtigo, artgo, ecolhe, rquivo, voc~e.
+- "artigo científico" agora ativa read_file mesmo sem a palavra "arquivo".
+- "mas e arquivos? quais tem?" agora lista arquivos reais de data/read_files.
+- "escolhe um arquivo pra ler" agora escolhe um arquivo real e lê no mesmo turno.
+- Follow-up como "Agora me diga o que você entendeu desse arquivo" usa o último arquivo lido como contexto.
+- Adicionado bridge InputFirewall.intent_hint -> requested_capability para não perder hints operacionais.
+- Adicionado fail-safe operacional para impedir LLM de inventar arquivo quando skill/contexto não resolver.
+- ResponseCleaner preserva extensões como .txt em respostas operacionais.
+
+## Correções de personalidade/comentários
+
+- CommentSkill deixa de ser tratado como skill de personalidade específica.
+- Log agora usa: "Skill de personalidade executada -> <ação>".
+- Ações de comentário/persona são carregadas de skills/skill_actions.json.
+- Ampliado skill_actions.json com mais ações reais: improvisar_caos, assumir_chute, pedir_algo, chamar_de_velho, etc.
+- Seleção de ações ficou mais dinâmica e com anti-vício leve contra repetição recente.
+- CommentSkill não entra em tarefa operacional ambígua com capability none.
+
+## Remoções
+
+- Removido skills/game_context_skill.py.
+- Removido skills/style_skill.py.
+- Removidos imports e fluxo dessas skills em skills/skill_system.py.
+
+## Arquivos alterados
+
+- Diana.py
+- config.py
+- README.md
+- .github/workflows/tests.yml
+- runtime/input_firewall.py
+- runtime/intent_router.py
+- utils/response_cleaner.py
+- skills/comment_skill.py
+- skills/read_file_skill.py
+- skills/skill_actions.json
+- skills/skill_system.py
+- skills/game_context_skill.py [removido]
+- skills/style_skill.py [removido]
+- tools/tests/test_continuidade_0_5_17_hostmode_read_response_auto.py
+- tools/tests/test_continuidade_0_5_18_operational_repeat_chat_path_fix.py
+- tools/tests/test_continuidade_0_5_19_file_context_personality_skills.py

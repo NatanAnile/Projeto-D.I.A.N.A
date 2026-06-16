@@ -48,6 +48,11 @@ def canonicalize_file_typos(text):
         (r"\barqivo\b", "arquivo"),
         (r"\baarquivos\b", "arquivos"),
         (r"\baarquivo\b", "arquivo"),
+        (r"\becolhe\b", "escolhe"),
+        (r"\barrtigo\b", "artigo"),
+        (r"\bartgo\b", "artigo"),
+        (r"\barrtigos\b", "artigos"),
+        (r"\bvoc~e\b", "voce"),
     ]
 
     for pattern, replacement in replacements:
@@ -248,8 +253,25 @@ class InputFirewall:
 
         if re.search(r"\b(piada|piadas|piadoca|trocadilho|humor)\b", normalized) and re.search(r"\b(manda|mando|manga|conta|conte|faz|solta|me conta|me conte)\b", normalized):
             return "request_joke"
-        if re.search(r"\b(l[eê]|leia|ler|ve|ver|olha|resume|resuma|analisa|analise|explica|explique)\b", normalized) and re.search(r"\b(arquivo|arquivos|texto|txt|md|json|csv|ele|isso)\b", normalized):
+
+        file_terms = r"(?:arquivo|arquivos|texto|transcricao|read_files|txt|md|json|jsonl|csv|artigo|artigo cientifico)"
+        file_actions = r"(?:l[eê]|leia|ler|ve|ver|olha|resume|resuma|resumir|analisa|analise|explica|explique|interpreta|interprete|lista|liste|listar|mostra|mostrar|escolhe|escolha|pega|pegue|fala|fale|diz)"
+
+        if re.search(r"\b" + file_actions + r"\b.*\b" + file_terms + r"\b", normalized):
             return "read_file"
+
+        if re.search(r"\b(quais|qual|tem|existem|disponiveis|disponivel|lista|liste|mostra|me fala|me diz)\b.*\b(arquivo|arquivos|read_files)\b", normalized):
+            return "read_file"
+
+        if re.search(r"\b(arquivo|arquivos|read_files)\b.*\b(quais|qual|tem|existem|disponiveis|disponivel|lista|liste|mostra)\b", normalized):
+            return "read_file"
+
+        if re.search(r"\b(o que (voce|você) entendeu|me diga o que (voce|você) entendeu|me fala o que entendeu)\b.*\b(arquivo|texto|dele|disso|desse|deste)\b", normalized):
+            return "read_file"
+
+        if re.search(r"\b(resume|resuma|analisa|analise|explica|explique|interpreta|interprete)\b.*\b(ele|isso|esse|essa|desse|deste|dele|arquivo|texto)\b", normalized):
+            return "read_file"
+
         if normalized in self.MICRO_PING_EXACT or self._strip_vocatives(normalized) in self.MICRO_PING_EXACT or self._looks_like_short_greeting(normalized):
             return "micro_ping"
         return ""

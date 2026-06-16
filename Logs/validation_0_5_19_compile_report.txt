@@ -1,0 +1,9 @@
+# VALIDATION — COMPILE — D.I.A.N.A. 0.5.19
+
+Comando executado:
+
+python -m compileall -q .
+
+Resultado:
+
+OK — compileall concluído sem erros.

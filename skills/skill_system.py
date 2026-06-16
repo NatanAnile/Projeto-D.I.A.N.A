@@ -8,9 +8,7 @@ from skills.comment_skill import CommentSkill
 from skills.read_file_skill import ReadFileSkill
 from skills.read_chat_skill import ReadChatSkill
 from skills.read_screen_skill import ReadScreenSkill
-from skills.style_skill import StyleSkill
 from skills.expression_lookup_skill import ExpressionLookupSkill
-from skills.game_context_skill import GameContextSkill
 from skills.donate_skill import DonateSkill
 from skills.command_skill import CommandSkill
 from skills.chat_reply_skill import ChatReplySkill
@@ -19,7 +17,7 @@ from skills.chat_reply_skill import ChatReplySkill
 class SkillManager:
 
     MIN_SEMANTIC_CONFIDENCE = 0.45
-    OPERATIONAL_CAPABILITIES = {"read_chat", "read_file", "read_screen", "send_chat", "style_query"}
+    OPERATIONAL_CAPABILITIES = {"read_chat", "read_file", "read_screen", "send_chat", "repeat_last_operational_task"}
 
     def __init__(self, context=None):
 
@@ -43,9 +41,7 @@ class SkillManager:
         self.primary_skills = [
             self.read_chat_skill,
             self.read_file_skill,
-            self.expression_lookup_skill,
-            StyleSkill(),
-            GameContextSkill()
+            self.expression_lookup_skill
         ]
 
         self.modifier_skills = [CommentSkill()]
@@ -138,13 +134,6 @@ class SkillManager:
             elif capability == "read_file" and confidence >= self.MIN_SEMANTIC_CONFIDENCE:
                 primary_context = self.read_file_skill.get_context(user_text=user_text, conversation=conversation, force=True)
                 primary_name = "ReadFileSkill"
-
-            elif capability == "style_query":
-                for skill in self.primary_skills:
-                    if isinstance(skill, StyleSkill):
-                        primary_context = skill.get_context(user_text=user_text, conversation=conversation)
-                        primary_name = "StyleSkill"
-                        break
 
             if primary_context:
                 contextos.append(primary_context)

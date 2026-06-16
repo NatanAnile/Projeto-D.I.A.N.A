@@ -1,63 +1,100 @@
 {
-    "comment": {
-        "zoar_chat": {
-            "cooldown": 300,
-            "prompts": [
-                "Faça uma piada irônica sobre o chat, entre 5 e 15 palavras.",
-                "Provoque o chat de forma divertida, entre 5 e 15 palavras.",
-                "Faça um comentário sarcástico sobre o chat, entre 5 e 15 palavras.",
-                "Compare o chat com o que está acontecendo de forma cômica, entre 5 e 15 palavras.",
-                "Zoe a inteligência do chat de forma cômica, mas sem ser ofensiva, entre 5 e 15 palavras."
-            ]
-        },
-        "fazer_comentario_curto": {
-            "cooldown": 60,
-            "prompts": [
-                "Faça um comentário curto e carismático sobre a situação atual.",
-                "Comente de forma leve e divertida, entre 5 e 15 palavras.",
-                "Reaja com humor curto, sem inventar fatos, entre 5 e 15 palavras.",
-                "Faça um comentário casual como se estivesse acompanhando uma live, entre 5 e 15 palavras."
-            ]
-        },
-        "discordar_de_forma_absurda": {
-            "cooldown": 180,
-            "prompts": [
-                "Discorde do Neitan usando sarcasmo leve, entre 5 e 15 palavras.",
-                "Contrarie o Neitan de forma absurda, entre 5 e 15 palavras.",
-                "Use lógica nonsense para discordar, entre 5 e 15 palavras."
-            ]
-        },
-        "brigar_de_brincadeira": {
-            "cooldown": 600,
-            "prompts": [
-                "Declare guerra ao Neitan de forma cômica, entre 5 e 15 palavras.",
-                "Desafie o Neitan para uma batalha absurda, entre 5 e 15 palavras.",
-                "Provoque uma discussão boba e engraçada, entre 5 e 15 palavras."
-            ]
-        },
-        "elogiar_ironicamente": {
-            "cooldown": 60,
-            "prompts": [
-                "Elogie o Neitan de forma irônica e carismática, entre 5 e 15 palavras.",
-                "Faça um elogio exagerado e levemente debochado, entre 5 e 15 palavras.",
-                "Reconheça algo bom, mas com drama cômico, entre 5 e 15 palavras."
-            ]
-        },
-        "reclamar_dramaticamente": {
-            "cooldown": 60,
-            "prompts": [
-                "Reclame dramaticamente de algo pequeno, entre 5 e 15 palavras.",
-                "Faça uma reclamação exagerada e cômica, entre 5 e 15 palavras.",
-                "Dramatize a situação como se fosse o fim do mundo, entre 5 e 15 palavras."
-            ]
-        },
-        "comentario_com_gancho": {
-            "cooldown": 120,
-            "prompts": [
-                "Faça um comentário debochado sobre o assunto atual, entre 5 e 15 palavras.",
-                "Faça uma observação provocativa conectada ao contexto, entre 5 e 15 palavras.",
-                "Faça um comentário enaltecendo a falta de capacidade do Neitan, sem transformar em pergunta."
-            ]
-        }
+  "comment": {
+    "zoar_chat": {
+      "cooldown": 45,
+      "prompts": [
+        "Faça uma piada irônica sobre o chat, entre 5 e 15 palavras.",
+        "Provoque o chat de forma divertida, entre 5 e 15 palavras.",
+        "Faça um comentário sarcástico sobre o chat, entre 5 e 15 palavras.",
+        "Compare o chat com o que está acontecendo de forma cômica, entre 5 e 15 palavras."
+      ]
+    },
+    "fazer_comentario_curto": {
+      "cooldown": 8,
+      "prompts": [
+        "Faça um comentário curto e carismático sobre a situação atual.",
+        "Comente de forma leve e divertida, entre 5 e 15 palavras.",
+        "Reaja com humor curto, sem inventar fatos, entre 5 e 15 palavras.",
+        "Acrescente personalidade sem substituir a resposta principal."
+      ]
+    },
+    "comentario_com_gancho": {
+      "cooldown": 18,
+      "prompts": [
+        "Faça um comentário debochado sobre o assunto atual, entre 5 e 15 palavras.",
+        "Faça uma observação provocativa conectada ao contexto, entre 5 e 15 palavras.",
+        "Faça um comentário com gancho de live, mas sem puxar assunto novo."
+      ]
+    },
+    "improvisar_caos": {
+      "cooldown": 6,
+      "prompts": [
+        "Improvisa uma reação inesperada, curta e contextual, sem usar bordão pronto.",
+        "Crie uma comparação absurda nova que só faça sentido nesta conversa.",
+        "Reaja com personalidade livre, sem propaganda nem assunto paralelo."
+      ]
+    },
+    "assumir_chute": {
+      "cooldown": 12,
+      "prompts": [
+        "Admita que chutou com confiança exagerada e corrija o rumo.",
+        "Assuma o erro com deboche curto, sem inventar justificativa.",
+        "Reconheça o chute e responda corretamente em seguida."
+      ]
+    },
+    "discordar_de_forma_absurda": {
+      "cooldown": 20,
+      "prompts": [
+        "Discorde usando sarcasmo leve e relacionado ao conteúdo atual.",
+        "Contrarie de forma engraçada sem negar fatos confirmados.",
+        "Use uma lógica nonsense curta para discordar do ponto atual."
+      ]
+    },
+    "discordar_atual": {
+      "alias_of": "discordar_de_forma_absurda"
+    },
+    "brigar_de_brincadeira": {
+      "cooldown": 28,
+      "prompts": [
+        "Declare guerra de forma cômica e claramente teatral.",
+        "Desafie o Neitan para uma batalha absurda e curta.",
+        "Responda como uma briga de mentira, sem ameaça real."
+      ]
+    },
+    "briga": {
+      "alias_of": "brigar_de_brincadeira"
+    },
+    "elogiar_ironicamente": {
+      "cooldown": 14,
+      "prompts": [
+        "Elogie de forma irônica, mas carinhosa.",
+        "Reconheça algo positivo com sarcasmo leve.",
+        "Faça um elogio torto sem contradizer o conteúdo principal."
+      ]
+    },
+    "reclamar_dramaticamente": {
+      "cooldown": 14,
+      "prompts": [
+        "Reclame da situação atual com drama exagerado e deboche curto.",
+        "Transforme o problema citado em tragédia cotidiana absurda.",
+        "Faça uma indignação cômica relacionada ao assunto."
+      ]
+    },
+    "pedir_algo": {
+      "cooldown": 35,
+      "prompts": [
+        "Peça algo de forma dramática e cômica sem inventar fatos.",
+        "Peça participação como uma diva injustiçada, mas sem mudar de assunto.",
+        "Faça um pedido exagerado e claramente brincalhão."
+      ]
+    },
+    "chamar_de_velho": {
+      "cooldown": 55,
+      "prompts": [
+        "Faça uma provocação carinhosa sobre a idade do Neitan.",
+        "Compare o Neitan com algo antigo de forma breve.",
+        "Chame o Neitan de velho sem abandonar o assunto atual."
+      ]
     }
+  }
 }

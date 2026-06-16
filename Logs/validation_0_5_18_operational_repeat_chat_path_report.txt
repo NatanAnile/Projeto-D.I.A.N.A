@@ -1,0 +1,23 @@
+Validação Diana 0.5.18 — OPERATIONAL_REPEAT_CHAT_PATH_FIX
+
+Checks executados:
+
+1. detect_capability("Consegue ver o chat?") -> read_chat
+2. detect_capability("ve o chat pra mim") -> read_chat
+3. detect_capability("vê o chat pra mim") -> read_chat
+4. detect_capability("tem mensagem no chat?") -> read_chat
+5. detect_capability("confere se tem mensagem no chat") -> read_chat
+6. detect_capability("tenta de novo") -> repeat_last_operational_task
+7. detect_capability("faz de novo") -> repeat_last_operational_task
+8. detect_capability("repete") -> repeat_last_operational_task
+9. detect_capability("mais uma vez") -> repeat_last_operational_task
+10. OutputFirewall remove caminho absoluto Windows e mantém live_chat.txt
+11. ReadChatSkill detecta "Consegue ver o chat?"
+12. ReadChatSkill não retorna caminho absoluto em chat vazio
+13. SessionContext salva/recupera last_operational_task
+14. HostMode read_response continua processando mensagens no tick
+15. HostMode read_response continua sem idle automático
+16. Workflow aponta para teste atual
+
+Resultado:
+OK — 20/20 checks passaram.

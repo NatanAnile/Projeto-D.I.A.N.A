@@ -60,6 +60,11 @@ class ReadFileSkill(BaseSkill):
             (r"\barqivo\b", "arquivo"),
             (r"\baarquivos\b", "arquivos"),
             (r"\baarquivo\b", "arquivo"),
+            (r"\becolhe\b", "escolhe"),
+            (r"\barrtigo\b", "artigo"),
+            (r"\bartgo\b", "artigo"),
+            (r"\barrtigos\b", "artigos"),
+            (r"\bvoc~e\b", "voce"),
         ]
 
         for pattern, replacement in replacements:
@@ -162,7 +167,18 @@ class ReadFileSkill(BaseSkill):
             "ultima frase",
             "primeira frase",
             "escolhe um arquivo",
-            "escolha um arquivo"
+            "escolha um arquivo",
+            "pega um arquivo",
+            "pegue um arquivo",
+            "artigo cientifico",
+            "artigo científico",
+            "read_files",
+            "quais tem",
+            "que arquivos",
+            "me fala um arquivo",
+            "me diz um arquivo",
+            "o que voce entendeu",
+            "o que você entendeu"
         ]
 
         for gatilho in gatilhos:
@@ -421,8 +437,22 @@ class ReadFileSkill(BaseSkill):
 
         texto = self.normalizar_texto(user_text)
         return bool(
-            re.search(r"\b(escolhe|escolha)\b.*\barquivo\b", texto)
+            re.search(r"\b(escolhe|escolha|pega|pegue)\b.*\barquivo\b", texto)
             and re.search(r"\b(resume|resuma|resumir)\b", texto)
+        )
+
+    def pedido_de_escolha_de_arquivo(self, user_text):
+
+        texto = self.normalizar_texto(user_text)
+        return bool(re.search(r"\b(escolhe|escolha|pega|pegue)\b.*\barquivo\b", texto))
+
+    def pedido_de_listagem_de_arquivos(self, user_text):
+
+        texto = self.normalizar_texto(user_text)
+        return bool(
+            re.search(r"\b(quais|qual|tem|existem|disponiveis|disponivel|lista|liste|listar|mostra|mostrar|me fala|me diz)\b.*\b(arquivo|arquivos|read_files)\b", texto)
+            or re.search(r"\b(arquivo|arquivos|read_files)\b.*\b(quais|qual|tem|existem|disponiveis|disponivel|lista|liste|listar|mostra|mostrar)\b", texto)
+            or "quais tem" in texto
         )
 
     def escolher_arquivo_para_resumo(self, arquivos):
@@ -484,6 +514,18 @@ class ReadFileSkill(BaseSkill):
 
         arquivo = self.encontrar_arquivo(user_text)
 
+        if self.pedido_de_listagem_de_arquivos(user_text):
+            nomes = [arquivo.name for arquivo in arquivos[:10]]
+            print("🧩 Skill direta ativada: ReadFileSkill -> list_files")
+            return (
+                "Arquivos disponíveis pra leitura: "
+                + ", ".join(nomes)
+                + ". Escolhe um deles que eu leio sem inventar biblioteca fantasma."
+            )
+
+        if not arquivo and self.pedido_de_escolha_de_arquivo(user_text):
+            arquivo = self.escolher_arquivo_para_resumo(arquivos)
+
         if arquivo:
             if self.pedido_ultima_frase(user_text) or self.pedido_primeira_frase(user_text):
                 conteudo, foi_cortado, erro = self.ler_arquivo(arquivo)
@@ -498,7 +540,7 @@ class ReadFileSkill(BaseSkill):
                 label = "última" if ultima else "primeira"
                 return f"A {label} frase útil de {arquivo.name} é: {frase}"
 
-            if self.pedido_de_leitura_direta(user_text):
+            if self.pedido_de_leitura_direta(user_text) or self.pedido_de_escolha_de_arquivo(user_text):
                 conteudo, foi_cortado, erro = self.ler_arquivo(arquivo)
                 print("🧩 Skill executada: ReadFileSkill -> " + arquivo.name + " | modo=read_direct")
                 if erro:
@@ -584,7 +626,7 @@ class ReadFileSkill(BaseSkill):
 
         # Pedido explícito para a Diana escolher um arquivo não deve cair no
         # contexto anterior só porque a frase usa "ele".
-        if not arquivo and self.pedido_de_escolha_com_resumo(user_text):
+        if not arquivo and self.pedido_de_escolha_de_arquivo(user_text):
             arquivo = self.escolher_arquivo_para_resumo(self.listar_arquivos())
 
         if not arquivo and self.last_file_content and self.detectar_referencia_anterior(user_text):

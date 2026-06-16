@@ -171,7 +171,7 @@ class ResponseCleaner:
             "chat_reply",
             "send_chat",
             "memory_query",
-            "style_query"
+            "repeat_last_operational_task"
         ]
 
         return capacidade in capacidades_operacionais
@@ -598,14 +598,41 @@ class ResponseCleaner:
     # ✂️ OPERACIONAL
     # =========================
 
+    def _proteger_nomes_de_arquivo(self, text):
+
+        mapa = {}
+
+        def repl(match):
+            chave = "__DIANA_FILE_DOT_" + str(len(mapa)) + "__"
+            mapa[chave] = match.group(0)
+            return chave
+
+        protegido = re.sub(
+            r"\b[\wÀ-ÿ .+()_-]+\.(?:txt|md|json|jsonl|csv|py)\b",
+            repl,
+            str(text or ""),
+            flags=re.IGNORECASE
+        )
+
+        return protegido, mapa
+
+    def _restaurar_nomes_de_arquivo(self, text, mapa):
+
+        for chave, valor in mapa.items():
+            text = text.replace(chave, valor)
+
+        return text
+
     def limitar_operacional(self, text):
 
-        frases = re.split(r"(?<=[.!?])\s+", str(text).strip())
+        protegido, mapa = self._proteger_nomes_de_arquivo(text)
+        frases = re.split(r"(?<=[.!?])\s+", protegido.strip())
 
         if len(frases) <= 2:
-            return text
+            return self._restaurar_nomes_de_arquivo(protegido, mapa)
 
-        return " ".join(frases[:2]).strip()
+        limitado = " ".join(frases[:2]).strip()
+        return self._restaurar_nomes_de_arquivo(limitado, mapa)
 
     # =========================
     # ✂️ ORÇAMENTO / FRASE INCOMPLETA

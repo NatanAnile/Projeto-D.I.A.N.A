@@ -36,10 +36,33 @@ class OutputFirewall:
         result = str(text or "")
         for pattern, replacement in self.NAME_REPLACEMENTS.items():
             result = re.sub(pattern, replacement, result, flags=re.IGNORECASE)
+        result = self._sanitize_file_paths(result)
         result = self._strip_verbal_tics(result)
         result = self._strip_emojis(result)
         result = self._trim_trailing_cta(result)
         return result.strip()
+
+    def _sanitize_file_paths(self, text):
+        """Remove diretórios completos da fala final.
+
+        Skills podem usar caminho absoluto em log/debug, mas a Diana nunca deve
+        falar caminhos completos do Windows/Linux para o usuário. Mantém só o nome do
+        arquivo quando houver extensão.
+        """
+
+        text = str(text or "")
+
+        windows_path = re.compile(
+            r"[A-Za-z]:\\(?:[^\\/:*?\"<>|\r\n]+\\)*([^\\/:*?\"<>|\r\n]+\.[A-Za-z0-9_]+)"
+        )
+        linux_path = re.compile(
+            r"(?:/[A-Za-z0-9_.+\- ]+)+/([A-Za-z0-9_.+\-]+\.[A-Za-z0-9_]+)"
+        )
+
+        text = windows_path.sub(r"\1", text)
+        text = linux_path.sub(r"\1", text)
+
+        return text
 
 
 

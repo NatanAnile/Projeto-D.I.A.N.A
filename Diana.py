@@ -123,6 +123,12 @@ stt_runtime_enabled = bool(LOAD_STT)
 last_prompt_text = ""
 last_input_channel = "OWNER_TEXT"
 
+REPEATABLE_OPERATIONAL_CAPABILITIES = {
+    "read_chat",
+    "read_file",
+    "read_screen"
+}
+
 
 # =========================
 # 📝 HISTÓRICO DE CONVERSA
@@ -357,6 +363,52 @@ def capacidade_eh_operacional(capacidade):
     return response_cleaner.is_operational(capacidade)
 
 
+# =========================
+# 🌉 BRIDGE INPUT FIREWALL -> CAPABILITY
+# =========================
+
+def aplicar_intent_hint_bridge(turn_context):
+
+    turn_context = turn_context or {}
+    capability = str(turn_context.get("requested_capability", "none") or "none").lower().strip()
+    intent_hint = str(turn_context.get("input_intent_hint", turn_context.get("intent_hint", "")) or "").lower().strip()
+
+    bridge_map = {
+        "read_file": "read_file",
+        "read_chat": "read_chat",
+        "read_screen": "read_screen",
+        "send_chat": "send_chat",
+        "repeat_last_operational_task": "repeat_last_operational_task"
+    }
+
+    if capability == "none" and intent_hint in bridge_map:
+        turn_context["requested_capability"] = bridge_map[intent_hint]
+        turn_context["confidence"] = 1.0
+        turn_context["capability_from_intent_hint"] = True
+        print("🌉 Intent hint aplicado como capability:", bridge_map[intent_hint])
+
+    return turn_context
+
+
+def resposta_operacional_sem_contexto(text, turn_context=None):
+
+    turn_context = turn_context or {}
+    capability = str(turn_context.get("requested_capability", "none") or "none").lower().strip()
+    turn_context["response_origin"] = "operational_no_context_failsafe"
+    turn_context["used_llm"] = False
+
+    if capability == "read_file":
+        return "Percebi pedido de arquivo, mas não consegui resolver qual conteúdo usar. Me manda o nome do arquivo ou pede a lista da pasta read_files."
+
+    if capability == "read_chat":
+        return "Percebi pedido de chat, mas não consegui ler o arquivo de chat agora. Palco sem bilhete, criatura."
+
+    if capability == "read_screen":
+        return "Percebi pedido de tela, mas o módulo de leitura de tela não devolveu contexto útil agora."
+
+    return "Percebi uma tarefa operacional, mas a skill não devolveu contexto. Não vou inventar serviço fantasma."
+
+
 def limpar_resposta(response, text, turn_context=None, mode="normal"):
 
     turn_context = turn_context or {}
@@ -499,6 +551,79 @@ def registrar_interacao(text, response, turn_context=None):
 
 
 # =========================
+# 🔁 CONTINUIDADE OPERACIONAL
+# =========================
+
+def registrar_tarefa_operacional(text, turn_context=None):
+
+    turn_context = turn_context or {}
+    capability = str(turn_context.get("requested_capability", "none") or "none").lower().strip()
+
+    if capability not in REPEATABLE_OPERATIONAL_CAPABILITIES:
+        return
+
+    if turn_context.get("repeat_request"):
+        return
+
+    try:
+        session_context.set_last_operational_task(
+            capability=capability,
+            user_text=text,
+            payload={
+                "source": "skill_direct",
+                "response_origin": turn_context.get("response_origin", "skill_direct")
+            }
+        )
+        print("🔁 Última tarefa operacional registrada:", capability)
+    except Exception as e:
+        print("⚠️ Falha ao registrar tarefa operacional:", e)
+
+
+def resolver_repeticao_operacional(text, turn_context=None):
+
+    turn_context = turn_context or {}
+    last_task = session_context.get_last_operational_task()
+
+    if not last_task:
+        turn_context["response_origin"] = "repeat_last_without_task"
+        turn_context["used_llm"] = False
+        return "Não tenho uma tarefa operacional anterior pra repetir, Neitan. Minha prancheta de palco tá vazia."
+
+    original_capability = str(last_task.get("capability", "none") or "none").lower().strip()
+
+    if original_capability not in REPEATABLE_OPERATIONAL_CAPABILITIES:
+        turn_context["response_origin"] = "repeat_last_invalid_task"
+        turn_context["used_llm"] = False
+        return "A última coisa que eu fiz não era uma tarefa repetível. Não vou fingir botão de replay onde não tem."
+
+    repeat_context = dict(turn_context)
+    repeat_context["requested_capability"] = original_capability
+    repeat_context["confidence"] = 1.0
+    repeat_context["repeat_request"] = True
+    repeat_context["repeated_from_user_text"] = last_task.get("user_text", "")
+
+    print("🔁 Reexecutando última tarefa operacional:", original_capability)
+
+    response = skill_manager.verificar_resposta_direta(
+        user_text=last_task.get("user_text", text),
+        conversation=conv_history,
+        turn_context=repeat_context
+    )
+
+    if not response:
+        turn_context["response_origin"] = "repeat_last_failed"
+        turn_context["used_llm"] = False
+        return "Tentei repetir a tarefa anterior, mas a skill não devolveu resposta. Cabo tropeçado nos bastidores."
+
+    turn_context.clear()
+    turn_context.update(repeat_context)
+    turn_context["response_origin"] = "repeat_last_operational_task"
+    turn_context["used_llm"] = False
+
+    return limpar_resposta(response, text, turn_context=turn_context, mode="operational")
+
+
+# =========================
 # 🧭 RETRIEVAL DETERMINÍSTICO
 # =========================
 
@@ -544,6 +669,9 @@ def gerar_resposta_brain(text, turn_context):
 
     if skill_extra:
         turn_context["skill_context_active"] = True
+
+    if capacidade_eh_operacional(turn_context.get("requested_capability")) and not skill_extra:
+        return resposta_operacional_sem_contexto(text, turn_context)
 
     prompt = prompt_builder.build(
         user_text=text,
@@ -650,7 +778,7 @@ def format_runtime_modules_status():
         f"stt: {'ON' if stt_runtime_enabled and stt is not None else 'OFF'}",
         f"query_planner: {'ON' if QUERY_PLANNER_ENABLED else 'OFF'}",
         f"session_summarizer: {'ON' if SESSION_SUMMARIZER_ENABLED else 'OFF'}",
-        "skills: read_chat, read_file, read_screen, donate, command, style, game_context, chat_reply"
+        "skills: read_chat, read_file, read_screen, expression_lookup, donate, command, chat_reply, comment_actions"
     ]
 
     return "\n".join(linhas)
@@ -869,6 +997,7 @@ try:
         if firewall_direct_response:
             turn_context = criar_turn_context(input_packet.text)
             turn_context.update(input_packet.to_turn_context())
+            aplicar_intent_hint_bridge(turn_context)
             turn_context["response_origin"] = "input_firewall"
             turn_context["used_llm"] = False
             turn_context["used_retrieval"] = False
@@ -884,10 +1013,20 @@ try:
 
         turn_context = criar_turn_context(text)
         turn_context.update(input_packet.to_turn_context())
+        aplicar_intent_hint_bridge(turn_context)
         dialogue_result = aplicar_dialogue_act_gate(text, turn_context)
         capability = turn_context.get("requested_capability", "none")
         confidence = float(turn_context.get("confidence", 0.0) or 0.0)
         print(f"🧭 Capability: {capability} | confidence={confidence:.2f}")
+
+        if capability == "repeat_last_operational_task":
+            response = resolver_repeticao_operacional(text, turn_context)
+            if response:
+                registrar_interacao(text, response, turn_context=turn_context)
+                entregar_resposta(text, response, turn_context=turn_context)
+                time.sleep(0.5)
+                continue
+
         modo_operacional = capacidade_eh_operacional(capability)
 
         # =========================
@@ -914,6 +1053,7 @@ try:
             )
 
             if response:
+                registrar_tarefa_operacional(text, turn_context=turn_context)
                 registrar_interacao(text, response, turn_context=turn_context)
                 entregar_resposta(text, response, turn_context=turn_context)
 

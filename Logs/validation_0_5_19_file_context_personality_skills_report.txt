@@ -1,0 +1,22 @@
+# VALIDATION — FILE CONTEXT + PERSONALITY SKILLS — D.I.A.N.A. 0.5.19
+
+Comandos executados:
+
+python tools/tests/test_continuidade_0_5_17_hostmode_read_response_auto.py
+python tools/tests/test_continuidade_0_5_18_operational_repeat_chat_path_fix.py
+python tools/tests/test_continuidade_0_5_19_file_context_personality_skills.py
+
+Resultados:
+
+OK — 7/7 checks passaram.
+OK — 20/20 checks passaram.
+OK — 25/25 checks passaram.
+
+Cobertura principal:
+
+- Host Mode read_response preservado.
+- read_chat e repeat_last_operational_task preservados.
+- read_file com typos, listagem, escolha e follow-up corrigidos.
+- OutputCleaner preserva nomes de arquivo com .txt.
+- CommentSkill carrega skill_actions.json e loga ação executada corretamente.
+- skills obsoletas game_context_skill.py e style_skill.py removidas.
