@@ -85,7 +85,6 @@ class RetrievalResponder:
 
         if retrieved.get("personal_query"):
             facts = retrieved.get("owner_facts", [])
-            mem0_memories = retrieved.get("mem0_memories", [])
             if facts:
                 fact = facts[0]
                 key = str(fact.get("key", "")).strip()
@@ -101,12 +100,10 @@ class RetrievalResponder:
                 label = labels.get(key, key.replace("_", " "))
                 if value:
                     return f"Seu {label} é {value}, Neitan."
-            if mem0_memories:
-                return None
-            return "Eu não tenho essa informação no meu perfil, no Mem0 nem no histórico atual, Neitan."
+            return "Eu não tenho essa informação no contexto da sessão nem no histórico atual, Neitan."
 
-        # Knowledge local foi removido na 0.5.5.
-        # Este responder agora só resolve memória pessoal do Neitan.
+        # Knowledge local e memória longa externa ficam desativados nesta linha.
+        # Este responder só resolve fatos pessoais vindos do contexto de sessão.
         return None
 
     @staticmethod

@@ -9,6 +9,7 @@ from skills.read_file_skill import ReadFileSkill
 from skills.read_chat_skill import ReadChatSkill
 from skills.read_screen_skill import ReadScreenSkill
 from skills.style_skill import StyleSkill
+from skills.expression_lookup_skill import ExpressionLookupSkill
 from skills.game_context_skill import GameContextSkill
 from skills.donate_skill import DonateSkill
 from skills.command_skill import CommandSkill
@@ -28,11 +29,13 @@ class SkillManager:
         self.read_chat_skill = ReadChatSkill()
         self.read_file_skill = ReadFileSkill()
         self.read_screen_skill = ReadScreenSkill()
+        self.expression_lookup_skill = ExpressionLookupSkill()
 
         self.direct_skills = [
             self.read_chat_skill,
             self.read_file_skill,
             self.read_screen_skill,
+            self.expression_lookup_skill,
             DonateSkill(),
             CommandSkill()
         ]
@@ -40,6 +43,7 @@ class SkillManager:
         self.primary_skills = [
             self.read_chat_skill,
             self.read_file_skill,
+            self.expression_lookup_skill,
             StyleSkill(),
             GameContextSkill()
         ]

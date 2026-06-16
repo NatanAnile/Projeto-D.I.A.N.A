@@ -1,0 +1,24 @@
+# Diana 0.5.16 — HOSTMODE_SCORE_CONTEXT_FIX
+
+Base: 0.5.15_HOSTMODE_CHAT_FILE_CONTEXT_FIX.
+
+Objetivo:
+- Corrigir Host Mode passivo demais.
+- Fazer o Host Mode responder pelo contexto do chat.
+- Impedir grude em um único usuário.
+- Tirar da LLM a decisão livre de ignorar mensagens boas.
+
+Mudanças:
+- Adicionado score determinístico em `integrations/chat_host_mode.py`.
+- Score mínimo para responder: 6.
+- Score de prioridade: 10.
+- A LLM recebe candidatas já filtradas e ranqueadas.
+- Se uma candidata passa score mínimo, `ignorar` não é aceito como decisão final.
+- Host Mode agora força formato `usuario: mensagem — pensamento da Diana`.
+- Adicionado anti-grude por usuário com streak.
+- Idle agora mira no chat inteiro, não em um usuário específico.
+- Logs de debug mostram score, usuário, motivo e mensagem.
+
+Validação:
+- test_continuidade_0_5_16_hostmode_score_context.py: OK.
+- compileall: OK.

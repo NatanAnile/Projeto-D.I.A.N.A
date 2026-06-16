@@ -44,18 +44,24 @@ def normalize_text(text):
 def is_read_chat_intent(text):
     normalized = normalize_text(text)
     return bool(
-        re.search(r"\b(l[eê]|leia|ler|lê|ve|v[eê]|olha|resuma|resume)\b.*\b(chat|mensagem|mensagens)\b", normalized)
-        or re.search(r"\b(o\s+que\s+o\s+chat\s+(falou|disse)|tem\s+algo\s+no\s+chat|responde\s+o\s+chat)\b", normalized)
+        re.search(r"\b(le|leia|ler|ve|olha|resuma|resume|confere|checa)\b.*\b(chat|mensagem|mensagens)\b", normalized)
+        or re.search(r"\b(o\s+que\s+o\s+chat\s+(falou|disse)|tem\s+(algo|mensagem|mensagens)\s+no\s+chat|responde\s+o\s+chat)\b", normalized)
     )
 
 
 def is_read_file_intent(text):
     normalized = normalize_text(text)
 
-    if re.search(r"\b(l[eê]|leia|ler|lê|abre|abrir|resume|resuma|resumir|ve|v[eê]|ver|olha|analisa|analise|explica|explique)\b.*\b(arquivo|texto|transcricao|transcrição|\.txt|\.md|\.json|\.py|\.csv)\b", normalized):
+    if re.search(r"\b(le|leia|ler|abre|abrir|resume|resuma|resumir|ve|ver|olha|analisa|analise|explica|explique)\b.*\b(arquivo|texto|transcricao|\.txt|\.md|\.json|\.py|\.csv)\b", normalized):
         return True
 
-    if re.search(r"\b(resume|resuma|resumir|analisa|analise|explica|explique|leia|ler|l[eê]|ve|ver)\b.*\b(ele|isso|esse|essa|agora)\b", normalized):
+    if re.search(r"\b(no|do|nesse|neste)\s+arquivo\b.*\b(identifica|identifique|acha|ache|encontra|encontre|ponto\s+critico|ultima\s+frase|primeira\s+frase)\b", normalized):
+        return True
+
+    if re.search(r"\b(escolhe|escolha)\b.*\barquivo\b.*\b(resume|resuma|resumir)\b", normalized):
+        return True
+
+    if re.search(r"\b(resume|resuma|resumir|analisa|analise|explica|explique|leia|ler|le|ve|ver)\b.*\b(ele|isso|esse|essa|agora)\b", normalized):
         return True
 
     if re.search(r"\b(arquivo|arquivos)\b.*\b(disponiveis|disponivel|leitura|ler|listar|lista|liste)\b", normalized):
@@ -67,10 +73,9 @@ def is_read_file_intent(text):
     if re.search(r"\b(primeiro|primeira|segundo|segunda|ultimo|ultima)\s+arquivo\b", normalized):
         return True
 
-    if re.search(r"\b(l[eê]|leia|ler|lê)\b.*\b(primeiro|primeira|segundo|segunda|ultimo|ultima)\b", normalized):
+    if re.search(r"\b(le|leia|ler)\b.*\b(primeiro|primeira|segundo|segunda|ultimo|ultima)\b", normalized):
         return True
 
-    # Nome direto com extensão deve ser skill de arquivo, não knowledge.
     if re.search(r"\b\S+\.(txt|md|json|jsonl|csv)\b", normalized):
         return True
 

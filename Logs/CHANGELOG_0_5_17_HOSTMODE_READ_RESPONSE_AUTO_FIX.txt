@@ -1,0 +1,13 @@
+# Diana 0.5.17 — HOSTMODE_READ_RESPONSE_AUTO_FIX
+
+Base: 0.5.16_HOSTMODE_SCORE_CONTEXT_FIX.
+
+Correção principal:
+- `read_response` agora processa mensagens novas automaticamente no `tick()`.
+- `read_response` não puxa assunto em idle.
+- `autonomous` continua processando mensagens e usando idle.
+- `/host read` passa a ser apenas comando manual de leitura imediata, não requisito para o modo funcionar.
+
+Validação:
+- test_continuidade_0_5_17_hostmode_read_response_auto.py: OK.
+- compileall: OK.

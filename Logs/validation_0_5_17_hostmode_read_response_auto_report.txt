@@ -1,0 +1,5 @@
+
+🎙️ Host candidates:
+0 | score=6 | user=isaac | motivo=pergunta,assunto_atual,usuario_novo,compreensivel | msg=O técnico vai continuar mesmo?
+1 | score=6 | user=stelyn | motivo=assunto_atual,usuario_novo,compreensivel,comentario_contextual | msg=Ele vai continuar.
+OK — 7/7 checks passaram.

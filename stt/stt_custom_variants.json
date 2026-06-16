@@ -1,5 +1,5 @@
 {
-    "description": "Variações fonéticas locais do STT. Inclui base 0.4.16 + extração das duas passadas do texto de calibração V1.",
+    "description": "Variações fonéticas locais do STT da Diana.",
     "sources": [
         "stt_custom_variants.json 0.4.16",
         "stt_custom_variants_v2_from_recording_SAFE.json",
@@ -62,7 +62,6 @@
         "maple bin": "grapple beam",
         "mark obin": "grapple beam",
         "marília": "Maridia",
-        "men0": "Mem0",
         "metroart": "RetroArch",
         "modbol": "mockball",
         "modern brain": "Mother Brain",
@@ -72,7 +71,6 @@
         "motor prain": "Mother Brain",
         "naitam": "Neitan",
         "natal": "Neitan",
-        "ne0": "Mem0",
         "neitom": "Neitan",
         "não cale": "não fala",
         "o google quem ganha": "eu julgo quem ganha",
@@ -87,8 +85,6 @@
         "plasma bin": "Plasma Beam",
         "puntum": "Phantoon",
         "purga e a científica": "pura gambiarra científica",
-        "quadrante": "Qdrant",
-        "quadratente": "Qdrant",
         "queen 2.5": "Qwen2.5",
         "quin3.5": "Qwen3.5",
         "racy chik": "Wrecked Ship",

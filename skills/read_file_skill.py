@@ -7,6 +7,8 @@
 import re
 from pathlib import Path
 
+from config import PROJECT_ROOT
+
 from skills.base_skill import BaseSkill, SkillContext
 
 
@@ -22,7 +24,7 @@ class ReadFileSkill(BaseSkill):
 
         super().__init__(context)
 
-        self.folder_path = Path("data") / "read_files"
+        self.folder_path = Path(PROJECT_ROOT) / "data" / "read_files"
         self.allowed_extensions = [".txt", ".md", ".json", ".jsonl", ".csv"]
 
         # Limite seguro para não explodir o prompt.
@@ -149,7 +151,18 @@ class ReadFileSkill(BaseSkill):
             "vê o arquivo",
             "ve o arquivo",
             "ve o arquivo aqui",
-            "vê o arquivo aqui"
+            "vê o arquivo aqui",
+            "no arquivo",
+            "do arquivo",
+            "identifique",
+            "identifica",
+            "ponto crítico",
+            "ponto critico",
+            "última frase",
+            "ultima frase",
+            "primeira frase",
+            "escolhe um arquivo",
+            "escolha um arquivo"
         ]
 
         for gatilho in gatilhos:
@@ -404,6 +417,51 @@ class ReadFileSkill(BaseSkill):
 
         return cabecalho + "\n\n" + conteudo.strip() + aviso
 
+    def pedido_de_escolha_com_resumo(self, user_text):
+
+        texto = self.normalizar_texto(user_text)
+        return bool(
+            re.search(r"\b(escolhe|escolha)\b.*\barquivo\b", texto)
+            and re.search(r"\b(resume|resuma|resumir)\b", texto)
+        )
+
+    def escolher_arquivo_para_resumo(self, arquivos):
+
+        if not arquivos:
+            return None
+
+        # Heurística estável: prefere arquivos pequenos/médios, evitando arquivo fake enorme
+        # quando existem opções melhores para teste de resumo.
+        ordenados = sorted(arquivos, key=lambda p: (p.stat().st_size if p.exists() else 10**9, p.name.lower()))
+        return ordenados[0]
+
+    def pedido_ultima_frase(self, user_text):
+
+        texto = self.normalizar_texto(user_text)
+        return bool(re.search(r"\b(ultima|última)\s+frase\b", texto))
+
+    def pedido_primeira_frase(self, user_text):
+
+        texto = self.normalizar_texto(user_text)
+        return bool(re.search(r"\b(primeira|primeiro)\s+frase\b", texto))
+
+    def extrair_frase(self, conteudo, ultima=True):
+
+        texto = str(conteudo or "").strip()
+        if not texto:
+            return ""
+
+        # Primeiro tenta por linhas úteis, porque roteiro/transcrição costuma ser quebrado.
+        linhas = [linha.strip() for linha in texto.splitlines() if linha.strip()]
+        if linhas:
+            return linhas[-1] if ultima else linhas[0]
+
+        partes = re.split(r"(?<=[.!?])\s+", texto)
+        partes = [parte.strip() for parte in partes if parte.strip()]
+        if not partes:
+            return texto
+        return partes[-1] if ultima else partes[0]
+
     # =========================
     # ⚡ RESPOSTA DIRETA
     # =========================
@@ -427,6 +485,19 @@ class ReadFileSkill(BaseSkill):
         arquivo = self.encontrar_arquivo(user_text)
 
         if arquivo:
+            if self.pedido_ultima_frase(user_text) or self.pedido_primeira_frase(user_text):
+                conteudo, foi_cortado, erro = self.ler_arquivo(arquivo)
+                print("🧩 Skill executada: ReadFileSkill -> " + arquivo.name + " | modo=frase_especifica")
+                if erro:
+                    return "Tentei ler " + arquivo.name + ", mas deu erro: " + erro
+                self.last_file_name = arquivo.name
+                self.last_file_content = conteudo
+                self.last_file_was_cut = foi_cortado
+                ultima = self.pedido_ultima_frase(user_text)
+                frase = self.extrair_frase(conteudo, ultima=ultima)
+                label = "última" if ultima else "primeira"
+                return f"A {label} frase útil de {arquivo.name} é: {frase}"
+
             if self.pedido_de_leitura_direta(user_text):
                 conteudo, foi_cortado, erro = self.ler_arquivo(arquivo)
                 print("🧩 Skill executada: ReadFileSkill -> " + arquivo.name + " | modo=read_direct")
@@ -436,6 +507,9 @@ class ReadFileSkill(BaseSkill):
                 self.last_file_content = conteudo
                 self.last_file_was_cut = foi_cortado
                 return self.montar_resposta_leitura_direta(arquivo.name, conteudo, foi_cortado)
+            return None
+
+        if self.pedido_de_escolha_com_resumo(user_text):
             return None
 
         if self.last_file_content and self.detectar_referencia_anterior(user_text):
@@ -503,7 +577,17 @@ class ReadFileSkill(BaseSkill):
 
     def get_context(self, user_text="", conversation=None, force=False):
 
-        if self.last_file_content and self.detectar_referencia_anterior(user_text):
+        if not force and not self.detectar_pedido(user_text):
+            return None
+
+        arquivo = self.encontrar_arquivo(user_text)
+
+        # Pedido explícito para a Diana escolher um arquivo não deve cair no
+        # contexto anterior só porque a frase usa "ele".
+        if not arquivo and self.pedido_de_escolha_com_resumo(user_text):
+            arquivo = self.escolher_arquivo_para_resumo(self.listar_arquivos())
+
+        if not arquivo and self.last_file_content and self.detectar_referencia_anterior(user_text):
 
             print("🧩 Skill ativada: ReadFileSkill -> " + self.last_file_name + " (contexto anterior)")
 
@@ -512,11 +596,6 @@ class ReadFileSkill(BaseSkill):
                 self.last_file_content,
                 self.last_file_was_cut
             )
-
-        if not force and not self.detectar_pedido(user_text):
-            return None
-
-        arquivo = self.encontrar_arquivo(user_text)
 
         if not arquivo:
             return None

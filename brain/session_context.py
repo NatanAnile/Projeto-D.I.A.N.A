@@ -470,7 +470,6 @@ class SessionContext:
     def _limpar_prefixo_memoria(self, texto):
 
         texto = str(texto or "").strip()
-        texto = re.sub(r"^\s*/?mem0\s+remember\s+", "", texto, flags=re.IGNORECASE).strip()
         texto = re.sub(r"^\s*/?lembrar\s+", "", texto, flags=re.IGNORECASE).strip()
         texto = re.sub(r"^\s*guarda(?: isso)?:?\s+", "", texto, flags=re.IGNORECASE).strip()
         return texto

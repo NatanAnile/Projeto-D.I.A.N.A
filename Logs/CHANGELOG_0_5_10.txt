@@ -1,7 +1,0 @@
-# CHANGELOG 0.5.10 — REPO_HYGIENE_CI_TEST_FIX
-
-- Corrige o GitHub Actions que ainda rodava o teste antigo `test_continuidade_0_5_7_v21_operational_skill_execution_fix.py`.
-- Move testes de continuidade para `tools/tests/`.
-- Move changelogs para `Logs/` para manter a raiz limpa.
-- O teste atual é CI-safe e não importa SkillManager/ReadScreenSkill/PIL.
-- Mantém o comportamento 0.5.9: micro_ping com LLM, CommentSkill preservado, sem banco fixo.

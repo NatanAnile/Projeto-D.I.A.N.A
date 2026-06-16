@@ -1,0 +1,31 @@
+# Diana 0.5.14 — SESSION_CONTEXT_ONLY
+
+Base: ProjetoDiana_0_5_10_REPO_HYGIENE_CI_TEST_FIX.
+
+Objetivo desta linha:
+- Voltar para a base 0.5.10 limpa.
+- Remover completamente a camada antiga de memória longa externa e seu banco vetorial.
+- Trabalhar somente com contexto de sessão, histórico literal e skills.
+
+Removido:
+- Módulo antigo de memória longa externa.
+- Módulo runtime de auto-save da memória longa externa.
+- Diretório de banco vetorial dessa camada.
+- Dependências dessa camada antiga.
+- Comandos runtime ligados à memória longa externa.
+- Consulta/injeção automática dessa camada no PromptBuilder.
+- Correções STT específicas dessa camada.
+
+Mantido:
+- ConversationLedger como histórico literal recente.
+- SessionContext como contexto leve de sessão.
+- SessionSummarizer opcional.
+- CommentSkill e skills de personalidade.
+- ReadFileSkill.
+- Host Mode.
+- STT/TTS/PTT.
+- Raiz limpa, testes em `tools/tests/` e logs em `Logs/`.
+
+Validação:
+- `tools/tests/test_continuidade_0_5_14_session_context_only.py`: OK.
+- `python -m compileall -q .`: OK.

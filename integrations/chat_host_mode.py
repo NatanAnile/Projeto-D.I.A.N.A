@@ -24,7 +24,10 @@ from config import (
     HOST_IGNORE_PREFIXES,
     HOST_USER_COOLDOWN_SECONDS,
     HOST_IDLE_STREAK_LIMIT,
-    HOST_DEBUG
+    HOST_DEBUG,
+    HOST_MIN_SCORE_TO_RESPOND,
+    HOST_PRIORITY_SCORE,
+    HOST_SAME_USER_STREAK_LIMIT
 )
 
 
@@ -52,6 +55,8 @@ class ChatHostMode:
         self.last_idle_time = 0
 
         self.user_last_response = {}
+        self.last_answered_user = ""
+        self.same_user_streak = 0
         self.idle_streak = 0
 
         self.context_history = []
@@ -195,7 +200,7 @@ class ChatHostMode:
         if self.mode == "autonomous":
             print("\n🎙️ Host Mode modo: AUTÔNOMO")
         else:
-            print("\n🎙️ Host Mode modo: LEITURA E RESPOSTA")
+            print("\n🎙️ Host Mode modo: LEITURA E RESPOSTA AUTOMÁTICA")
 
     def set_send_to_chat(self, value):
 
@@ -210,7 +215,7 @@ class ChatHostMode:
 
         status = "ATIVADO" if self.enabled else "DESATIVADO"
         envio = "CHAT REAL" if self.send_to_chat else "TREINO SEGURO"
-        modo = "AUTÔNOMO" if self.mode == "autonomous" else "LEITURA E RESPOSTA"
+        modo = "AUTÔNOMO" if self.mode == "autonomous" else "LEITURA E RESPOSTA AUTOMÁTICA"
 
         return (
             "🎙️ Host Mode\n"
@@ -463,9 +468,6 @@ class ChatHostMode:
         if role == "BOT":
             return True
 
-        if self.usuario_em_cooldown(item):
-            return True
-
         if len(message) < HOST_MIN_MESSAGE_LENGTH:
             return True
 
@@ -494,19 +496,180 @@ class ChatHostMode:
 
         return False
 
+    def tokens_significativos(self, text):
+
+        stopwords = {
+            "que", "com", "para", "pra", "por", "uma", "uns", "das", "dos", "ele", "ela",
+            "isso", "esse", "essa", "aqui", "ali", "vai", "foi", "era", "ser", "tem",
+            "mas", "nao", "não", "sim", "hoje", "agora", "acho", "tipo", "muito", "pouco"
+        }
+
+        text = self.normalize(text)
+        tokens = re.findall(r"[a-z0-9_]{3,}", text)
+        return [token for token in tokens if token not in stopwords]
+
+    def extrair_topico_atual(self, messages):
+
+        contador = {}
+
+        for item in self.context_history[-self.context_history_limit:]:
+            for token in self.tokens_significativos(item.get("message", "")):
+                contador[token] = contador.get(token, 0) + 2
+
+        for item in messages[-HOST_MAX_CANDIDATES:]:
+            for token in self.tokens_significativos(item.get("message", "")):
+                contador[token] = contador.get(token, 0) + 1
+
+        termos = [token for token, count in contador.items() if count >= 2]
+        return set(termos[:16])
+
+    def menciona_diana(self, text):
+        text = self.normalize(text)
+        return bool(re.search(r"\b(diana|d\s*i\s*a\s*n\s*a)\b", text))
+
+    def tem_pergunta(self, item):
+        raw = str(item.get("message", ""))
+        text = self.normalize(raw)
+        return "?" in raw or bool(re.search(r"\b(quem|qual|quais|quando|onde|como|porque|por que|pq|ser[aá]|sera|tem como|voce|você|tu)\b", text))
+
+    def pergunta_direta(self, item):
+        text = self.normalize(item.get("message", ""))
+        if self.menciona_diana(text) and self.tem_pergunta(item):
+            return True
+        if re.search(r"\b(voce|você|vc|tu|diana)\b", text) and self.tem_pergunta(item):
+            return True
+        return False
+
+    def provocacao_leve(self, item):
+        text = self.normalize(item.get("message", ""))
+        sinais = [
+            "duvido", "nao consegue", "não consegue", "num sabi", "nao sabe", "não sabe",
+            "burra", "burrinha", "fraca", "ruim", "medrosa", "covarde", "mentira",
+            "prova", "quero ver", "cade", "cadê"
+        ]
+        return any(sinal in text for sinal in sinais)
+
+    def frase_compreensivel(self, item):
+        text = self.normalize(item.get("message", ""))
+        tokens = re.findall(r"[a-z0-9_]{2,}", text)
+        if len(tokens) >= 3:
+            return True
+        if self.menciona_diana(text) or self.tem_pergunta(item):
+            return True
+        return False
+
+    def conversa_com_topico(self, item, topic_terms):
+        if not topic_terms:
+            return False
+        tokens = set(self.tokens_significativos(item.get("message", "")))
+        return bool(tokens & set(topic_terms))
+
+    def score_message(self, item, topic_terms):
+
+        score = 0
+        reasons = []
+
+        role = item.get("role", "CHAT_USER")
+        message = item.get("message", "")
+
+        if role == "BOT":
+            return -10, ["bot"]
+
+        if str(message).strip().startswith(tuple(HOST_IGNORE_PREFIXES)):
+            return -10, ["comando"]
+
+        if item.get("risk") == "PESADO":
+            score -= 10
+            reasons.append("pesado")
+
+        if self.menciona_diana(message):
+            score += 2
+            reasons.append("cita_diana")
+
+        if self.tem_pergunta(item):
+            score += 1
+            reasons.append("pergunta")
+
+        if self.pergunta_direta(item):
+            score += 2
+            reasons.append("pergunta_direta")
+
+        if self.conversa_com_topico(item, topic_terms):
+            score += 1
+            reasons.append("assunto_atual")
+
+        if role == "OWNER":
+            score += 6
+            reasons.append("owner")
+
+        user_norm = self.normalize(item.get("user", ""))
+
+        if user_norm and user_norm not in self.user_last_response:
+            score += 3
+            reasons.append("usuario_novo")
+
+        if self.provocacao_leve(item):
+            score += 4
+            reasons.append("provocacao")
+
+        if self.frase_compreensivel(item):
+            score += 1
+            reasons.append("compreensivel")
+
+        if self.conversa_com_topico(item, topic_terms) and self.frase_compreensivel(item) and not self.tem_pergunta(item):
+            score += 1
+            reasons.append("comentario_contextual")
+
+        if self.usuario_em_cooldown(item):
+            score -= 3
+            reasons.append("usuario_cooldown")
+
+        if self.last_answered_user and user_norm == self.last_answered_user and role != "OWNER":
+            score -= 3
+            reasons.append("mesmo_usuario_seguido")
+            if self.same_user_streak >= HOST_SAME_USER_STREAK_LIMIT and score < HOST_PRIORITY_SCORE:
+                score = min(score, HOST_MIN_SCORE_TO_RESPOND - 1)
+                reasons.append("anti_grude")
+
+        if (not self.tem_pergunta(item) and not self.menciona_diana(message) and not self.conversa_com_topico(item, topic_terms) and role != "OWNER" and not self.provocacao_leve(item)):
+            score -= 4
+            reasons.append("solta_sem_contexto")
+
+        return score, reasons
+
     def filtrar_candidatas(self, messages):
 
-        filtradas = []
+        topic_terms = self.extrair_topico_atual(messages)
+        scored = []
 
         for item in messages:
 
             if self.should_ignore_message(item):
                 continue
 
-            filtradas.append(item)
+            score, reasons = self.score_message(item, topic_terms)
+            item = dict(item)
+            item["score"] = score
+            item["score_reasons"] = reasons
+            scored.append(item)
+
+        scored.sort(key=lambda item: item.get("score", 0), reverse=True)
+
+        if HOST_DEBUG:
+            print("\n🎙️ Host candidates:")
+            for index, item in enumerate(scored[:HOST_MAX_CANDIDATES]):
+                print(
+                    str(index)
+                    + " | score=" + str(item.get("score", 0))
+                    + " | user=" + str(item.get("user", ""))
+                    + " | motivo=" + ",".join(item.get("score_reasons", []))
+                    + " | msg=" + str(item.get("message", ""))
+                )
+
+        filtradas = [item for item in scored if item.get("score", 0) >= HOST_MIN_SCORE_TO_RESPOND]
 
         if len(filtradas) > HOST_MAX_CANDIDATES:
-            filtradas = filtradas[-HOST_MAX_CANDIDATES:]
+            filtradas = filtradas[:HOST_MAX_CANDIDATES]
 
         return filtradas
 
@@ -522,6 +685,11 @@ class ChatHostMode:
 
             linhas.append(
                 str(index)
+                + " | "
+                + "SCORE="
+                + str(item.get("score", 0))
+                + " | MOTIVOS="
+                + ",".join(item.get("score_reasons", []))
                 + " | "
                 + "ROLE="
                 + item["role"]
@@ -786,9 +954,37 @@ class ChatHostMode:
     # 📤 ENTREGAR
     # =========================
 
+    def formatar_resposta_com_leitura(self, item, response):
+
+        user = str(item.get("user", "chat") or "chat").strip()
+        message = str(item.get("message", "") or "").strip()
+        response = str(response or "").strip()
+
+        if len(message) > 80:
+            message = message[:77].rstrip() + "..."
+
+        if not response:
+            response = "li isso e registrei a traquinagem."
+
+        prefix = user + ": " + message
+
+        if response.lower().startswith(prefix.lower()):
+            return response
+
+        return prefix + " — " + response
+
     def marcar_usuario_respondido(self, user):
 
         user_norm = self.normalize(user)
+        if not user_norm:
+            return
+
+        if self.last_answered_user == user_norm:
+            self.same_user_streak += 1
+        else:
+            self.last_answered_user = user_norm
+            self.same_user_streak = 1
+
         self.user_last_response[user_norm] = time.time()
 
     def deliver_response(self, response, source="chat", user=None):
@@ -849,6 +1045,12 @@ class ChatHostMode:
 
             print("\n🎙️ Host Mode decisão:", decision["acao"], "| índice:", decision["indice"], "| motivo:", decision["motivo"])
 
+        if decision["acao"] == "ignorar" and candidatas and candidatas[0].get("score", 0) >= HOST_MIN_SCORE_TO_RESPOND:
+            decision["acao"] = "responder"
+            decision["indice"] = 0
+            if HOST_DEBUG:
+                print("🎙️ Host Mode: ignore recusado pelo score >= mínimo; forçando resposta ao índice 0")
+
         if decision["acao"] == "ignorar":
             return False
 
@@ -867,7 +1069,8 @@ class ChatHostMode:
             if HOST_DEBUG:
                 print("🎙️ Host Mode respondeu:", item["role"], item["user"], "->", item["message"])
 
-            self.deliver_response(decision["resposta"], source="chat", user=item["user"])
+            resposta = self.formatar_resposta_com_leitura(item, decision["resposta"])
+            self.deliver_response(resposta, source="chat", user=item["user"])
             return True
 
         if decision["acao"] == "puxar_assunto":
@@ -939,9 +1142,6 @@ class ChatHostMode:
         if not self.enabled:
             return
 
-        if self.mode != "autonomous":
-            return
-
         now = time.time()
 
         if now - self.last_tick_time < HOST_COOLDOWN_SECONDS:
@@ -958,4 +1158,7 @@ class ChatHostMode:
             if respondeu:
                 return
 
-        self.processar_idle()
+        # autonomous fala sozinha quando o chat fica quieto.
+        # read_response só lê e responde mensagens novas; não puxa assunto em idle.
+        if self.mode == "autonomous":
+            self.processar_idle()

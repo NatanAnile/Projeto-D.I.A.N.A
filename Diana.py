@@ -40,10 +40,7 @@ from config import (
     PROJECT_VERSION,
     QUERY_PLANNER_ENABLED,
     SESSION_SUMMARIZER_ENABLED,
-    STT_ENGINE,
-    MEM0_AUTO_SAVE_INTERACTIONS,
-    MEM0_AUTO_SAVE_SMART_FILTER,
-    MEM0_AUTO_SAVE_MIN_CHARS
+    STT_ENGINE
 )
 
 from llm.ollama_llm import OllamaLLM
@@ -56,7 +53,6 @@ from brain.prompt_builder import PromptBuilder
 from brain.action_parser import ActionParser
 from brain.session_context import SessionContext
 from brain.session_summarizer import SessionSummarizer
-from brain.memory_mem0 import Mem0Memory
 from brain.activity_context import ActivityContextProvider
 from brain.dialogue_act_gate import DialogueActGate
 
@@ -69,10 +65,10 @@ from utils.text_cleaner import clean_for_tts
 
 from runtime.input_firewall import InputFirewall
 from runtime.conversation_ledger import ConversationLedger
-from runtime.mem0_autosave import extrair_memoria_direta_mem0, deve_salvar_mem0_auto
 from runtime.retrieval_responder import RetrievalResponder
 from runtime.ptt_guard import PushToTalkGuard
 from runtime.output_firewall import OutputFirewall
+from runtime.session_preference_responder import SessionPreferenceResponder
 from runtime.intent_router import detect_capability
 
 
@@ -103,10 +99,9 @@ response_cleaner = ResponseCleaner(
 )
 
 session_summarizer = SessionSummarizer()
-mem0_memory = Mem0Memory()
 prompt_builder = PromptBuilder(
     session_summarizer=session_summarizer,
-    mem0_memory=mem0_memory
+    session_context=session_context
 )
 retrieval_responder = RetrievalResponder(prompt_builder)
 action_parser = ActionParser()
@@ -115,17 +110,16 @@ dialogue_act_gate = DialogueActGate()
 input_firewall = InputFirewall()
 ptt_guard = PushToTalkGuard(PUSH_TO_TALK_KEY)
 output_firewall = OutputFirewall()
+session_preference_responder = SessionPreferenceResponder(session_context)
 
 print(f"🧠 Diana Brain carregado — versão {PROJECT_VERSION}")
 print(f"🎤 STT selecionado: {STT_ENGINE}")
 print(f"🗺️ Query Planner auxiliar: {'ATIVADO' if QUERY_PLANNER_ENABLED else 'DESATIVADO'}")
 print(f"🧠 Resumidor auxiliar: {'ATIVADO' if SESSION_SUMMARIZER_ENABLED else 'DESATIVADO'}")
-print(f"🧠 Mem0 auto-save: {'ATIVADO' if MEM0_AUTO_SAVE_INTERACTIONS else 'DESATIVADO'}")
 
 # Estados runtime de módulos simples. Não alteram config.py; só valem até fechar a Diana.
 tts_runtime_enabled = bool(TTS_ENABLED)
 stt_runtime_enabled = bool(LOAD_STT)
-mem0_autosave_runtime_enabled = bool(MEM0_AUTO_SAVE_INTERACTIONS)
 last_prompt_text = ""
 last_input_channel = "OWNER_TEXT"
 
@@ -437,6 +431,10 @@ def aplicar_dialogue_act_gate(text, turn_context):
 
 def resposta_direta_dialogue_act(text, turn_context):
 
+    capability = str((turn_context or {}).get("requested_capability", "none")).lower().strip()
+    if capacidade_eh_operacional(capability):
+        return ""
+
     direct = str((turn_context or {}).get("dialogue_direct_response", "")).strip()
     if not direct:
         return ""
@@ -497,21 +495,7 @@ def registrar_interacao(text, response, turn_context=None):
         print("⚠️ SessionContext ignorado por erro:", e)
 
     if turn_context.get("allow_memory") is False:
-        print("🧠 Mem0 auto-save: ignorado pelo InputFirewall")
-        return
-
-    if mem0_autosave_runtime_enabled and turn_context.get("source", LOCAL_INPUT_SOURCE).upper() == "OWNER":
-        if deve_salvar_mem0_auto(text, response, smart_filter=MEM0_AUTO_SAVE_SMART_FILTER, min_chars=MEM0_AUTO_SAVE_MIN_CHARS):
-            try:
-                memoria_direta = extrair_memoria_direta_mem0(text)
-                if memoria_direta:
-                    mem0_memory.salvar_interacao(text, response, memoria_direta=memoria_direta)
-                else:
-                    print("🧠 Mem0 auto-save: ignorado por memória ambígua")
-            except Exception as e:
-                print("⚠️ Mem0 auto-save ignorado por erro:", e)
-        else:
-            print("🧠 Mem0 auto-save: ignorado por filtro leve")
+        print("🧠 Contexto de sessão: entrada não usada para atualização leve")
 
 
 # =========================
@@ -546,6 +530,12 @@ def gerar_resposta_brain(text, turn_context):
         turn_context["used_llm"] = False
         return "Não peguei isso com confiança suficiente pra mandar pro meu cérebro grande. Repete essa com carinho técnico, Neitan."
 
+    if str(turn_context.get("dialogue_act", "")) == "owner_preference_query":
+        response = session_preference_responder.responder(text)
+        turn_context["response_origin"] = "session_preference_direct"
+        turn_context["used_llm"] = False
+        return limpar_resposta(response, text, turn_context=turn_context, mode="normal")
+
     skill_extra = skill_manager.verificar_skills(
         user_text=text,
         conversation=conv_history,
@@ -565,18 +555,7 @@ def gerar_resposta_brain(text, turn_context):
 
     retrieved = prompt_builder.get_last_retrieval()
     turn_context["retrieval_status"] = (retrieved or {}).get("knowledge_status", "") or ("FOUND" if (retrieved or {}).get("owner_facts") else "")
-    turn_context["used_retrieval"] = bool((retrieved or {}).get("query_plan", {}).get("should_query") or (retrieved or {}).get("owner_facts") or (retrieved or {}).get("mem0_memories") or (retrieved or {}).get("knowledge_entries"))
-
-    memoria_direta = extrair_memoria_direta_mem0(text)
-    query_plan = (retrieved or {}).get("query_plan") or {}
-    if memoria_direta and query_plan.get("operation") == "remember":
-        chave, valor = memoria_direta.split(":", 1)
-        chave = chave.strip()
-        valor = valor.strip()
-        label = chave.replace("_", " ")
-        turn_context["response_origin"] = "memory_direct"
-        turn_context["used_llm"] = False
-        return f"Anotado: {label} = {valor}."
+    turn_context["used_retrieval"] = bool((retrieved or {}).get("query_plan", {}).get("should_query") or (retrieved or {}).get("owner_facts") or (retrieved or {}).get("knowledge_entries"))
 
     deterministic_response = retrieval_responder.resolve(retrieved)
 
@@ -632,7 +611,7 @@ def shutdown():
     except Exception:
         pass
 
-    for obj in [tts, stt, vad, session_context, mem0_memory, host_mode, activity_context]:
+    for obj in [tts, stt, vad, session_context, host_mode, activity_context]:
 
         if obj is None:
             continue
@@ -656,8 +635,8 @@ def shutdown():
 COMMANDS_BANNER = (
     "/limpar | /limpar sessao | /fatos | /atividade | /modulos | "
     "/modulo NOME on|off | /host on|off | /host status | /host send on|off | "
-    "/host mode autonomous|read | /host read | /prompt | /mem0 status | "
-    "/mem0 remember TEXTO | /history clear | /tts on|off|status | /stt on|off|status | /ptt status|reset | /comandos"
+    "/host mode autonomous|read | /host read | /prompt | /history clear | "
+    "/tts on|off|status | /stt on|off|status | /ptt status|reset | /comandos"
 )
 
 
@@ -669,7 +648,6 @@ def format_runtime_modules_status():
         f"host_mode: {host_mode.mode}",
         f"tts: {'ON' if tts_runtime_enabled else 'OFF'}",
         f"stt: {'ON' if stt_runtime_enabled and stt is not None else 'OFF'}",
-        f"mem0_autosave: {'ON' if mem0_autosave_runtime_enabled else 'OFF'}",
         f"query_planner: {'ON' if QUERY_PLANNER_ENABLED else 'OFF'}",
         f"session_summarizer: {'ON' if SESSION_SUMMARIZER_ENABLED else 'OFF'}",
         "skills: read_chat, read_file, read_screen, donate, command, style, game_context, chat_reply"
@@ -704,7 +682,7 @@ def limpar_sessao_runtime():
 
 def set_runtime_module(name, enabled):
 
-    global tts_runtime_enabled, stt_runtime_enabled, mem0_autosave_runtime_enabled
+    global tts_runtime_enabled, stt_runtime_enabled
 
     name = str(name or "").lower().strip()
 
@@ -716,20 +694,16 @@ def set_runtime_module(name, enabled):
         stt_runtime_enabled = bool(enabled)
         return True, f"STT: {'ON' if stt_runtime_enabled and stt is not None else 'OFF'}"
 
-    if name in ["mem0", "memoria", "memória"]:
-        mem0_autosave_runtime_enabled = bool(enabled)
-        return True, f"Mem0 auto-save: {'ON' if mem0_autosave_runtime_enabled else 'OFF'}"
-
     if name in ["host", "hostmode", "chat_host"]:
         host_mode.set_enabled(bool(enabled))
         return True, f"Host Mode: {'ON' if host_mode.enabled else 'OFF'}"
 
-    return False, "Módulo desconhecido. Use: tts, stt, mem0 ou host."
+    return False, "Módulo desconhecido. Use: tts, stt ou host."
 
 
 def handle_terminal_command(comando, texto_original):
 
-    global tts_runtime_enabled, stt_runtime_enabled, mem0_autosave_runtime_enabled
+    global tts_runtime_enabled, stt_runtime_enabled
 
     if comando == "/comandos":
         print("Comandos: " + COMMANDS_BANNER)
@@ -796,10 +770,6 @@ def handle_terminal_command(comando, texto_original):
     if comando == "/ptt reset":
         ptt_guard.reset()
         print("🎛️ PTT resetado. Próxima gravação só inicia em nova pressão da tecla.")
-        return True
-
-    if comando == "/mem0 status":
-        print(f"Mem0 auto-save: {'ON' if mem0_autosave_runtime_enabled else 'OFF'} | Mem0 enabled={getattr(mem0_memory, 'enabled', False)}")
         return True
 
     if comando == "/prompt":
@@ -888,17 +858,6 @@ try:
             print(host_mode.get_status_text())
             continue
 
-        if comando.startswith("/mem0 remember ") or comando.startswith("/mem0 lembrar "):
-            memoria_manual = re.sub(r"^/mem0\s+(remember|lembrar)\s+", "", text, flags=re.IGNORECASE).strip()
-
-            if memoria_manual:
-                mem0_memory.salvar_memoria_manual(memoria_manual, metadata={"source": "manual_runtime"})
-                print("🧠 Mem0: memória manual enviada.")
-            else:
-                print("⚠️ Use: /mem0 lembrar texto da memória")
-
-            continue
-
         if comando == "/history clear":
             conv_history.clear()
             print("🧹 Histórico curto limpo.")
@@ -916,7 +875,7 @@ try:
             if input_packet.quality != "BLOCKED":
                 registrar_interacao(input_packet.text, firewall_direct_response, turn_context=turn_context)
             else:
-                print("🧠 Histórico/Mem0: entrada bloqueada não registrada")
+                print("🧠 Histórico/contexto: entrada bloqueada não registrada")
             entregar_resposta(input_packet.text, firewall_direct_response, turn_context=turn_context)
             time.sleep(0.5)
             continue

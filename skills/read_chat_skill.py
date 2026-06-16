@@ -6,7 +6,7 @@
 
 from pathlib import Path
 
-from config import CHAT_LOG_PATH, CHAT_READ_LAST_LINES, CHAT_BOT_USERS
+from config import PROJECT_ROOT, CHAT_LOG_PATH, CHAT_READ_LAST_LINES, CHAT_BOT_USERS
 
 from skills.base_skill import BaseSkill, SkillContext
 
@@ -24,6 +24,9 @@ class ReadChatSkill(BaseSkill):
         super().__init__(context)
 
         self.chat_log_path = Path(CHAT_LOG_PATH)
+        if not self.chat_log_path.is_absolute():
+            self.chat_log_path = Path(PROJECT_ROOT) / self.chat_log_path
+        self.chat_log_path = self.chat_log_path.resolve()
         self.last_context = ""
 
     # =========================
@@ -45,6 +48,10 @@ class ReadChatSkill(BaseSkill):
             "o que estão falando no chat",
             "o que estao falando no chat",
             "tem algo no chat",
+            "tem mensagem no chat",
+            "tem mensagens no chat",
+            "confere o chat",
+            "checa o chat",
             "responde o chat",
             "responda o chat",
             "vê o chat",
@@ -133,31 +140,52 @@ class ReadChatSkill(BaseSkill):
 
     def parse_linha(self, linha):
 
-        if "] " not in linha or ": " not in linha:
+        linha = str(linha or "").strip()
+        if not linha:
             return None
 
-        try:
+        horario = ""
+        usuario = "chat"
+        mensagem = linha
 
-            horario = linha.split("] ", 1)[0].replace("[", "").strip()
-            depois_hora = linha.split("] ", 1)[1]
-            usuario = depois_hora.split(": ", 1)[0].strip()
-            mensagem = depois_hora.split(": ", 1)[1].strip()
+        # Formato completo esperado:
+        # [12:34:56] usuario: mensagem
+        if "] " in linha and ": " in linha:
+            try:
+                horario = linha.split("] ", 1)[0].replace("[", "").strip()
+                depois_hora = linha.split("] ", 1)[1]
+                usuario = depois_hora.split(": ", 1)[0].strip()
+                mensagem = depois_hora.split(": ", 1)[1].strip()
+            except Exception:
+                return None
 
-            is_bot = "[mensagem_da_diana]" in mensagem
+        # Formato simples:
+        # usuario: mensagem
+        elif ": " in linha:
+            try:
+                usuario = linha.split(": ", 1)[0].strip()
+                mensagem = linha.split(": ", 1)[1].strip()
+            except Exception:
+                return None
 
-            mensagem = mensagem.replace("[mensagem_da_diana]", "").strip()
+        # Formato bruto/linha solta: aceita como mensagem de chat anônima.
+        else:
+            usuario = "chat"
+            mensagem = linha
 
-            return {
-                "horario": horario,
-                "usuario": usuario,
-                "mensagem": mensagem,
-                "is_bot": is_bot,
-                "raw": linha
-            }
+        is_bot = "[mensagem_da_diana]" in mensagem
+        mensagem = mensagem.replace("[mensagem_da_diana]", "").strip()
 
-        except Exception:
-
+        if not mensagem:
             return None
+
+        return {
+            "horario": horario,
+            "usuario": usuario or "chat",
+            "mensagem": mensagem,
+            "is_bot": is_bot,
+            "raw": linha
+        }
 
     # =========================
     # 👥 EXTRAIR USUÁRIOS
@@ -321,12 +349,14 @@ class ReadChatSkill(BaseSkill):
 
         if not mensagens:
             print("🧩 Skill direta ativada: ReadChatSkill")
+            print("💬 Chat log lido:", str(self.chat_log_path), "| linhas=0")
             return (
-                "Ainda não encontrei mensagens recentes do chat, Neitan. "
-                "Confere se o coletor da Twitch está rodando e salvando em data/chat/live_chat.txt."
+                "Ainda não encontrei mensagens recentes do chat. "
+                "Arquivo lido: " + str(self.chat_log_path)
             )
 
         print("🧩 Skill direta ativada: ReadChatSkill")
+        print("💬 Chat log lido:", str(self.chat_log_path), "| linhas=", len(mensagens))
 
         modo = self.detectar_modo_leitura(user_text)
 

@@ -1,0 +1,26 @@
+# Diana 0.5.15 — HOSTMODE_CHAT_FILE_CONTEXT_FIX
+
+Base: 0.5.14_SESSION_CONTEXT_ONLY.
+
+Objetivo:
+- Corrigir os trilhos operacionais apontados no relatório de conversa.
+- Preparar Host Mode/chat para teste em live.
+- Manter persona como está, sem mexer no tom principal.
+
+Mudanças:
+- Caminhos de chat agora usam PROJECT_ROOT.
+- Coletor da Twitch refeito com caminho absoluto e teste local `--test-write`.
+- ReadChatSkill aceita formatos flexíveis e mostra debug do arquivo lido.
+- IntentRouter detecta `tem mensagem no chat?` como read_chat.
+- IntentRouter detecta análise de arquivo por frases como `no arquivo X, identifique...`.
+- ReadFileSkill suporta última/primeira frase útil de arquivo.
+- ReadFileSkill consegue escolher um arquivo automaticamente quando o usuário pede.
+- Respostas diretas de histórico não sequestram capacidades operacionais.
+- ExpressionLookupSkill consulta expression_rules de forma determinística.
+- SessionPreferenceResponder responde preferências simples via SessionContext.
+- OutputFirewall remove emojis na fala final.
+- Removido exemplo de persona que reforçava bordão repetitivo de pixel turístico.
+
+Validação:
+- test_continuidade_0_5_15_hostmode_chat_file_context.py: OK.
+- compileall: OK.

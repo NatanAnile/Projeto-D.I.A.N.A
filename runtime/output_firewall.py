@@ -37,9 +37,30 @@ class OutputFirewall:
         for pattern, replacement in self.NAME_REPLACEMENTS.items():
             result = re.sub(pattern, replacement, result, flags=re.IGNORECASE)
         result = self._strip_verbal_tics(result)
+        result = self._strip_emojis(result)
         result = self._trim_trailing_cta(result)
         return result.strip()
 
+
+
+    def _strip_emojis(self, text):
+        # Sem emoji na fala final da Diana. Mantém texto puro para chat/TTS.
+        return re.sub(
+            "["
+            "\U0001F300-\U0001F5FF"
+            "\U0001F600-\U0001F64F"
+            "\U0001F680-\U0001F6FF"
+            "\U0001F700-\U0001F77F"
+            "\U0001F780-\U0001F7FF"
+            "\U0001F800-\U0001F8FF"
+            "\U0001F900-\U0001F9FF"
+            "\U0001FA00-\U0001FA6F"
+            "\U0001FA70-\U0001FAFF"
+            "\u2600-\u27BF"
+            "]+",
+            "",
+            str(text or ""),
+        ).strip()
 
     def _strip_verbal_tics(self, text):
         text = str(text or "").strip()

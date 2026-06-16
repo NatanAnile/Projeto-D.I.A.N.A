@@ -1,8 +1,0 @@
-# CHANGELOG 0.5.9 — LLM_RENDER_ONLY_RESPONSE_PIPELINE
-
-- Integra o fix cirúrgico de micro_ping com allow_llm=True, allow_memory=False, allow_retrieval=False.
-- DialogueActGate não usa mais banco de frase pronta para micro_ping.
-- PromptBuilder injeta uma task curta de persona para micro_ping.
-- Perguntas sobre a própria Diana usam target DIANA_SELF e LLM com persona, sem hardcode por palavra-chave.
-- CommentSkill permanece no pipeline; o fix não bloqueia personalidade nem improviso contextual.
-- Mantém as correções da 0.5.8 para ReadFile typo/follow-up/anti-truncamento.

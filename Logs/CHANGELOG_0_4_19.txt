@@ -1,9 +1,0 @@
-# CHANGELOG 0.4.19 — SOURCE ISOLATION + COMMANDS + FAKE SOURCES
-
-- Corrigido SessionContext: fontes externas não salvam preferências/fatos pessoais do Neitan.
-- Restaurados comandos locais principais: /limpar, /limpar sessao, /fatos, /atividade, /modulos, /modulo, /prompt, /tts, /stt, /mem0 status e /comandos.
-- Banner de comandos no terminal em linha única separada por |.
-- Adicionado live_chat.txt fake com 500 linhas.
-- Adicionado artigo científico fake em data/read_files com 1000 linhas.
-- Personalidade reforçada: travessa, levada, teimosa, inquieta e orgulhosa.
-- Adicionado teste v8 para contaminação de memória por live_chat/read_file/fonte externa.

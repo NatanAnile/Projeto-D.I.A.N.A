@@ -6,11 +6,6 @@ sounddevice
 keyboard
 python-dotenv
 
-# Memória / vetores
-qdrant-client
-mem0ai
-fastembed
-
 # STT/TTS opcionais conforme configuração local
 faster-whisper
 torch

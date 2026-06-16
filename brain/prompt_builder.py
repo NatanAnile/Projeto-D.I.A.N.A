@@ -5,10 +5,8 @@
 # =========================
 
 from brain.brain_loader import DianaBrain
-from brain.context_retriever import ContextRetriever
-from brain.query_planner import QueryPlanner
-from brain.query_gate import QueryGate
 from brain.constitution import build_constitution_context
+from brain.session_context import SessionContext
 
 
 class PromptBuilder:
@@ -16,13 +14,10 @@ class PromptBuilder:
     def __init__(self, *args, **kwargs):
 
         self.brain = kwargs.get("brain") or DianaBrain()
-        self.mem0_memory = kwargs.get("mem0_memory")
-        self.context_retriever = kwargs.get("context_retriever") or ContextRetriever(mem0_memory=self.mem0_memory)
-        self.query_planner = kwargs.get("query_planner") or QueryPlanner()
-        self.query_gate = kwargs.get("query_gate") or QueryGate()
+        self.session_context = kwargs.get("session_context") or SessionContext()
         self.session_summarizer = kwargs.get("session_summarizer")
-        self.last_retrieval = None
-        self.last_query_plan = None
+        self.last_retrieval = self._empty_retrieval()
+        self.last_query_plan = self.last_retrieval["query_plan"]
 
     def build(self, user_text, conv_history=None, extra_context=None, turn_context=None):
 
@@ -35,67 +30,31 @@ class PromptBuilder:
         history_context = self._safe_history_context(conv_history)
         active_activity_context = str(turn_context.get("activity_context", "")).strip()
         active_activity_task = str(turn_context.get("activity_task", "")).strip()
-        last_collection = getattr(self.context_retriever.knowledge, "last_collection", "")
-        last_entry = getattr(self.context_retriever.knowledge, "last_entry", None) or {}
 
-        if turn_context.get("allow_retrieval") is False:
-            gate = {"should_query": False, "reason": "InputFirewall bloqueou retrieval para este turno"}
-        else:
-            gate = self.query_gate.decide(user_text, has_active_entry=bool(last_entry))
-
-        if gate["should_query"]:
-            query_plan = self.query_planner.plan(
-                user_text=user_text,
-                history_text=history_context,
-                last_collection=last_collection,
-                last_entry_name=str(last_entry.get("name", ""))
-            )
-            if not query_plan:
-                query_plan = {"source": "none", "collection": "", "operation": "none", "filters": {"contains": [], "category": ""}, "limit": None, "requires_local_source": False}
-        else:
-            query_plan = {"source": "none", "collection": "", "operation": "none", "filters": {"contains": [], "category": ""}, "limit": None, "requires_local_source": False}
-        # Knowledge local foi removido na 0.5.5. O QueryGate agora só ajuda
-        # a decidir se memória pessoal/continuidade devem ser consultadas.
-        if query_plan.get("source") == "knowledge":
-            query_plan["source"] = "none"
-            query_plan["operation"] = "none"
-        query_plan["should_query"] = gate["should_query"]
-        query_plan["gate_reason"] = gate["reason"]
-        query_plan["dialogue_act"] = str(turn_context.get("dialogue_act", "") or "")
-        query_plan["dialogue_target"] = str(turn_context.get("dialogue_target", "") or "")
-        self.last_query_plan = query_plan
-        retrieved = self.context_retriever.retrieve(user_text, history_text=history_context, query_plan=query_plan)
+        retrieved = self._empty_retrieval()
         self.last_retrieval = retrieved
-        task = self._derive_task(user_text, capability, retrieved, turn_context=turn_context)
+        self.last_query_plan = retrieved["query_plan"]
+
+        task = self._derive_task(user_text, capability, turn_context=turn_context)
 
         parts = []
 
         parts.append(build_constitution_context())
 
+        session_context_text = self.session_context.get_context_for_prompt(turn_context=turn_context)
+        if session_context_text:
+            parts.append("# CONTEXTO DE SESSÃO — FONTE LEVE\n" + session_context_text)
+
         parts.append(
             "# CONTRATO DE FONTE DE VERDADE — PRIORIDADE MÁXIMA\n"
             "Criatividade pode mudar a forma da fala, nunca os fatos.\n"
             "A fonte de continuidade da conversa é o HISTÓRICO LITERAL RECENTE vindo do ConversationLedger.\n"
-            "Resumo auxiliar de sessão serve só como orientação de baixa autoridade; nunca substitui o histórico literal.\n"
-            "Retrieval só vale quando o STATUS DAS FONTES indicar fato recuperado ou fonte obrigatória.\n"
-            "Se uma informação pessoal não foi encontrada, diga claramente que não sabe e não dê palpite.\n"
+            "Contexto de sessão é repertório leve; não invente preferências ausentes.\n"
+            "Se uma informação pessoal não foi encontrada no contexto de sessão ou histórico, diga que não sabe.\n"
             "Se Neitan disser que você inventou ou errou, reconheça e pare de chutar."
         )
 
         parts.append(self._build_source_status(retrieved))
-
-        if query_plan and query_plan.get("should_query") and self.query_planner.enabled:
-            parts.append(
-                "# PLANO DE CONSULTA AUXILIAR — NÃO É RESPOSTA\n"
-                "Knowledge está desativado. Este plano só pode orientar memória pessoal/continuidade.\n"
-                + str(query_plan)
-            )
-
-        if retrieved["owner_context"]:
-            parts.append("# FATOS PESSOAIS RECUPERADOS\n" + retrieved["owner_context"])
-
-        if retrieved.get("mem0_context"):
-            parts.append("# MEMÓRIAS MEM0 RECUPERADAS\n" + retrieved["mem0_context"])
 
         if active_activity_context:
             parts.append(
@@ -111,7 +70,7 @@ class PromptBuilder:
                 "As mensagens abaixo aconteceram de verdade nesta sessão.\n"
                 "Use este bloco para continuações, correções e perguntas sobre o que foi dito antes.\n"
                 "Não invente detalhes ausentes.\n"
-                "Este histórico tem prioridade sobre resumo auxiliar, exemplos de estilo e contexto tangencial.\n\n"
+                "Este histórico tem prioridade sobre exemplos de estilo e contexto tangencial.\n\n"
                 + history_context
             )
 
@@ -160,9 +119,6 @@ class PromptBuilder:
 
         parts.append(self.brain.build_brain_context())
 
-        if retrieved["style_context"]:
-            parts.append("# ESTILO OPCIONAL RECUPERADO\n" + retrieved["style_context"])
-
         if extra_context:
             parts.append(
                 "# CONTEXTO EXTRA DE SKILL\n"
@@ -187,43 +143,42 @@ class PromptBuilder:
 
         return "\n\n".join(str(part).strip() for part in parts if str(part).strip())
 
-
     def get_last_retrieval(self):
 
-        return self.last_retrieval or {}
+        return self.last_retrieval or self._empty_retrieval()
 
     def get_last_query_plan(self):
 
-        return self.last_query_plan
+        return self.last_query_plan or self._empty_retrieval()["query_plan"]
+
+    def _empty_retrieval(self):
+
+        return {
+            "mode": "session_context_only",
+            "personal_query": False,
+            "personal_status": "DISABLED",
+            "owner_context": "",
+            "owner_facts": [],
+            "style_context": "",
+            "knowledge_entries": [],
+            "knowledge_status": "DISABLED_SESSION_CONTEXT_ONLY",
+            "knowledge_operation": "none",
+            "query_plan": {
+                "source": "none",
+                "operation": "none",
+                "should_query": False,
+                "gate_reason": "Diana 0.5.14 usa somente contexto de sessão e histórico literal."
+            }
+        }
 
     def _build_source_status(self, retrieved):
 
-        lines = ["# STATUS DAS FONTES"]
-
-        if retrieved["personal_query"]:
-            if retrieved["personal_status"] == "FOUND":
-                values = "; ".join(f"{fact['path']}={fact['value']}" for fact in retrieved.get("owner_facts", []))
-                lines.append(
-                    "Pergunta pessoal sobre Neitan detectada: fatos locais encontrados. "
-                    "Use estes valores exatamente; não substitua e não dê outro palpite. " + values
-                )
-            elif retrieved.get("mem0_memories"):
-                lines.append(
-                    "Pergunta pessoal sobre Neitan detectada: fatos locais não encontrados, mas o Mem0 trouxe memória(s). "
-                    "Use o Mem0 somente se responder diretamente à pergunta. Se não responder, admita que não sabe."
-                )
-            else:
-                lines.append(
-                    "Pergunta pessoal sobre Neitan detectada: INFORMAÇÃO NÃO ENCONTRADA. "
-                    "A resposta obrigatória é admitir que não sabe. Não adivinhe, não improvise e não invente."
-                )
-
-        lines.append(
-            "Knowledge local: DESATIVADO nesta versão. "
-            "Pedidos de arquivo/chat devem ir por skills; perguntas gerais podem ir ao LLM sem base técnica local."
+        return (
+            "# STATUS DAS FONTES\n"
+            "Memória longa externa: DESATIVADA nesta versão.\n"
+            "Knowledge local: DESATIVADO nesta versão.\n"
+            "Fontes ativas: contexto leve da sessão, histórico literal recente e contexto de skills."
         )
-
-        return "\n".join(lines)
 
     def _safe_history_context(self, conv_history):
 
@@ -235,11 +190,10 @@ class PromptBuilder:
         except Exception:
             return ""
 
-    def _derive_task(self, user_text, capability, retrieved=None, turn_context=None):
+    def _derive_task(self, user_text, capability, turn_context=None):
 
         text = str(user_text or "").strip()
         lower = text.lower()
-        retrieved = retrieved or {}
         turn_context = turn_context or {}
         dialogue_act = str(turn_context.get("dialogue_act", "") or "")
 
@@ -254,28 +208,17 @@ class PromptBuilder:
             )
 
         # diana_self_query sem direct_response: Diana responde sobre si mesma com persona completa.
-        # Sem hardcode por palavra-chave — o LLM tem o system prompt completo da Diana.
+        # Sem hardcode por palavra-chave — o LLM tem o contexto de persona completo da Diana.
         if dialogue_act == "diana_self_query":
             return (
                 "A pergunta é sobre a própria Diana, não sobre Neitan. "
                 "Responda como a Diana responderia sobre si mesma: com personalidade, opinião real ou assumida, "
                 "sem inventar fato externo e sem responder com dado pessoal do Neitan. "
-                "Se não tiver preferência definida, admita com estilo — mas nunca responda igual a um FAQ."
+                "Se não tiver preferência definida no contexto de sessão, admita com estilo — mas nunca responda igual a um FAQ."
             )
 
-        operation = retrieved.get("knowledge_operation", "")
-
-        if operation == "correction":
-            return "Reconhecer o erro apontado por Neitan sem discutir, sem defender a resposta anterior e sem inventar uma nova explicação."
-
-        if operation == "topic_change":
-            return "Confirmar brevemente a mudança de assunto sem puxar contexto antigo nem inventar uma nova pauta."
-
-        if operation == "topic_setup":
-            return "Acompanhar o assunto proposto sem consultar ou explicar uma entrada específica até que Neitan faça uma pergunta concreta."
-
-        if operation == "feedback":
-            return "Responder ao feedback de Neitan de forma curta, sem repetir a consulta anterior e sem inventar informação técnica."
+        if dialogue_act == "feedback_negative_previous_response":
+            return "Responder ao feedback de Neitan de forma curta, sem defender erro anterior e sem inventar informação técnica."
 
         short_followups = [
             "qual", "qual?", "como assim", "como assim?", "por que", "por quê", "porque", "e aí", "e ai"
@@ -286,12 +229,6 @@ class PromptBuilder:
                 "Responder como continuação direta da fala imediatamente anterior no HISTÓRICO REAL DA SESSÃO. "
                 "Se a Diana fez uma pergunta/piada antes, complete essa sequência em vez de perguntar 'qual o quê?'. "
                 "Não trocar de assunto e não inventar contexto fora do histórico."
-            )
-
-        if retrieved.get("mem0_memories") and retrieved.get("personal_query"):
-            return (
-                "Responder à pergunta pessoal usando as MEMÓRIAS MEM0 RECUPERADAS somente se elas forem diretamente relevantes. "
-                "Se a memória não responder, diga que ainda não sabe. Não invente preferência ou lembrança."
             )
 
         if capability == "read_chat":

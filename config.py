@@ -84,7 +84,7 @@ DEBUG_SKILLS = True
 # =========================
 
 TWITCH_CHANNEL = "natan_anile"
-CHAT_LOG_PATH = "data/chat/live_chat.txt"
+CHAT_LOG_PATH = os.path.join(PROJECT_ROOT, "data", "chat", "live_chat.txt")
 CHAT_MAX_LINES = 200
 CHAT_READ_LAST_LINES = 12
 
@@ -163,7 +163,7 @@ HOST_SEND_TO_CHAT = False
 # "read_response" = só lê e responde quando você pedir pelo comando /host read.
 HOST_MODE_KIND = os.getenv("HOST_MODE_KIND", "autonomous")
 
-HOST_CHAT_LOG_PATH = "data/chat/live_chat.txt"
+HOST_CHAT_LOG_PATH = CHAT_LOG_PATH
 
 OWNER_USERS = [
     "natan_anile"
@@ -197,31 +197,11 @@ HOST_IDLE_STREAK_LIMIT = 2
 
 HOST_DEBUG = True
 
-
-# =========================
-# 🧠 MEMÓRIA LONGA / MEM0
-# =========================
-
-MEM0_ENABLED = os.getenv("MEM0_ENABLED", "true").lower() == "true"
-MEM0_USER_ID = os.getenv("MEM0_USER_ID", "natan")
-MEM0_COLLECTION_NAME = os.getenv("MEM0_COLLECTION_NAME", "diana_memories")
-MEM0_QDRANT_PATH = os.getenv("MEM0_QDRANT_PATH", "mem0_qdrant")
-MEM0_EMBEDDING_DIMS = int(os.getenv("MEM0_EMBEDDING_DIMS", "768"))
-MEM0_LLM_MODEL = os.getenv("MEM0_LLM_MODEL", LLM_MODEL)
-MEM0_EMBEDDER_MODEL = os.getenv("MEM0_EMBEDDER_MODEL", "nomic-embed-text")
-MEM0_OLLAMA_BASE_URL = os.getenv("MEM0_OLLAMA_BASE_URL", "http://localhost:11434")
-MEM0_RETRIEVAL_LIMIT = int(os.getenv("MEM0_RETRIEVAL_LIMIT", "3"))
-
-# Ligado por padrão: a Diana salva interações do OWNER na memória longa.
-# Para desligar sem editar código: MEM0_AUTO_SAVE_INTERACTIONS=false
-MEM0_AUTO_SAVE_INTERACTIONS = os.getenv("MEM0_AUTO_SAVE_INTERACTIONS", "true").lower() == "true"
-
-# Auto-save inteligente: mantém o recurso ligado, mas não chama Mem0 para cumprimento,
-# pergunta vazia, zoeira curta ou frase sem valor de memória.
-MEM0_AUTO_SAVE_SMART_FILTER = os.getenv("MEM0_AUTO_SAVE_SMART_FILTER", "true").lower() == "true"
-MEM0_AUTO_SAVE_MIN_CHARS = int(os.getenv("MEM0_AUTO_SAVE_MIN_CHARS", "8"))
-MEM0_DIRECT_IMPORT = os.getenv("MEM0_DIRECT_IMPORT", "true").lower() == "true"
-MEM0_DEBUG = os.getenv("MEM0_DEBUG", "false").lower() == "true"
+# Host Mode score: uma mensagem com score >= 6 pode receber resposta.
+# Score >= 10 vira prioridade e deve ser respondida primeiro.
+HOST_MIN_SCORE_TO_RESPOND = 6
+HOST_PRIORITY_SCORE = 10
+HOST_SAME_USER_STREAK_LIMIT = 1
 
 
 # =========================
@@ -255,7 +235,7 @@ KNOWLEDGE_RETRIEVAL_LIMIT = 0
 # 🧩 DIANA 0.4 — MODELOS AUXILIARES
 # =========================
 
-PROJECT_VERSION = "0.5.10"
+PROJECT_VERSION = "0.5.17"
 
 # Os modelos auxiliares ficam DESATIVADOS por padrão.
 # Quando forem ativados, use outra instância do Ollama/porta para poder

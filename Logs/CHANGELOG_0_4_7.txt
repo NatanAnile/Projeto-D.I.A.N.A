@@ -1,6 +1,0 @@
-# Diana 0.4.7 — Parakeet auto-download ligado
-
-- Corrigido o padrão de `PARAKEET_AUTO_DOWNLOAD`.
-- Como `LOAD_STT=True` por padrão, o Parakeet agora baixa automaticamente se a pasta do modelo não existir.
-- Mantidos STT Parakeet, Mem0 auto-save ligado, modelo auxiliar, query planner auxiliar e resumidor auxiliar.
-- Mantida raiz limpa com histórico/notas dentro de `Logs/`.

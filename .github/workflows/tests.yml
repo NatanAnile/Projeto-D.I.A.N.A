@@ -18,8 +18,8 @@ jobs:
 
       - name: Compile core files
         run: |
-          python -m py_compile config.py Diana.py runtime/runtime_types.py runtime/input_firewall.py runtime/intent_router.py runtime/ptt_guard.py runtime/conversation_ledger.py runtime/mem0_autosave.py runtime/retrieval_responder.py runtime/output_firewall.py brain/constitution.py brain/prompt_builder.py brain/dialogue_act_gate.py brain/identity_guard.py brain/dialogue_act_policy.py personality/dialogue_response_bank.py personality/joke_bank.py
+          python -m py_compile config.py Diana.py runtime/runtime_types.py runtime/input_firewall.py runtime/intent_router.py runtime/ptt_guard.py runtime/conversation_ledger.py runtime/retrieval_responder.py runtime/output_firewall.py runtime/session_preference_responder.py brain/constitution.py brain/prompt_builder.py brain/session_context.py brain/dialogue_act_gate.py brain/identity_guard.py brain/dialogue_act_policy.py personality/dialogue_response_bank.py personality/joke_bank.py skills/expression_lookup_skill.py skills/read_chat_skill.py skills/read_file_skill.py integrations/chat_host_mode.py twitch_chat_collector.py
 
       - name: Run current continuity test
         run: |
-          python tools/tests/test_continuidade_0_5_10_v24_repo_hygiene_ci.py
+          python tools/tests/test_continuidade_0_5_17_hostmode_read_response_auto.py

@@ -1,0 +1,5 @@
+🧩 Skill executada: ReadFileSkill -> roteiro.txt | modo=frase_especifica
+🧩 Skill ativada: ReadFileSkill -> piada.txt
+🧩 Skill direta ativada: ExpressionLookupSkill -> balacobaco
+🧩 Skill direta ativada: ExpressionLookupSkill -> trakinagem
+OK — 26/26 checks passaram.
